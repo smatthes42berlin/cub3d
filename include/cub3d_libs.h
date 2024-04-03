@@ -1,5 +1,5 @@
-#ifndef MINISHELL_LIBS_H
-# define MINISHELL_LIBS_H
+#ifndef CUB3D_LIBS_H
+# define CUB3D_LIBS_H
 
 # include "lib_main.h"
 # include <errno.h>
