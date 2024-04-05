@@ -16,7 +16,7 @@ INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
 # if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
 SUBFOLDERSRC = . /error /parse_map /raycast
-BASEPATHSRC = ./src/
+BASEPATHSRC = ./src
 PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
 PATHBUILD = build/
 PATHOBJ = build/

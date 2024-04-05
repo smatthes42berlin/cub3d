@@ -5,7 +5,6 @@ int keys(int key, void *param)
 	t_main_data *data = (t_main_data *)param;
 	if (key == 'a')
 	{
-		printf("a\n");
 		data->player.x -=5;
 	}
 	if (key == 'd')
@@ -123,14 +122,6 @@ void draw_player(t_main_data *data, int *addr)
     }
 }
 
-int max(int a, int b)
-{
-    if (a > b)
-		return a;
-	else 
-		return b;
-}
-
 void draw_line_on_image(int *addr, int width, int height, int start_x, int start_y, int end_x, int end_y, int color) {
     int delta_x = abs(end_x - start_x), step_x = start_x < end_x ? 1 : -1;
     int delta_y = -abs(end_y - start_y), step_y = start_y < end_y ? 1 : -1; 
@@ -157,6 +148,7 @@ void draw_line_on_image(int *addr, int width, int height, int start_x, int start
     }
 }
 
+/*
 void draw_vertical_rays(t_main_data *data, int *addr)
 {
     int map_x, map_y, map_pos, depth;
@@ -168,6 +160,9 @@ void draw_vertical_rays(t_main_data *data, int *addr)
 	while (r < 1)
 	{
 		depth = 0;
+		float dist_v = 1000000;
+		float vertical_x = data->player.x;
+		float vertical_y = data->player.y;
 		float neg_tan = -tan(ray_angle);
 
 		if (ray_angle > PI2 && ray_angle < PI3)
@@ -197,6 +192,9 @@ void draw_vertical_rays(t_main_data *data, int *addr)
 			map_pos = map_y * data->map.width + map_x;
 			if (map_pos > 0 && map_pos < data->map.width * data->map.height && data->map.tiles[map_pos] == 1)
 			{
+				vertical_x = ray_x;
+				vertical_y = ray_y;
+				dist_v = dist(data->player.x, data->player.y, vertical_x, vertical_y, ray_angle);
 				depth = 8;
 			}
 			else
@@ -216,8 +214,161 @@ void draw_vertical_rays(t_main_data *data, int *addr)
                         data->player.y + data->player.size / 2, 
                         ray_x, ray_y, 0x0000FF); // Example: Drawing the ray in red
 }
+*/
+
+float calculate_distance(float ax, float ay, float bx, float by)
+{
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+
+}
+
+int max(int a, int b)
+{
+    if (a > b)
+		return a;
+	else 
+		return b;
+}
 
 
+
+void calculate_horizontal_distance(t_main_data *data, float *dist, float *ray_x, float *ray_y)
+{
+    int map_x, map_y, map_pos, depth;
+    float ray_angle, step_x, step_y;
+
+    ray_angle = data->player.angle;
+	
+	int r = 0;
+	while (r < 1)
+	{
+		depth = 0;
+		float inverse_tan = -1/(tan(ray_angle));
+		if (ray_angle > PI)
+		{
+			*ray_y = (((int)data->player.y >> 6) << 6) -0.0001;
+			*ray_x = (data->player.y - *ray_y) * inverse_tan + data->player.x;
+			step_y = -64;
+			step_x = -step_y * inverse_tan;
+		}
+		if (ray_angle < PI)
+		{
+			*ray_y = (((int)data->player.y >> 6) << 6) + 64;
+			*ray_x = (data->player.y - *ray_y) * inverse_tan + data->player.x;
+			step_y = 64;
+			step_x = -step_y * inverse_tan;
+		}
+		if (ray_angle == 0 || ray_angle == PI)
+		{
+			*ray_x = data->player.x;
+			*ray_y = data->player.y;
+			depth = 8;
+		}
+		while (depth < 8)
+		{
+			map_x = (int)(*ray_x) >> 6;
+			map_y = (int)(*ray_y) >> 6;
+			map_pos = map_y * data->map.width + map_x;
+			if (map_pos > 0 && map_pos < data->map.width * data->map.height && data->map.tiles[map_pos] == 1)
+			{
+				*dist = calculate_distance(data->player.x + data->player.size / 2, data->player.y + data->player.size / 2, *ray_x, *ray_y);
+                break; // Exit loop once wall is hit
+			}
+			else
+			{
+				*ray_x += step_x;
+				*ray_y += step_y;
+				depth += 1;
+			}
+		}
+		r++;
+	}
+}
+
+void calculate_vertical_distance(t_main_data *data, float *dist, float *ray_x, float *ray_y)
+{
+    int map_x, map_y, map_pos, depth;
+    float ray_angle, step_x, step_y;
+
+    ray_angle = data->player.angle;
+
+	*dist = calculate_distance(data->player.x + data->player.size / 2, 
+                           data->player.y + data->player.size / 2, 
+                           *ray_x, *ray_y);
+	
+	int r = 0;
+	while (r < 1)
+	{
+		depth = 0;
+		float neg_tan = -tan(ray_angle);
+
+		if (ray_angle > PI2 && ray_angle < PI3)
+		{
+			*ray_x = (((int)data->player.x >> 6) << 6) -0.0001;
+			*ray_y = (data->player.x - *ray_x) * neg_tan + data->player.y;
+			step_x = -64;
+			step_y = -step_x * neg_tan;
+		}
+		if (ray_angle < PI2 || ray_angle > PI3)
+		{
+			*ray_x = (((int)data->player.x >> 6) << 6) + 64;
+			*ray_y = (data->player.x - *ray_x) * neg_tan + data->player.y;
+			step_x = 64;
+			step_y = -step_x * neg_tan;
+		}
+		if (ray_angle == 0 || ray_angle == PI)
+		{
+			*ray_x = data->player.x;
+			*ray_y = data->player.y;
+			depth = 8;
+		}
+		while (depth < 8)
+		{
+			map_x = (int)(*ray_x) >> 6;
+			map_y = (int)(*ray_y) >> 6;
+			map_pos = map_y * data->map.width + map_x;
+			if (map_pos > 0 && map_pos < data->map.width * data->map.height && data->map.tiles[map_pos] == 1)
+			{
+				*dist = calculate_distance(data->player.x + data->player.size / 2, data->player.y + data->player.size / 2, *ray_x, *ray_y);
+                break; // Exit loop once wall is hit
+			}
+			else
+			{
+				*ray_x += step_x;
+				*ray_y += step_y;
+				depth += 1;
+			}
+		}
+		r++;
+	}
+}
+
+void draw_shortest_ray(t_main_data *data, int *addr)
+{
+    float dist_h = 1000000, dist_v = 1000000;
+    float horizontal_x = 0, horizontal_y = 0, vertical_x = 0, vertical_y = 0;
+
+    calculate_horizontal_distance(data, &dist_h, &horizontal_x, &horizontal_y);
+    calculate_vertical_distance(data, &dist_v, &vertical_x, &vertical_y);
+
+    // Compare distances and draw the shortest ray
+    if (dist_h < dist_v) {
+        // Draw horizontal ray if it's shorter
+        draw_line_on_image(addr, data->w.width, data->w.height, 
+            data->player.x + data->player.size / 2, 
+            data->player.y + data->player.size / 2, 
+            horizontal_x, horizontal_y, 0xFF0000); // Red for horizontal
+    } else {
+        // Draw vertical ray if it's shorter or equal
+        draw_line_on_image(addr, data->w.width, data->w.height, 
+            data->player.x + data->player.size / 2, 
+            data->player.y + data->player.size / 2, 
+            vertical_x, vertical_y, 0x0000FF); // Blue for vertical
+    }
+}
+
+
+/*
 void draw_horizontal_rays(t_main_data *data, int *addr)
 {
     int map_x, map_y, map_pos, depth;
@@ -229,8 +380,10 @@ void draw_horizontal_rays(t_main_data *data, int *addr)
 	while (r < 1)
 	{
 		depth = 0;
+		float dist_h = 1000000;
+		float horizontal_x = data->player.x;
+		float horizontal_y = data->player.y;
 		float inverse_tan = -1/(tan(ray_angle));
-		printf("Inverse Tan: %f\n", inverse_tan);
 		if (ray_angle > PI)
 		{
 			ray_y = (((int)data->player.y >> 6) << 6) -0.0001;
@@ -258,6 +411,9 @@ void draw_horizontal_rays(t_main_data *data, int *addr)
 			map_pos = map_y * data->map.width + map_x;
 			if (map_pos > 0 && map_pos < data->map.width * data->map.height && data->map.tiles[map_pos] == 1)
 			{
+				horizontal_x = ray_x;
+				horizontal_y = ray_y;
+				dist_h = dist(data->player.x, data->player.y, horizontal_x, horizontal_y, ray_angle);
 				depth = 8;
 			}
 			else
@@ -277,6 +433,7 @@ void draw_horizontal_rays(t_main_data *data, int *addr)
                         data->player.y + data->player.size / 2, 
                         ray_x, ray_y, 0xFF0000); // Example: Drawing the ray in red
 }
+*/
 
 
 
@@ -310,8 +467,9 @@ int draw(t_main_data *data)
 	draw_grid_lines(data, addr);
     draw_player(data, addr);
 	draw_player_direction(data, addr);
-	draw_horizontal_rays(data, addr);
-	draw_vertical_rays(data, addr);
+	//draw_horizontal_rays(data, addr);
+	//draw_vertical_rays(data, addr);
+	draw_shortest_ray(data, addr);
 	mlx_put_image_to_window(data->w.mlx, data->w.mlx_win, frame, 0, 0);
 	mlx_destroy_image(data->w.mlx, frame);
 	return 0;
