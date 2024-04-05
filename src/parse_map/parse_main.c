@@ -6,18 +6,19 @@ int	parse_main(t_main_data *main_data)
 	t_list_d	*file_lbl;
 
 	if (main_data->argc != 2)
-		throw_error_map_file(1, "Wrong number of args!", true);
+		throw_error_gen(1, "Wrong number of args!", true);
 	fd = open(main_data->argv[1], O_RDONLY);
 	if (fd == -1)
 		throw_error_sys_call((t_error_ms){errno, ERROR_OPEN,
-				"Cannot open Map file!"}, true);
+			"Cannot open Map file!"}, true);
 	if (read_file_lines_to_list(fd, &file_lbl))
 		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot read Map file!"}, true);
-	// read_file_list_rem_newlines(file_lbl);
+			"Cannot read Map file!"}, true);
+	if (REM_EMPTY_LINES_MAP_FILE)
+		read_file_list_rem_newlines(file_lbl);
 	if (close(fd))
 		throw_error_sys_call((t_error_ms){errno, ERROR_CLOSE,
-				"Cannot close Map file!"}, true);
+			"Cannot close Map file!"}, true);
 	parse_map(main_data, file_lbl);
 	d_lst_clear(&file_lbl, free);
 	return (0);
@@ -26,41 +27,26 @@ int	parse_main(t_main_data *main_data)
 // check if all necessary lines exists exactly one time before reaching map
 // vom groben ins feine
 
+// parse whole file and keep track of things zou find
+
 int	parse_map(t_main_data *main_data, t_list_d *file_lbl)
 {
 	t_parse_state	parse_state;
 
-	init_parse_state(&parse_state, file_lbl);
-	test_correct_basic_structure(&parse_state);
-}
-
-int	test_correct_basic_structure(t_parse_state *parse_state)
-{
-	parse_state->cur_line = parse_state->file_lbl;
-	while (parse_state->cur_line)
+	init_parse_state(&parse_state, main_data, file_lbl);
+	while (parse_state.cur_line)
 	{
-		identify_line(parse_state);
+		identify_line(&parse_state);
 	}
 	return (0);
 }
 
-int identify_line(t_parse_state *parse_state)
+int	identify_line(t_parse_state *parse_state)
 {
-	if(is_newline())
-	
-}
-
-int	init_parse_state(t_parse_state *parse_state, t_list_d *file_lbl)
-{
-	parse_state->texture_north = NULL;
-	parse_state->texture_south = NULL;
-	parse_state->texture_east = NULL;
-	parse_state->texture_west = NULL;
-	parse_state->color_ceiling = NULL;
-	parse_state->color_floor = NULL;
-	parse_state->map_started = false;
-	parse_state->map_ended = false;
-	parse_state->file_lbl = file_lbl;
+	printf("line: %s\n", (char *)parse_state->cur_line->content);
+	if (is_newline(parse_state))
+		printf("newline");
+	go_to_next_line(parse_state);
 	return (0);
 }
 
@@ -69,8 +55,6 @@ int	init_parse_state(t_parse_state *parse_state, t_list_d *file_lbl)
 // check no unknown fields
 // check only numbers and on letter in map
 //
-
-
 
 // try to open texture file, to see if it exists
 // map muss zusammenhaengend sein, bzw. replace all spaces with 0 or 1

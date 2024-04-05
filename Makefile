@@ -32,7 +32,10 @@ VPATH = $(PATHSRC) $(INCLUDEPATH)
 SRC = 	main.c \
 		throw_error.c \
 		get_failed_func_str.c \
-		parse_main.c
+		parse_main.c \
+		init_parse_state.c \
+		parse_util_1.c \
+		parse_util_2.c
 
 #parser_main.c
 	
