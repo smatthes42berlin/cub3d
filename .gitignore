@@ -12,15 +12,13 @@
 *.o
 *.a
 *.txt
-*.sh
+# *.sh
 *.out
 .vscode/
 submission/
 handin/
 .vscode
-minishell_tester/
-minishellsecond/
-zzzzzzTester/
-**/minishell
+**/cub3D
+cub3D
 **/*.log
 **/.*
