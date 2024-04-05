@@ -4,13 +4,13 @@ int	main(int argc, char *argv[])
 {
 	t_main_data	main_data;
 
-	init_main_data(&main_data, argc, argv);
-
-	parse_main(&main_data);
-
+	//init_main_data(&main_data, argc, argv);
+	//parse_main(&main_data);
+	init(&main_data);
 	// check correct number of args
-	// 
-
+	//
+	(void)argc;
+	(void)argv;
 	return (0);
 }
 

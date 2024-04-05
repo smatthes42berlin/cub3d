@@ -23,3 +23,4 @@ minishellsecond/
 zzzzzzTester/
 **/minishell
 **/*.log
+**/.*
