@@ -1,5 +1,7 @@
 SHELL:=/bin/bash
-CFLAGS = -Wall -Wextra -Werror $(INCLUDEFLAGS)
+CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
+LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
 NAME = cub3D
@@ -37,10 +39,7 @@ SRC = 	main.c \
 		parse_util_1.c \
 		parse_util_2.c
 
-#parser_main.c
-	
 
-		
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
@@ -49,7 +48,7 @@ OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 all: $(NAME)
 
 $(NAME): $(PATHLIBFT) $(OBJ)
-	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) $(PATHLIBFT)
+	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) $(PATHLIBFT) $(LDFLAGS)
 
 $(PATHOBJ)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -69,11 +68,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 leaks:
-	@echo -e "\n\n"
-	@echo "Please copy/create supression file first: 'readline.supp' "
-	@echo -e "\n\n"
 	@make
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp ./minishell
+	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./test_maps/1.cub
 
 reall: fcleanall all
 
