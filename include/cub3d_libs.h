@@ -17,6 +17,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <dirent.h>
+
+# include <X11/Xutil.h>
+# include "mlx.h"
+# include "mlx_int.h"
+# include <math.h>
 
 #endif

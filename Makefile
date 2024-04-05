@@ -12,10 +12,10 @@ NAMELIBFT = libft.a
 FOLDERLIBFT = ./libft/
 PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
 
-INCLUDEPATH = ./include/ ./libft/include/ ./libft/
+INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
 # if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
-SUBFOLDERSRC = . /error /parse_map
+SUBFOLDERSRC = . /error /parse_map /raycast
 BASEPATHSRC = ./src/
 PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
 PATHBUILD = build/
@@ -46,7 +46,9 @@ SRC = 	main.c \
 		handle_no.c \
 		handle_so.c \
 		handle_unknown.c \
-		handle_we.c 
+		handle_we.c \
+		raycast.c
+
 
 
 OBJFNAME = $(SRC:.c=.o)
