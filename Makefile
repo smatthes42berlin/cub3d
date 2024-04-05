@@ -1,79 +1,44 @@
-SHELL:=/bin/bash
-CFLAGS = -Wall -Wextra -Werror $(INCLUDEFLAGS)
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
-# CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
-NAME = cub3D
-LINK= cc
+# Compiler and flags
 CC = cc
+CFLAGS = -g -O3 -Wall -Werror -Wextra
+LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
 
-NAMELIBFT = libft.a
-FOLDERLIBFT = ./libft/
-PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
+# Source dir and files
+SRC_DIR = src
+SRCS = src/main.c 
 
-INCLUDEPATH = ./include/ ./libft/include/ ./libft/
-INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
-# if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
-SUBFOLDERSRC = . /error /parse_map
-BASEPATHSRC = ./src/
-PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
-PATHBUILD = build/
-PATHOBJ = build/
+# Object files
+OBJ_DIR = obj
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+BONUS_OBJS = $(BONUS_SRCS:$(BONUS_DIR)/%.c=$(OBJ_DIR)/bonus_%.o)
 
-# create build folder
-$(shell if [ ! -d $(PATHBUILD) ]; then \
-    mkdir -p $(PATHBUILD); \
-fi)
+# Output binary
+TARGET = cub3d
 
-# specifies the path, where the compiler will look for files (e.g. *.c, *.h files)
-# that way, you dont have to specify full filepath when listing source files below
-VPATH = $(PATHSRC) $(INCLUDEPATH)
+# Phony targets
+.PHONY: all clean fclean re bonus
 
-# list all filenames (without path) here
-SRC = 	main.c \
-		throw_error.c \
-		get_failed_func_str.c \
-		parse_main.c
+# Default target (all)
+all: $(TARGET)
 
-#parser_main.c
-	
+# Linking the program
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-		
-OBJFNAME = $(SRC:.c=.o)
-OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
-
-.PHONY: all clean fclean re fcleanall reall leaks
-
-all: $(NAME)
-
-$(NAME): $(PATHLIBFT) $(OBJ)
-	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) $(PATHLIBFT)
-
-$(PATHOBJ)%.o: %.c
+# Compilation rule for object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(PATHLIBFT): 
-	make -C $(FOLDERLIBFT)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
+# Clean object files and executable
 clean:
-	make -C $(FOLDERLIBFT) clean
-	$(RM) $(OBJ)
+	rm -rf $(OBJ_DIR)
 
-fcleanall: clean
-	make -C libft fclean
-	$(RM) $(NAME)
-
+# Remove all generated files
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(TARGET)
 
-leaks:
-	@echo -e "\n\n"
-	@echo "Please copy/create supression file first: 'readline.supp' "
-	@echo -e "\n\n"
-	@make
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=readline.supp ./minishell
-
-reall: fcleanall all
-
+# Rebuild everything
 re: fclean all
-
-.PRECIOUS: $(PATHOBJ)%.o
