@@ -2,7 +2,7 @@
 
 bool	compare_line(t_parse_state *parse_state, const char *str)
 {
-	(ft_strcmp(str, (char *)parse_state->cur_line->content) == 0);
+	return (ft_strcmp(str, (char *)parse_state->cur_line->content) == 0);
 }
 
 bool	is_newline(t_parse_state *parse_state)
@@ -31,7 +31,6 @@ bool	is_map_start(t_parse_state *parse_state)
 	{
 		if (ft_isspace(content[i]))
 			i++;
-		
 	}
 	return (false);
 }

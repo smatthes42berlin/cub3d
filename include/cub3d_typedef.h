@@ -1,6 +1,8 @@
 #ifndef CUB3D_TYPEDEF_H
 # define CUB3D_TYPEDEF_H
 
+# define REM_EMPTY_LINES_MAP_FILE false
+
 typedef struct s_map
 {
 	char				*texture_north;
@@ -31,6 +33,7 @@ typedef struct s_main_data
 
 typedef struct s_parse_state
 {
+	t_main_data			*main_data;
 	t_list_d			*file_lbl;
 	t_list_d			*cur_line;
 	char				*texture_north;
@@ -39,6 +42,28 @@ typedef struct s_parse_state
 	char				*texture_west;
 	char				*color_ceiling;
 	char				*color_floor;
+	bool				multi_def_tex_no;
+	bool				multi_def_tex_so;
+	bool				multi_def_tex_ea;
+	bool				multi_def_tex_we;
+	bool				multi_def_col_cei;
+	bool				multi_def_col_flo;
+	bool				wrong_format_tex_no;
+	bool				wrong_format_tex_so;
+	bool				wrong_format_tex_ea;
+	bool				wrong_format_tex_we;
+	bool				unknown_lines_found;
+	bool				defs_after_map_found;
+	bool				wrong_format_ceiling;
+	bool				wrong_format_floor;
+	bool				no_access_to_tex_no;
+	bool				no_access_to_tex_so;
+	bool				no_access_to_tex_ea;
+	bool				no_access_to_tex_we;
+	bool				map_multi_start_pos;
+	bool				map_unknown_char;
+	bool				map_no_start_pos;
+	bool				map_not_closed;
 	bool				map_started;
 	bool				map_ended;
 }						t_parse_state;
