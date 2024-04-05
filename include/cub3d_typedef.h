@@ -2,9 +2,24 @@
 # define CUB3D_TYPEDEF_H
 
 # define REM_EMPTY_LINES_MAP_FILE false
+# define MAX_TILES 64
+# define PI 3.1415926535
+# define PI2 PI / 2
+# define PI3 3 * PI / 2
+
+// 111111111111999
+// 100000000001111
+// 100000000000001
+// 100111111111119
+// 111199999999999
 
 typedef struct s_map
 {
+	int					tiles[MAX_TILES];
+	int					width;
+	int					height;
+	int size; // size of each tile
+	//
 	char				*texture_north;
 	char				*texture_south;
 	char				*texture_east;
@@ -14,17 +29,33 @@ typedef struct s_map
 	int					**map;
 }						t_map;
 
-// 111111111111999
-// 100000000001111
-// 100000000000001
-// 100111111111119
-// 111199999999999
+typedef struct s_player
+{
+	int					x;
+	int					y;
+	int					size;
+	int					color;
+	float				angle;
+	float				dx;
+	float				dy;
+}						t_player;
+
+typedef struct s_window
+{
+	void				*mlx;
+	void				*mlx_win;
+	int					width;
+	int					height;
+}						t_window;
 
 typedef struct s_main_data
 {
-	t_map				map;
+	// t_map				map;
 	int					argc;
 	char				**argv;
+	t_window			w;
+	t_player			player;
+	t_map				map;
 	// player start_position
 	// player cur_position
 	// player orientation
