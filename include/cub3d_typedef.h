@@ -36,6 +36,7 @@ typedef struct s_parse_state
 	t_main_data			*main_data;
 	t_list_d			*file_lbl;
 	t_list_d			*cur_line;
+	char				*cur_line_trimmed;
 	char				*texture_north;
 	char				*texture_south;
 	char				*texture_east;

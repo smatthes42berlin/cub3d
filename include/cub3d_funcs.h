@@ -17,19 +17,29 @@ int		init_parse_state_map(t_parse_state *parse_state);
 int		init_parse_state_tex(t_parse_state *parse_state);
 int		init_parse_state_col(t_parse_state *parse_state);
 int		identify_line(t_parse_state *parse_state);
+int		handle_ceil(t_parse_state *parse_state);
+int		handle_ea(t_parse_state *parse_state);
+int		handle_floor(t_parse_state *parse_state);
+int		handle_map_start(t_parse_state *parse_state);
+int		handle_newline(t_parse_state *parse_state);
+int		handle_no(t_parse_state *parse_state);
+int		handle_so(t_parse_state *parse_state);
+int		handle_unknown(t_parse_state *parse_state);
+int		handle_we(t_parse_state *parse_state);
 
 /* parse util */
 
 bool	compare_line(t_parse_state *parse_state, const char *str);
 bool	is_newline(t_parse_state *parse_state);
-bool	is_c(t_parse_state *parse_state);
-bool	is_f(t_parse_state *parse_state);
+bool	is_ceil(t_parse_state *parse_state);
+bool	is_floor(t_parse_state *parse_state);
 bool	is_map_start(t_parse_state *parse_state);
 bool	is_no(t_parse_state *parse_state);
 bool	is_so(t_parse_state *parse_state);
 bool	is_we(t_parse_state *parse_state);
 bool	is_ea(t_parse_state *parse_state);
 int		go_to_next_line(t_parse_state *parse_state);
+int		get_cur_line_trimmed(t_parse_state *parse_state);
 
 /* errors */
 

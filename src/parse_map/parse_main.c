@@ -36,6 +36,7 @@ int	parse_map(t_main_data *main_data, t_list_d *file_lbl)
 	init_parse_state(&parse_state, main_data, file_lbl);
 	while (parse_state.cur_line)
 	{
+		printf("line: %s\n", (char *)parse_state.cur_line->content);
 		identify_line(&parse_state);
 	}
 	return (0);
@@ -43,33 +44,25 @@ int	parse_map(t_main_data *main_data, t_list_d *file_lbl)
 
 int	identify_line(t_parse_state *parse_state)
 {
-	// printf("line: %s\n", (char *)parse_state->cur_line->content);
 	if (is_newline(parse_state))
-		handle_newline(parse_state);
-	if (is_no(parse_state))
-		handle_no(parse_state);
-	if (is_so(parse_state))
-		handle_so(parse_state);
-	if (is_ea(parse_state))
-		handle_ea(parse_state);
-	if (is_we(parse_state))
-		handle_we(parse_state);
-	if (is_map_start(parse_state))
-		handle_map_start(parse_state);
-	if (is_we(parse_state))
-		handle_we(parse_state);
-	if (is_we(parse_state))
-		handle_we(parse_state);
-	// go_to_next_line(parse_state);
-	return (0);
-}
-
-int	handle_newline(t_parse_state *parse_state)
-{
-	// wenn map nicht reached, just skip
-	// wenn map bereits reached, set map auf end, wenn es nicht bereits geschehen ist
-	// wenn map bereits ended, just skip
-	return (0);
+		return (handle_newline(parse_state));
+	else if (is_no(parse_state))
+		return (handle_no(parse_state));
+	else if (is_so(parse_state))
+		return (handle_so(parse_state));
+	else if (is_ea(parse_state))
+		return (handle_ea(parse_state));
+	else if (is_we(parse_state))
+		return (handle_we(parse_state));
+	else if (is_ceil(parse_state))
+		return (handle_ceil(parse_state));
+	else if (is_floor(parse_state))
+		return (handle_floor(parse_state));
+	else if (is_map_start(parse_state))
+		return (handle_map_start(parse_state));
+	else
+		return (handle_unknown(parse_state));
+	printf("11\n");
 }
 
 // check nothing after map

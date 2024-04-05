@@ -16,6 +16,7 @@ int	init_parse_state_gen(t_parse_state *parse_state, t_main_data *main_data,
 	parse_state->main_data = main_data;
 	parse_state->file_lbl = file_lbl;
 	parse_state->cur_line = file_lbl;
+	get_cur_line_trimmed(parse_state);
 	parse_state->unknown_lines_found = false;
 	parse_state->defs_after_map_found = false;
 	return (0);

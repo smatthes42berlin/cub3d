@@ -6,8 +6,6 @@ int	main(int argc, char *argv[])
 
 	init_main_data(&main_data, argc, argv);
 	parse_main(&main_data);
-	// check correct number of args
-	//
 	return (0);
 }
 
