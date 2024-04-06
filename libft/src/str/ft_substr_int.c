@@ -3,7 +3,6 @@
 int	ft_substr_int(char const *s, unsigned int start, size_t len, char **res)
 {
 	size_t			str_len;
-	char			*substr;
 	unsigned int	sub_len;
 
 	*res = NULL;
@@ -14,9 +13,9 @@ int	ft_substr_int(char const *s, unsigned int start, size_t len, char **res)
 		sub_len = str_len - start;
 	else
 		sub_len = len;
-	substr = malloc(sizeof(*substr) * (sub_len + 1));
-	if (!substr)
+	*res = malloc(sizeof(**res) * (sub_len + 1));
+	if (!*res)
 		return (1);
-	ft_strlcpy(substr, (s + start), sub_len + 1);
+	ft_strlcpy(*res, (s + start), sub_len + 1);
 	return (0);
 }

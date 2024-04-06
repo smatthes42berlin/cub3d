@@ -1,6 +1,6 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
-LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+LDFLAGS = -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
@@ -38,15 +38,10 @@ SRC = 	main.c \
 		init_parse_state.c \
 		parse_util_1.c \
 		parse_util_2.c \
-		handle_ceil.c \
-		handle_ea.c \
-		handle_floor.c \
 		handle_map_start.c \
 		handle_newline.c \
-		handle_no.c \
-		handle_so.c \
 		handle_unknown.c \
-		handle_we.c \
+		handle_optn.c \
 		raycast.c
 
 

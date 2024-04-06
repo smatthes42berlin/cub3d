@@ -1,39 +1,36 @@
 #include "cub3d.h"
 
-bool	compare_line(t_parse_state *parse_state, const char *str)
+bool	optn_not_def_map_not_started(t_parse_state *parse_state,
+		t_optn_parse *optn)
 {
-	return (ft_strncmp(str, (char *)parse_state->cur_line->content, ft_strlen(str)) == 0);
+	return (!optn->line_in_map_file && !parse_state->map_parse.started);
 }
 
-bool	is_newline(t_parse_state *parse_state)
+bool	optn_alr_def_map_not_started(t_parse_state *parse_state,
+		t_optn_parse *optn)
 {
-	return (compare_line(parse_state, "\n"));
+	return (optn->line_in_map_file && !parse_state->map_parse.started);
 }
 
-bool	is_ceil(t_parse_state *parse_state)
+bool	map_already_ended(t_parse_state *parse_state)
 {
-	return (compare_line(parse_state, "C "));
+	return (parse_state->map_parse.ended);
 }
 
-bool	is_floor(t_parse_state *parse_state)
+int	go_to_next_line(t_parse_state *parse_state)
 {
-	return (compare_line(parse_state, "F "));
+	parse_state->cur_line = parse_state->cur_line->next;
+	get_cur_line_trimmed(parse_state);
+	return (0);
 }
 
-bool	is_map_start(t_parse_state *parse_state)
+
+int	get_cur_line_trimmed(t_parse_state *parse_state)
 {
-	char	*content;
-	int		i;
-
-	i = 0;
-	content = parse_state->cur_line->content;
-	while (content[i])
-	{
-		if (ft_isspace(content[i]))
-			i++;
-	}
-	return (false);
+	free(parse_state->cur_line_trimmed);
+	if (ft_strtrim_int(parse_state->cur_line->content, " \n\v\t\f\r",
+			&(parse_state->cur_line_trimmed)))
+		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
+				"trying to trim cur line of map file"}, true);
+	return (0);
 }
-
-// any number of ws
-// encounter either a 1, 0, W,E,S,N,
