@@ -17,7 +17,8 @@ bool	compare_line(t_parse_state *parse_state, const char *str)
 
 bool	is_newline(t_parse_state *parse_state)
 {
-	return (compare_line(parse_state, "\n"));
+	return (compare_line(parse_state, "\n")
+		|| str_is_empty((char *)parse_state->cur_line->content));
 }
 
 t_optn_parse	*is_optn(t_parse_state *parse_state)

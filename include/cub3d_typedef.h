@@ -3,7 +3,7 @@
 
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define SPACE ' '
+# define MAP_SPACE '-'
 # define MAX_TILES 64
 # define PI 3.1415926535
 # define PI2 PI / 2
@@ -78,19 +78,24 @@ typedef struct s_optn_parse
 	bool				wrong_format;
 	bool				file_access;
 	bool				rgb_out_of_range;
+	int					color[3];
 	enum e_optn_type	type;
 }						t_optn_parse;
 
 typedef struct s_map_parse
 {
+	char				**org_map_rect;
+	char				**reachable_map_rect;
 	bool				multi_start_pos;
 	bool				unknown_char;
 	bool				no_start_pos;
 	bool				not_closed;
 	bool				started;
 	bool				ended;
-	int					max_height;
-	int					max_width;
+	int					max_height_org;
+	int					max_width_org;
+	int					max_height_reachable;
+	int					max_width_reachable;
 }						t_map_parse;
 
 typedef struct s_parse_state
@@ -101,6 +106,7 @@ typedef struct s_parse_state
 	char				*cur_line_trimmed;
 	bool				unknown_lines_found;
 	bool				defs_after_map_found;
+	bool				map_file_valid;
 	t_optn_parse		texture_north;
 	t_optn_parse		texture_south;
 	t_optn_parse		texture_east;

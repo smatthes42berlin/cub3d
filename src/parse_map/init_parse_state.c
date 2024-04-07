@@ -12,11 +12,11 @@ int	init_parse_state(t_parse_state *parse_state, t_main_data *main_data,
 int	init_parse_state_gen(t_parse_state *parse_state, t_main_data *main_data,
 		t_list_d *file_lbl)
 {
-	printf("%p\n", parse_state->file_lbl);
 	parse_state->main_data = main_data;
 	parse_state->file_lbl = file_lbl;
 	parse_state->cur_line = file_lbl;
 	parse_state->cur_line_trimmed = NULL;
+	parse_state->map_file_valid = true;
 	get_cur_line_trimmed(parse_state);
 	parse_state->unknown_lines_found = false;
 	parse_state->defs_after_map_found = false;
@@ -31,8 +31,12 @@ int	init_parse_state_map(t_parse_state *parse_state)
 	parse_state->map_parse.not_closed = false;
 	parse_state->map_parse.started = false;
 	parse_state->map_parse.ended = false;
-	parse_state->map_parse.max_height = 0;
-	parse_state->map_parse.max_width = 0;
+	parse_state->map_parse.org_map_rect = NULL;
+	parse_state->map_parse.reachable_map_rect = NULL;
+	parse_state->map_parse.max_height_org = 0;
+	parse_state->map_parse.max_width_org = 0;
+	parse_state->map_parse.max_width_reachable = 0;
+	parse_state->map_parse.max_height_reachable = 0;
 	return (0);
 }
 
@@ -56,5 +60,8 @@ int	init_optn(t_optn_parse *optn, const char *name, enum e_optn_type type)
 	optn->wrong_format = false;
 	optn->file_access = true;
 	optn->rgb_out_of_range = false;
+	optn->color[0] = -1;
+	optn->color[1] = -1;
+	optn->color[2] = -1;
 	return (0);
 }

@@ -83,7 +83,7 @@ int						ft_str_cont_duplic(const char *str);
 int						ft_str_cont_chars(const char *str, const char *set);
 int						str_are_equal(const char *s1, const char *s2);
 int						str_is_empty(const char *str);
-int						str_contains_str_index(const char *big,
+int	str_contains_str_index(const char *big,
 							const char *little);
 
 /* str manip */
@@ -104,12 +104,14 @@ char					*ft_strtrim(char const *s1, char const *set);
 char					*ft_strmapi(char const *s, char (*f)(unsigned int,
 								char));
 void					ft_striteri(char *s, void (*f)(unsigned int, char *));
-int						split_str_str_after_index(char const *s,
-							char const *split_at, char ***res, int index);
-int						ins_replace_str_after_index(char **res,
-							t_ins_repl_str replace_info);
-int						rem_str_after_index(char **res,
-							t_ins_repl_str replace_info);
+int	split_str_str_after_index(char const *s,
+								char const *split_at,
+								char ***res,
+								int index);
+int	ins_replace_str_after_index(char **res,
+								t_ins_repl_str replace_info);
+int	rem_str_after_index(char **res,
+						t_ins_repl_str replace_info);
 int						remove_spaces_inplace(char **str);
 bool					str_only_spaces(char *str);
 int						str_trim_inplace(char **str);
@@ -118,6 +120,8 @@ int						ft_substr_int(char const *s, unsigned int start,
 							size_t len, char **res);
 int						ft_strtrim_int(char const *s1, char const *set,
 							char **res);
+int						str_fill(char *str, int len, char c);
+bool					str_only_digits(char *str);
 
 /* split */
 
@@ -156,8 +160,9 @@ t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 t_list_d				*dc_lst_new(void *content);
 
-void					dc_lst_print_whole(t_list_d *lst_ptr,
-							const char *longShort, const char *type);
+void	dc_lst_print_whole(t_list_d *lst_ptr,
+						const char *longShort,
+						const char *type);
 void					dc_lst_print_one_str_long(void *lst_ptr_void);
 void					dc_lst_print_one_str_short(void *lst_ptr_void);
 void					dc_lst_print_one_int_long(void *lst_ptr_void);
@@ -215,7 +220,7 @@ void					ft_putnbr_fd(int n, int fd);
 size_t					ft_putnbr_base_fd_l(int fd, long nbr, const char *base);
 size_t					ft_putnbr_base_fd_ul(int fd, unsigned long nbr,
 							const char *base);
-size_t					ft_putnbr_base_check(const char *base,
+size_t	ft_putnbr_base_check(const char *base,
 							t_base_info *base_info);
 
 /* atoi itoa */
@@ -245,6 +250,8 @@ char					**ft_arr_char_add(char **arr, char *val);
 char					**ft_arr_cpy_char_null(char **arr);
 char					**ft_arr_char_add_replace_n(char **arr, char *val);
 char					*ft_arr_char_get_val(char **arr, char *key);
+int						allocate_arr_char(char ***res, char prefill,
+							int num_elem, int str_len);
 
 /* math */
 
@@ -254,20 +261,21 @@ int						ft_abs(int nb);
 /* files */
 
 int						count_lines_filename(char *filename);
-int						count_lines_size_filename(char *filename,
-							t_file_info *file_info);
+int	count_lines_size_filename(char *filename,
+								t_file_info *file_info);
 int						count_lines_fd(int fd);
 int						count_lines_size_fd(int fd, t_file_info *file_info);
 void					free_file_info_ptr(t_file_info *file_info);
 void					free_file_info(t_file_info file_info);
 int						count_cols_per_line_fd(int fd, t_file_info *file_info);
-int						count_cols_per_line_filename(char *filename,
-							t_file_info *file_info);
+int	count_cols_per_line_filename(char *filename,
+									t_file_info *file_info);
 int						get_file_size_filename(char *filename);
 int						get_file_size_fd(int fd);
 int						read_whole_file(int fd, char **res);
-int						read_file_lines_to_list(int fd, t_list_d **res);
-int						read_file_list_rem_newlines(t_list_d *list);
+int						read_file_lines_to_list(int fd, t_list_d **res,
+							bool remove_newline_end_of_line);
+int						read_file_list_rem_empty_lines(t_list_d *list);
 
 /* free */
 

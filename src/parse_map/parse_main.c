@@ -11,15 +11,15 @@ int	parse_main(t_main_data *main_data)
 	if (fd == -1)
 		throw_error_sys_call((t_error_ms){errno, ERROR_OPEN,
 				"Cannot open Map file!"}, true);
-	if (read_file_lines_to_list(fd, &file_lbl))
+	if (read_file_lines_to_list(fd, &file_lbl, true))
 		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
 				"Cannot read Map file!"}, true);
 	if (REM_EMPTY_LINES_MAP_FILE)
-		read_file_list_rem_newlines(file_lbl);
+		read_file_list_rem_empty_lines(file_lbl);
 	if (close(fd))
 		throw_error_sys_call((t_error_ms){errno, ERROR_CLOSE,
 				"Cannot close Map file!"}, true);
-	parse_map(main_data, file_lbl);
+	parse_map_file(main_data, file_lbl);
 	d_lst_clear(&file_lbl, free);
 	return (0);
 }
@@ -31,37 +31,6 @@ int	parse_main(t_main_data *main_data)
 // vom groben ins feine
 
 // parse whole file and keep track of things zou find
-
-int	parse_map(t_main_data *main_data, t_list_d *file_lbl)
-{
-	t_parse_state	parse_state;
-
-	if(!file_lbl)
-		throw_error_gen(1, "Empty map file provided!", true);
-	init_parse_state(&parse_state, main_data, file_lbl);
-	while (parse_state.cur_line)
-	{
-		printf("l: %s\n", (char *)parse_state.cur_line->content);
-		identify_line(&parse_state);
-	}
-	return (0);
-}
-
-int	identify_line(t_parse_state *parse_state)
-{
-	t_optn_parse	*check_optn;
-
-	check_optn = is_optn(parse_state);
-	if (is_newline(parse_state))
-		return (handle_newline(parse_state));
-	if (check_optn)
-		return handle_optn(parse_state, check_optn);
-	if (is_map_start(parse_state))
-		return (handle_map_start(parse_state));
-	else
-		return (handle_unknown(parse_state));
-
-}
 
 // check nothing after map
 // check all required fields before map only once
