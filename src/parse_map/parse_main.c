@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+/*
 int	parse_main(t_main_data *main_data)
 {
 	int			fd;
@@ -91,3 +92,4 @@ int	handle_newline(t_parse_state *parse_state)
 // everything except for map can be separated by one or more empty lines
 // except for map eny element can be set in any order
 // each type of information from an element can be seperated by one or more spaces
+*/

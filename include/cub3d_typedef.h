@@ -1,11 +1,19 @@
 #ifndef CUB3D_TYPEDEF_H
 # define CUB3D_TYPEDEF_H
 
+#define FALSE 0
+#define TRUE 1
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX_TILES 64
 # define PI 3.1415926535
 # define PI2 PI / 2
 # define PI3 3 * PI / 2
+# define DR 0.0174533
+# define NUM_RAYS 60
+# define FOV (60 * DR)
 
 // 111111111111999
 // 100000000001111

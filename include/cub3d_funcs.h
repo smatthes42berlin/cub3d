@@ -40,19 +40,20 @@ int		throw_error_map_file(int code, t_parse_state *parse_state,
 char	*get_failed_func_str(enum e_failed_func failed_func);
 
 /*raycast friedrich*/
-int keys(int key, void *param);
-void	draw_map(t_main_data *data, int *addr);
-void draw_grid_lines(t_main_data *data, int *addr);
-void draw_player(t_main_data *data, int *addr);
-int max(int a, int b);
-void draw_line_on_image(int *addr, int width, int height, int start_x, int start_y, int end_x, int end_y, int color);
-void draw_vertical_rays(t_main_data *data, int *addr);
-void draw_horizontal_rays(t_main_data *data, int *addr);
-void create_window(t_main_data *data);
-void init_player(t_main_data *data);
-void init_map(t_main_data *data);
-void init(t_main_data *data);
+//int keys(int key, void *param);
+//void	draw_map(t_main_data *data, int *addr);
+//void draw_grid_lines(t_main_data *data, int *addr);
+//void draw_player(t_main_data *data, int *addr);
+//int max(int a, int b);
+//void draw_line_on_image(int *addr, int width, int height, int start_x, int start_y, int end_x, int end_y, int color);
+//void draw_vertical_rays(t_main_data *data, int *addr);
+//void draw_horizontal_rays(t_main_data *data, int *addr);
+int create_window(t_main_data *data);
+int init(t_main_data *data);
 
-int draw(t_main_data *data);
+//void init_player(t_main_data *data);
+//void init_map(t_main_data *data);
+
+//int draw(t_main_data *data);
 
 #endif
