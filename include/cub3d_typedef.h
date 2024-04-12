@@ -19,6 +19,9 @@
 #define NUM_RAYS WINDOW_WIDTH
 #define MINIMAP_SCALE_FACTOR 1.0
 
+#define STRAIGHT_MOVEMENT (5 * MINIMAP_SCALE_FACTOR)
+#define ROTATION_MOVEMENT 0.1
+
 //# define PI2 PI / 2
 //# define PI3 3 * PI / 2
 //# define DR 0.0174533
@@ -58,6 +61,8 @@ typedef struct s_player
 	float 					rotation_angle;
 	float 					walk_speed;
 	float                   turn_speed;
+	float 					delta_x;
+	float 					delta_y;
 }						t_player;
 
 typedef struct s_window
