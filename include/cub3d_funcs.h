@@ -28,10 +28,30 @@ int				handle_newline(t_parse_state *parse_state);
 int				handle_unknown(t_parse_state *parse_state);
 int				copy_array_from_file(t_parse_state *parse_state);
 int				parse_whole_file(t_parse_state *parse_state);
-int				parse_extracted_details(t_parse_state *parse_state);
-bool			check_comma_error(t_optn_parse *col);
+
+/* check validity */
+
+int				check_extracted_details(t_parse_state *parse_state);
+int				check_map_validity(t_parse_state *parse_state);
 int				check_option_col(t_optn_parse *col);
+int				check_option_tex(t_optn_parse *col);
+int				check_file_access(t_optn_parse *col);
+int				check_path_extension(t_optn_parse *col);
+int				check_path_format(t_optn_parse *col);
+int				handle_unquoted_path(t_optn_parse *col);
+int				handle_quoted_path(t_optn_parse *col);
 int				get_val_rgb(t_optn_parse *col, char **splitted, int index);
+bool			check_comma_error(t_optn_parse *col);
+int				check_exactly_one_start_pos(t_parse_state *parse_state);
+int				check_unknown_characters(t_parse_state *parse_state);
+int				get_start_pos(t_parse_state *parse_state, int height, int width,
+					int *num_start_pos);
+int				check_map_not_closed(t_parse_state *parse_state, int height,
+					int width);
+int				flood_fill(t_parse_state *parse_state);
+int				flood_check(t_parse_state *parse_state, int height, int width);
+int				adjust_reachable_map(t_parse_state *parse_state, int height,
+					int width);
 
 /* parse util */
 
@@ -45,6 +65,11 @@ bool	optn_not_def_map_not_started(t_parse_state *parse_state,
 									t_optn_parse *optn);
 bool			optn_alr_def(t_optn_parse *optn);
 bool			map_already_ended(t_parse_state *parse_state);
+bool			is_quote(char c);
+bool			closing_quote_found(char *cli_input, char quote_type);
+bool			closing_quote_not_last_char(t_optn_parse *col);
+
+/* check validity */
 
 /* errors */
 

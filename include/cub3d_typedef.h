@@ -3,8 +3,8 @@
 
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define MAP_SPACE '-'
 # define MAX_TILES 64
+# define MAP_SIZE_LIMIT_FLOOD_FILL 1000000
 # define PI 3.1415926535
 # define PI2 PI / 2
 # define PI3 3 * PI / 2
@@ -84,11 +84,19 @@ typedef struct s_optn_parse
 
 typedef struct s_map_parse
 {
-	char				**org_map_rect;
-	char				**reachable_map_rect;
+	char				**org_rect;
+	char				**reachable_rect;
+	int					reachable_height_min;
+	int					reachable_height_max;
+	int					reachable_width_min;
+	int					reachable_width_max;
 	bool				multi_start_pos;
 	bool				unknown_char;
 	bool				no_start_pos;
+	bool				over_size_limit;
+	int					start_pos[2];
+	char				start_orient;
+	bool				more_than_one_start_pos;
 	bool				not_closed;
 	bool				started;
 	bool				ended;

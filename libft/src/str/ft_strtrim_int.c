@@ -12,7 +12,7 @@ int	ft_strtrim_int(char const *s1, char const *set, char **res)
 	*res = NULL;
 	set_len = ft_strlen(set);
 	s1_len = ft_strlen(s1);
-	if (set_len == 0 || s1_len == 0 || set_len > s1_len)
+	if (set_len == 0 || s1_len == 0)
 		return (0);
 	while (ft_strchr((char *)set, s1[rem_c_start]) != NULL)
 		rem_c_start += 1;

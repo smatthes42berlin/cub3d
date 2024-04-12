@@ -1,18 +1,10 @@
 #include "cub3d.h"
 
-// parse textures
-// parse colors
-// check map validity
-// only one start pos
-// played cannot go outside or map or reach map spaces
-// create flood filled map
-// shrink map to playable size
-//
-
 int	handle_map_start(t_parse_state *parse_state)
 {
+	parse_state->map_parse.started = true;
 	get_map_max_dim(parse_state);
-	if (allocate_arr_char(&(parse_state->map_parse.org_map_rect), MAP_SPACE,
+	if (allocate_arr_char(&(parse_state->map_parse.org_rect), '-',
 			parse_state->map_parse.max_height_org,
 			parse_state->map_parse.max_width_org))
 		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
@@ -37,7 +29,9 @@ int	copy_array_from_file(t_parse_state *parse_state)
 		i = 0;
 		while (cur_line[i])
 		{
-			(parse_state->map_parse.org_map_rect)[j][i] = cur_line[i];
+			(parse_state->map_parse.org_rect)[j][i] = cur_line[i];
+			if (cur_line[i] == '-')
+				(parse_state->map_parse.org_rect)[j][i] = '?';
 			i++;
 		}
 		go_to_next_line(parse_state);

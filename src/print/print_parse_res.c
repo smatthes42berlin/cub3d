@@ -5,12 +5,12 @@ int	print_parse_res(t_parse_state *parse_state)
 	printf("\n***********Result of Parsing map file:********\n");
 	print_gen_parse_res(parse_state);
 	print_map_parse_res(parse_state);
-	print_optn_parse_res(&(parse_state->texture_south));
-	print_optn_parse_res(&(parse_state->texture_north));
-	print_optn_parse_res(&(parse_state->texture_east));
-	print_optn_parse_res(&(parse_state->texture_west));
-	print_optn_parse_res(&(parse_state->color_ceiling));
-	print_optn_parse_res(&(parse_state->color_floor));
+	// print_optn_parse_res(&(parse_state->texture_south));
+	// print_optn_parse_res(&(parse_state->texture_north));
+	// print_optn_parse_res(&(parse_state->texture_east));
+	// print_optn_parse_res(&(parse_state->texture_west));
+	// print_optn_parse_res(&(parse_state->color_ceiling));
+	// print_optn_parse_res(&(parse_state->color_floor));
 	printf("\n***********                           ********\n\n");
 	return (0);
 }
@@ -37,15 +37,21 @@ int	print_map_parse_res(t_parse_state *parse_state)
 	print_res("unknown_char", parse_state->map_parse.unknown_char);
 	print_res("no_start_pos", parse_state->map_parse.no_start_pos);
 	print_res("not_closed", parse_state->map_parse.not_closed);
-	print_res("not_found", parse_state->map_parse.started);
+	print_res("not_found", !parse_state->map_parse.org_rect);
 	print_caption("map org");
-	print_map(parse_state->map_parse.org_map_rect,
-			parse_state->map_parse.max_width_org,
-			parse_state->map_parse.max_height_org);
+	printf("start height %d\n", (parse_state->map_parse.start_pos)[0]);
+	printf("start width %d\n", (parse_state->map_parse.start_pos)[1]);
+	printf("reachable height min %d\n", parse_state->map_parse.reachable_height_min);
+	printf("reachable height max %d\n", parse_state->map_parse.reachable_height_max);
+	printf("reachable width min %d\n", parse_state->map_parse.reachable_width_min);
+	printf("reachable width max %d\n", parse_state->map_parse.reachable_width_max);
+	print_map(parse_state->map_parse.org_rect,
+				parse_state->map_parse.max_width_org,
+				parse_state->map_parse.max_height_org);
 	print_caption("map reachable");
-	print_map(parse_state->map_parse.reachable_map_rect,
-			parse_state->map_parse.max_width_reachable,
-			parse_state->map_parse.max_height_reachable);
+	print_map(parse_state->map_parse.reachable_rect,
+				parse_state->map_parse.max_width_reachable,
+				parse_state->map_parse.max_height_reachable);
 	return (0);
 }
 

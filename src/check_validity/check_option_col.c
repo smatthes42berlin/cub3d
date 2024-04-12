@@ -1,17 +1,5 @@
 #include "cub3d.h"
 
-int	parse_extracted_details(t_parse_state *parse_state)
-{
-	// check_map_validity(parse_state);
-	// check_option_tex(parse_state->texture_east);
-	// check_option_tex(parse_state->texture_west);
-	// check_option_tex(parse_state->texture_north);
-	// check_option_tex(parse_state->texture_south);
-	check_option_col(&(parse_state->color_ceiling));
-	check_option_col(&(parse_state->color_floor));
-	return (0);
-}
-
 int	check_option_col(t_optn_parse *col)
 {
 	char	**splitted;
@@ -32,12 +20,14 @@ int	check_option_col(t_optn_parse *col)
 				"Cannot split col def line!"}, true);
 	if (ft_arr_len_char(splitted) != 3)
 	{
+		free_str_arr_null(splitted);
 		col->wrong_format = true;
 		return (0);
 	}
 	get_val_rgb(col, splitted, 0);
 	get_val_rgb(col, splitted, 1);
 	get_val_rgb(col, splitted, 2);
+	free_str_arr_null(splitted);
 	return (0);
 }
 
@@ -88,7 +78,7 @@ bool	check_comma_error(t_optn_parse *col)
 			one_comma = false;
 		i++;
 	}
-	if ((col->line_in_map_file)[i-1] == ',')
+	if ((col->line_in_map_file)[i - 1] == ',')
 	{
 		col->wrong_format = true;
 		return (true);

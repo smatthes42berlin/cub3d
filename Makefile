@@ -15,7 +15,7 @@ PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
 INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
 # if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
-SUBFOLDERSRC = . /error /parse_map /raycast /free print/
+SUBFOLDERSRC = . /error /parse_map /raycast /free print/ check_validity/ parse_util/
 BASEPATHSRC = ./src/
 PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
 PATHBUILD = build/
@@ -35,12 +35,12 @@ SRC = 	main.c \
 		throw_error.c \
 		get_failed_func_str.c \
 		parse_map_file.c \
-		parse_extracted_details.c \
 		parse_main.c \
 		parse_whole_file.c \
 		init_parse_state.c \
 		parse_util_1.c \
 		parse_util_2.c \
+		parse_util_3.c \
 		handle_map_start.c \
 		handle_newline.c \
 		handle_unknown.c \
@@ -49,7 +49,15 @@ SRC = 	main.c \
 		free_everything.c \
 		print_map.c \
 		print_parse_res.c \
-		print_parse_util.c
+		print_parse_util.c \
+		check_extracted_details.c \
+		check_map_main.c \
+		check_map_start_pos.c \
+		check_map_unknown_chars.c \
+		check_option_col.c \
+		check_option_tex.c \
+		check_map_flood_fill.c 
+
 
 
 

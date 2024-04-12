@@ -16,9 +16,9 @@ int	free_parse_state(t_parse_state *parse_state)
 		free(parse_state->texture_west.line_in_map_file);
 		free(parse_state->color_ceiling.line_in_map_file);
 		free(parse_state->color_floor.line_in_map_file);
-		if (parse_state->map_parse.org_map_rect)
+		if (parse_state->map_parse.org_rect)
 		{
-			free_str_arr_null(parse_state->map_parse.org_map_rect);
+			free_str_arr_null(parse_state->map_parse.org_rect);
 		}
 	}
 	return (0);

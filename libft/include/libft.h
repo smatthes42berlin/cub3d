@@ -85,6 +85,9 @@ int						str_are_equal(const char *s1, const char *s2);
 int						str_is_empty(const char *str);
 int	str_contains_str_index(const char *big,
 							const char *little);
+bool					str_ends_on(const char *str, const char *ends_on);
+bool					str_only_digits(char *str);
+bool					str_only_spaces(char *str);
 
 /* str manip */
 
@@ -113,7 +116,6 @@ int	ins_replace_str_after_index(char **res,
 int	rem_str_after_index(char **res,
 						t_ins_repl_str replace_info);
 int						remove_spaces_inplace(char **str);
-bool					str_only_spaces(char *str);
 int						str_trim_inplace(char **str);
 int						move_all_by_one(char **str, int i);
 int						ft_substr_int(char const *s, unsigned int start,
@@ -121,7 +123,6 @@ int						ft_substr_int(char const *s, unsigned int start,
 int						ft_strtrim_int(char const *s1, char const *set,
 							char **res);
 int						str_fill(char *str, int len, char c);
-bool					str_only_digits(char *str);
 
 /* split */
 

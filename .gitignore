@@ -8,7 +8,7 @@
 **/*.a
 **/*.out
 **/*.txt
-**/*.sh
+# **/*.sh
 *.o
 *.a
 *.txt
@@ -22,3 +22,6 @@ handin/
 cub3D
 **/*.log
 **/.*
+
+*x*.cub
+**/*x*.cub

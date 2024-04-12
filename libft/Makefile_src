@@ -158,7 +158,8 @@ SRC =	ft_atoi.c \
 		ft_substr_int.c \
 		ft_strtrim_int.c \
 		str_fill.c \
-		allocate_arr_char.c
+		allocate_arr_char.c \
+		str_ends_on.c
 
 
 

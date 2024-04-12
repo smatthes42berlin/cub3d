@@ -53,5 +53,3 @@ bool	is_map_start(t_parse_state *parse_state)
 	return (false);
 }
 
-// any number of ws
-// encounter either a 1, 0, W,E,S,N,
