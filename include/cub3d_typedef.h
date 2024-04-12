@@ -3,18 +3,29 @@
 
 #define FALSE 0
 #define TRUE 1
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+
+# define PI 3.1415926535
+# define TWO_PI 6.28318530
+
+# define TILE_SIZE 64
+# define MAP_NUM_ROWS 13
+# define MAP_NUM_COLS 20
+
+#define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
+#define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+
+#define FOV_ANGLE (60 * (PI / 180))
+
+#define NUM_RAYS WINDOW_WIDTH
+#define MINIMAP_SCALE_FACTOR 1.0
+
+//# define PI2 PI / 2
+//# define PI3 3 * PI / 2
+//# define DR 0.0174533
+//# define NUM_RAYS 60
+// # define FOV (60 * DR)
 
 # define REM_EMPTY_LINES_MAP_FILE false
-# define MAX_TILES 64
-# define PI 3.1415926535
-# define PI2 PI / 2
-# define PI3 3 * PI / 2
-# define DR 0.0174533
-# define NUM_RAYS 60
-# define FOV (60 * DR)
-
 // 111111111111999
 // 100000000001111
 // 100000000000001
@@ -23,7 +34,6 @@
 
 typedef struct s_map
 {
-	int					tiles[MAX_TILES];
 	int					width;
 	int					height;
 	int size; // size of each tile
@@ -39,13 +49,15 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int					x;
-	int					y;
-	int					size;
-	int					color;
-	float				angle;
-	float				dx;
-	float				dy;
+	float					x;
+	float					y;
+	float					size;
+	float					color;
+	int						turn_direction;
+	int						walk_direction;
+	float 					rotation_angle;
+	float 					walk_speed;
+	float                   turn_speed;
 }						t_player;
 
 typedef struct s_window
