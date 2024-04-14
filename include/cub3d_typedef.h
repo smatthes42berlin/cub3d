@@ -19,7 +19,7 @@
 #define NUM_RAYS WINDOW_WIDTH
 #define MINIMAP_SCALE_FACTOR 1.0
 
-#define STRAIGHT_MOVEMENT (5 * MINIMAP_SCALE_FACTOR)
+#define STRAIGHT_MOVEMENT (10 * MINIMAP_SCALE_FACTOR)
 #define ROTATION_MOVEMENT 0.1
 
 //# define PI2 PI / 2
@@ -64,6 +64,20 @@ typedef struct s_player
 	float 					delta_x;
 	float 					delta_y;
 }						t_player;
+
+typedef struct s_ray 
+{
+	float ray_angle;
+	float wall_hit_x;
+	float wall_hit_y;
+	float distance;
+	int was_hit_vertical;
+	int is_ray_facing_up;
+	int is_ray_facing_down;
+	int is_ray_facing_left;
+	int is_ray_facing_right;
+	int wall_hit_content;
+}	t_ray;
 
 typedef struct s_window
 {

@@ -50,7 +50,7 @@ char	*get_failed_func_str(enum e_failed_func failed_func);
 //void draw_horizontal_rays(t_main_data *data, int *addr);
 int create_window(t_main_data *data);
 int init(t_main_data *data);
-void render(t_main_data *data, int *addr);
+void render(t_main_data *data, int *addr, t_ray *rays);
 
 //void init_player(t_main_data *data);
 //void init_map(t_main_data *data);
