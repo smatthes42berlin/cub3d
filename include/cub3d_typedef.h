@@ -16,11 +16,11 @@
 
 #define FOV_ANGLE (60 * (PI / 180))
 
-#define NUM_RAYS WINDOW_WIDTH
-#define MINIMAP_SCALE_FACTOR 1.0
+#define NUM_RAYS (WINDOW_WIDTH)
+#define MINIMAP_SCALE_FACTOR 0.2
 
-#define STRAIGHT_MOVEMENT (10 * MINIMAP_SCALE_FACTOR)
 #define ROTATION_MOVEMENT 0.1
+#define STRAIGHT_MOVEMENT 10
 
 //# define PI2 PI / 2
 //# define PI3 3 * PI / 2
@@ -59,6 +59,7 @@ typedef struct s_player
 	int						turn_direction;
 	int						walk_direction;
 	float 					rotation_angle;
+	int 					straight_movement;
 	float 					walk_speed;
 	float                   turn_speed;
 	float 					delta_x;
@@ -85,6 +86,7 @@ typedef struct s_window
 	void				*mlx_win;
 	int					width;
 	int					height;
+	float				scale_factor;
 }						t_window;
 
 typedef struct s_main_data
@@ -95,6 +97,7 @@ typedef struct s_main_data
 	t_window			w;
 	t_player			player;
 	t_map				map;
+	u_int32_t			*color_buffer;
 	// player start_position
 	// player cur_position
 	// player orientation

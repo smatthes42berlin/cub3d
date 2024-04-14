@@ -36,6 +36,8 @@ void destroy_window(t_main_data *data)
 		free(data->w.mlx);
         data->w.mlx = NULL;
     }
+	if (data->color_buffer)
+		free(data->color_buffer);
 }
 
 int close_window(void *param)
@@ -117,13 +119,15 @@ int keys(int key, void *param)
 
 void draw_tile(int *addr, int tile_x, int tile_y, int tile_color, t_main_data *data)
 {
+	int scaled_tile_size = (int)(TILE_SIZE * MINIMAP_SCALE_FACTOR);
+
     int y = 0; 
 	int x;
 	int pixel_index;
-    while (y < TILE_SIZE)
+    while (y < scaled_tile_size)
 	{
 		x = 0;
-        while (x < TILE_SIZE)
+        while (x < scaled_tile_size)
 		{
             pixel_index = ((tile_y + y) * data->w.width + (tile_x + x));
             if (pixel_index < data->w.width * data->w.height)
@@ -346,11 +350,11 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 
 	float horz_hit_distance = found_horz_wall_hit
 		? distance_between_points(data->player.x, data->player.y, horz_wall_hit_x, horz_wall_hit_y)
-		: (float)INT_MAX;
+		: FLT_MAX;
 
 	float vert_hit_distance = found_vert_wall_hit
 		? distance_between_points(data->player.x, data->player.y, vert_wall_hit_x, vert_wall_hit_y)
-		: (float)INT_MAX;
+		: FLT_MAX;
 
 	if (vert_hit_distance < horz_hit_distance)
 	{
@@ -402,6 +406,7 @@ void draw_rays(t_main_data *data, int *addr, t_ray *rays)
 
 }
 
+
 int draw(t_main_data *data)
 {
 	void *frame = mlx_new_image(data->w.mlx, data->w.width, data->w.height);
@@ -416,8 +421,78 @@ int draw(t_main_data *data)
 	return 0;
 }
 
+void init_player(t_main_data *data)
+{
+	data->player.x = WINDOW_WIDTH / 2;
+    data->player.y = WINDOW_HEIGHT / 2;
+	data->player.size = 1;
+	data->player.color = 0xFFFF00;
+	data->player.turn_direction = 0;
+	data->player.walk_direction = 0;
+	data->player.rotation_angle = PI / 2;
+	data->player.walk_speed = 100;
+	data->player.turn_speed = 45 * (PI / 180);
+}
+
+void setup(t_main_data *data)
+{
+	init_player(data);
+	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH * WINDOW_HEIGHT);
+}
+
+void generate_3d_projection(t_main_data *data, t_ray *rays)
+{
+	int i = 0;
+	while (i < NUM_RAYS)
+	{
+		float perp_distance = rays[i].distance * cos(rays[i].ray_angle - data->player.rotation_angle);
+		float distance_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+		float projected_wall_height = (TILE_SIZE / perp_distance) * distance_proj_plane;
+
+		int wall_strip_height = projected_wall_height;
+
+		int wall_top_pixel = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+		wall_top_pixel = wall_top_pixel < 0 ? 0 : wall_top_pixel;
+
+		int wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
+		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
+
+		int y = wall_top_pixel;
+		while (y < wall_bottom_pixel)
+		{
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFFFFFFFF;
+			y++;
+		}
+		i++;
+	}
+
+}
+
+void fill_color_buffer(u_int32_t color, u_int32_t *color_buffer)
+{
+	int x = 0;
+    while (x < WINDOW_WIDTH)
+	{
+		int y = 0;
+		while (y < WINDOW_HEIGHT)
+		{
+			
+			color_buffer[(WINDOW_WIDTH * y) + x] = color;
+			y++;
+		}
+		x++;
+    }
+}
+
+
 void render(t_main_data *data, int *addr, t_ray *rays)
 {
+	fill_color_buffer(0xFF000000, data->color_buffer);
+	generate_3d_projection(data, rays);
+
+	memcpy(addr, data->color_buffer, WINDOW_WIDTH * WINDOW_HEIGHT * sizeof(u_int32_t));
+
+	// display mini-map
 	draw_map(data, addr);
 	draw_player(data, addr);
 	draw_player_direction(data, addr);
@@ -439,24 +514,6 @@ int initialize_window(t_main_data *data)
 	return TRUE;
 }
 
-void init_player(t_main_data *data)
-{
-	data->player.x = WINDOW_WIDTH / 2;
-    data->player.y = WINDOW_HEIGHT / 2;
-	data->player.size = 1;
-	data->player.color = 0xFFFF00;
-	data->player.turn_direction = 0;
-	data->player.walk_direction = 0;
-	data->player.rotation_angle = PI / 2;
-	data->player.walk_speed = 100;
-	data->player.turn_speed = 45 * (PI / 180);
-}
-
-
-void setup(t_main_data *data)
-{
-	init_player(data);
-}
 
 int init(t_main_data *data)
 {
