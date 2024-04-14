@@ -23,7 +23,7 @@ typedef struct s_list_dc
 	void				*content;
 	struct s_list_dc	*next;
 	struct s_list_dc	*prev;
-}						t_list_d;
+}						t_list_dc;
 
 typedef struct s_base_info
 {
@@ -159,9 +159,9 @@ t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 /* double circular linked list */
 
-t_list_d				*dc_lst_new(void *content);
+t_list_dc				*dc_lst_new(void *content);
 
-void	dc_lst_print_whole(t_list_d *lst_ptr,
+void	dc_lst_print_whole(t_list_dc *lst_ptr,
 						const char *longShort,
 						const char *type);
 void					dc_lst_print_one_str_long(void *lst_ptr_void);
@@ -171,43 +171,43 @@ void					dc_lst_print_one_int_short(void *lst_ptr_void);
 
 void					dc_lst_print_sep(void);
 
-void					dc_lst_add_back(t_list_d **lst, t_list_d *new);
-void					dc_lst_add_front(t_list_d **lst, t_list_d *new);
-int						dc_lst_size(t_list_d *lst);
-void					dc_lst_clear(t_list_d **lst, void (*del)(void *));
-void					dc_lst_del_one(t_list_d *lst, void (*del)(void *));
-void					dc_lst_iter_node(t_list_d *lst, void (*f)(void *));
-void					dc_lst_iter_content(t_list_d *lst, void (*f)(void *));
-t_list_d				*dc_lst_map(t_list_d *lst, void *(*f)(void *),
+void					dc_lst_add_back(t_list_dc **lst, t_list_dc *new);
+void					dc_lst_add_front(t_list_dc **lst, t_list_dc *new);
+int						dc_lst_size(t_list_dc *lst);
+void					dc_lst_clear(t_list_dc **lst, void (*del)(void *));
+void					dc_lst_del_one(t_list_dc *lst, void (*del)(void *));
+void					dc_lst_iter_node(t_list_dc *lst, void (*f)(void *));
+void					dc_lst_iter_content(t_list_dc *lst, void (*f)(void *));
+t_list_dc				*dc_lst_map(t_list_dc *lst, void *(*f)(void *),
 							void (*del)(void *));
-int						dc_lst_exactly_one(t_list_d *lst_ptr);
-t_list_d				*dc_lst_pop(t_list_d **lst);
-int						dc_lst_exactly_one(t_list_d *lst_ptr);
-int						dc_lst_exactly_two(t_list_d *lst_ptr);
+int						dc_lst_exactly_one(t_list_dc *lst_ptr);
+t_list_dc				*dc_lst_pop(t_list_dc **lst);
+int						dc_lst_exactly_one(t_list_dc *lst_ptr);
+int						dc_lst_exactly_two(t_list_dc *lst_ptr);
 
-t_list_d				*dc_lst_swap(t_list_d **lst);
+t_list_dc				*dc_lst_swap(t_list_dc **lst);
 
 /* double linked list non circular*/
 
-t_list_d				*d_lst_new(void *content);
-t_list_d				*d_lst_last(t_list_d *lst);
-void					d_lst_add_back(t_list_d **lst, t_list_d *new);
-void					d_lst_add_front(t_list_d **lst, t_list_d *new);
-void					d_lst_clear(t_list_d **lst, void (*del)(void *));
-void					d_lst_del_one(t_list_d *lst, void (*del)(void *));
-int						d_lst_exactly_one(t_list_d *lst_ptr);
-int						d_lst_exactly_two(t_list_d *lst_ptr);
-int						d_lst_size(t_list_d *lst);
-t_list_d				*d_lst_pop(t_list_d **lst);
-t_list_d				*d_lst_pop_n(t_list_d **lst, int n);
-t_list_d				*d_lst_pop_current(t_list_d **lst);
-t_list_d				*d_lst_swap(t_list_d **lst);
-t_list_d				*d_lst_map(t_list_d *lst, void *(*f)(void *),
+t_list_dc				*d_lst_new(void *content);
+t_list_dc				*d_lst_last(t_list_dc *lst);
+void					d_lst_add_back(t_list_dc **lst, t_list_dc *new);
+void					d_lst_add_front(t_list_dc **lst, t_list_dc *new);
+void					d_lst_clear(t_list_dc **lst, void (*del)(void *));
+void					d_lst_del_one(t_list_dc *lst, void (*del)(void *));
+int						d_lst_exactly_one(t_list_dc *lst_ptr);
+int						d_lst_exactly_two(t_list_dc *lst_ptr);
+int						d_lst_size(t_list_dc *lst);
+t_list_dc				*d_lst_pop(t_list_dc **lst);
+t_list_dc				*d_lst_pop_n(t_list_dc **lst, int n);
+t_list_dc				*d_lst_pop_current(t_list_dc **lst);
+t_list_dc				*d_lst_swap(t_list_dc **lst);
+t_list_dc				*d_lst_map(t_list_dc *lst, void *(*f)(void *),
 							void (*del)(void *));
-void					d_lst_iter_content(t_list_d *lst, void (*f)(void *));
-void					d_lst_iter_node(t_list_d *lst, void (*f)(void *));
-bool					d_lst_is_first(t_list_d *lst);
-bool					d_lst_is_last(t_list_d *lst);
+void					d_lst_iter_content(t_list_dc *lst, void (*f)(void *));
+void					d_lst_iter_node(t_list_dc *lst, void (*f)(void *));
+bool					d_lst_is_first(t_list_dc *lst);
+bool					d_lst_is_last(t_list_dc *lst);
 
 /* output */
 
@@ -253,6 +253,8 @@ char					**ft_arr_char_add_replace_n(char **arr, char *val);
 char					*ft_arr_char_get_val(char **arr, char *key);
 int						allocate_arr_char(char ***res, char prefill,
 							int num_elem, int str_len);
+int						allocate_arr_str(char ***res, char prefill,
+							int num_elem, int str_len);
 
 /* math */
 
@@ -274,9 +276,9 @@ int	count_cols_per_line_filename(char *filename,
 int						get_file_size_filename(char *filename);
 int						get_file_size_fd(int fd);
 int						read_whole_file(int fd, char **res);
-int						read_file_lines_to_list(int fd, t_list_d **res,
+int						read_file_lines_to_list(int fd, t_list_dc **res,
 							bool remove_newline_end_of_line);
-int						read_file_list_rem_empty_lines(t_list_d *list);
+int						read_file_list_rem_empty_lines(t_list_dc *list);
 
 /* free */
 

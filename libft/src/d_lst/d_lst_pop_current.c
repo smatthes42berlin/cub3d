@@ -1,10 +1,10 @@
 #include "lib_main.h"
 
-t_list_d	*d_lst_pop_current(t_list_d **lst)
+t_list_dc	*d_lst_pop_current(t_list_dc **lst)
 {
 	int			has_prev;
 	int			has_next;
-	t_list_d	*to_pop;
+	t_list_dc	*to_pop;
 
 	if (!lst || !*lst)
 		return (NULL);

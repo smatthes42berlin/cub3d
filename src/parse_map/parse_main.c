@@ -3,8 +3,9 @@
 int	parse_main(t_main_data *main_data)
 {
 	int			fd;
-	t_list_d	*file_lbl;
+	t_list_dc	*file_lbl;
 
+	file_lbl = NULL;
 	if (main_data->argc != 2)
 		throw_error_gen(1, "Wrong number of args!", true);
 	if (!str_ends_on(main_data->argv[1], ".cub"))
@@ -22,6 +23,5 @@ int	parse_main(t_main_data *main_data)
 		throw_error_sys_call((t_error_ms){errno, ERROR_CLOSE,
 				"Cannot close Map file!"}, true);
 	parse_map_file(main_data, file_lbl);
-	d_lst_clear(&file_lbl, free);
 	return (0);
 }

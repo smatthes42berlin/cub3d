@@ -1,8 +1,8 @@
 #include "lib_main.h"
 
-void	d_lst_iter_node(t_list_d *lst, void (*f)(void *))
+void	d_lst_iter_node(t_list_dc *lst, void (*f)(void *))
 {
-	t_list_d	*current;
+	t_list_dc	*current;
 
 	if (!lst)
 		return ;

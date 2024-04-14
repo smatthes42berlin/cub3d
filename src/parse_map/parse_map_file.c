@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	parse_map_file(t_main_data *main_data, t_list_d *file_lbl)
+int	parse_map_file(t_main_data *main_data, t_list_dc *file_lbl)
 {
 	t_parse_state	parse_state;
 
@@ -10,5 +10,6 @@ int	parse_map_file(t_main_data *main_data, t_list_d *file_lbl)
 	parse_whole_file(&parse_state);
 	check_extracted_details(&parse_state);
 	print_parse_res(&parse_state);
+	free_parse_state(&parse_state);
 	return (0);
 }

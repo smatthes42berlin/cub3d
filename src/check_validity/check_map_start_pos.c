@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 int	check_exactly_one_start_pos(t_parse_state *parse_state)
 {
 	int	num_start_pos;
@@ -22,9 +21,13 @@ int	check_exactly_one_start_pos(t_parse_state *parse_state)
 		height++;
 	}
 	if (num_start_pos == 0)
-		parse_state->map_parse.no_start_pos = true;
+		set_bool_field(&(parse_state->map_parse.no_start_pos),
+						true,
+						0);
 	if (num_start_pos > 1)
-		parse_state->map_parse.multi_start_pos = true;
+		set_bool_field(&(parse_state->map_parse.multi_start_pos),
+						true,
+						0);
 	return (0);
 }
 

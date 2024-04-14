@@ -1,8 +1,8 @@
 #include "lib_main.h"
 
-int	read_file_list_rem_empty_lines(t_list_d *list)
+int	read_file_list_rem_empty_lines(t_list_dc *list)
 {
-	t_list_d	*rem;
+	t_list_dc	*rem;
 
 	while (list)
 	{

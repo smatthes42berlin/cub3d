@@ -1,10 +1,10 @@
 #include "lib_main.h"
 
-t_list_d	*d_lst_map(t_list_d *lst, void *(*f)(void *), void (*del)(void *))
+t_list_dc	*d_lst_map(t_list_dc *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list_d	*cur_old;
-	t_list_d	*new_head;
-	t_list_d	*new_node;
+	t_list_dc	*cur_old;
+	t_list_dc	*new_head;
+	t_list_dc	*new_node;
 
 	new_head = NULL;
 	if (lst == NULL)

@@ -1,11 +1,11 @@
 #include "lib_main.h"
 
-static void	swap_2(t_list_d *head);
-static void	swap_3(t_list_d *head);
+static void	swap_2(t_list_dc *head);
+static void	swap_3(t_list_dc *head);
 
-t_list_d	*d_lst_swap(t_list_d **lst)
+t_list_dc	*d_lst_swap(t_list_dc **lst)
 {
-	t_list_d	*head;
+	t_list_dc	*head;
 
 	head = *lst;
 	*lst = head->next;
@@ -20,9 +20,9 @@ t_list_d	*d_lst_swap(t_list_d **lst)
 	return (*lst);
 }
 
-static void	swap_2(t_list_d *head)
+static void	swap_2(t_list_dc *head)
 {
-	t_list_d	*second;
+	t_list_dc	*second;
 
 	second = head->next;
 	head->next = NULL;
@@ -31,9 +31,9 @@ static void	swap_2(t_list_d *head)
 	second->prev = NULL;
 }
 
-static void	swap_3(t_list_d *head)
+static void	swap_3(t_list_dc *head)
 {
-	t_list_d	*second;
+	t_list_dc	*second;
 
 	second = head->next;
 	head->next = second->next;

@@ -2,15 +2,15 @@
 
 int	handle_map_start(t_parse_state *parse_state)
 {
-	parse_state->map_parse.started = true;
+	set_bool_field(&(parse_state->map_parse.started), true, 0);
 	get_map_max_dim(parse_state);
-	if (allocate_arr_char(&(parse_state->map_parse.org_rect), '-',
+	if (allocate_arr_str(&(parse_state->map_parse.org_rect), '-',
 			parse_state->map_parse.max_height_org,
 			parse_state->map_parse.max_width_org))
-		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot allocate array for oprg map!"}, true);
+		throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
+				"Cannot allocate array for org map!"}, parse_state, true);
 	copy_array_from_file(parse_state);
-	parse_state->map_parse.ended = true;
+	set_bool_field(&(parse_state->map_parse.ended), true, 0);
 	return (0);
 }
 
@@ -44,7 +44,7 @@ int	copy_array_from_file(t_parse_state *parse_state)
 
 int	get_map_max_dim(t_parse_state *parse_state)
 {
-	t_list_d	*cur_line;
+	t_list_dc	*cur_line;
 
 	cur_line = parse_state->cur_line;
 	while (cur_line && ft_strcmp((char *)cur_line->content, "\n")

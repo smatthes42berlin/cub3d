@@ -1,11 +1,11 @@
 #include "lib_main.h"
 
-int	read_file_lines_to_list(int fd, t_list_d **res,
+int	read_file_lines_to_list(int fd, t_list_dc **res,
 		bool remove_newline_end_of_line)
 {
 	char		*next_line;
 	int			line_length;
-	t_list_d	*new;
+	t_list_dc	*new;
 
 	*res = NULL;
 	next_line = get_next_line(fd);

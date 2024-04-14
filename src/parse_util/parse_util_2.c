@@ -43,7 +43,6 @@ bool	is_map_start(t_parse_state *parse_state)
 	char	*content;
 	int		i;
 
-	printf("is map start!\n");
 	i = 0;
 	content = parse_state->cur_line->content;
 	while (ft_isspace(content[i]))

@@ -6,22 +6,14 @@ int	handle_optn(t_parse_state *parse_state, t_optn_parse *optn)
 	{
 		optn->line_in_map_file = ft_strdup((parse_state->cur_line_trimmed)
 				+ ft_strlen(optn->identifier));
-		optn->line_in_map_file = ft_strdup(((char *)(parse_state->cur_line->content))
-				+ ft_strlen(optn->identifier));
 		if (!optn->line_in_map_file)
-			throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
-					"Cannot duplicate line of file!"}, true);
+			throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
+					"Cannot duplicate line of file!"}, parse_state, true);
 	}
 	else if (optn_alr_def(optn) && !map_already_ended(parse_state))
-	{
-		optn->multi_def = true;
-		parse_state->map_file_valid = false;
-	}
+		set_bool_field(&(optn->multi_def), true, 0);
 	else if (map_already_ended(parse_state))
-	{
-		parse_state->defs_after_map_found = true;
-		parse_state->map_file_valid = false;
-	}
+		set_bool_field(&(parse_state->defs_after_map_found), true, 0);
 	else
 		throw_error_gen(1,
 						"Not handled exception for option state parsing map file!",

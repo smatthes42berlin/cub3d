@@ -9,8 +9,8 @@ int	print_map(char **map, int width, int height)
 	if (!map || !*map)
 		return (0);
 	printf("map start\n");
-	printf("height: %d\n", width);
-	printf("width: %d\n", height);
+	printf("height: %d\n", height);
+	printf("width: %d\n\n", width);
 	while (j < height)
 	{
 		i = 0;
@@ -23,6 +23,6 @@ int	print_map(char **map, int width, int height)
 		printf("$\n");
 		j++;
 	}
-	printf("map end\n");
+	printf("\nmap end\n");
 	return (0);
 }

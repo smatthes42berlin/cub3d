@@ -16,8 +16,8 @@ int	check_option_col(t_optn_parse *col)
 		return (0);
 	splitted = ft_split_str(col->line_in_map_file, ",");
 	if (!splitted)
-		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot split col def line!"}, true);
+		throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
+				"Cannot split col def line!"}, col->parse_state, true);
 	if (ft_arr_len_char(splitted) != 3)
 	{
 		free_str_arr_null(splitted);
