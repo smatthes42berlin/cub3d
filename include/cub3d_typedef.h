@@ -22,11 +22,7 @@
 #define ROTATION_MOVEMENT 0.1
 #define STRAIGHT_MOVEMENT 10
 
-//# define PI2 PI / 2
-//# define PI3 3 * PI / 2
-//# define DR 0.0174533
-//# define NUM_RAYS 60
-// # define FOV (60 * DR)
+extern int map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
 # define REM_EMPTY_LINES_MAP_FILE false
 // 111111111111999
@@ -47,7 +43,7 @@ typedef struct s_map
 	char				*texture_west;
 	int					color_ceiling[3];
 	int					color_floor[3];
-	int					**map;
+	//int					**map;
 }						t_map;
 
 typedef struct s_player

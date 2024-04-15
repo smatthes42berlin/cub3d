@@ -38,7 +38,18 @@ SRC = 	main.c \
 		init_parse_state.c \
 		parse_util_1.c \
 		parse_util_2.c \
-		raycast.c
+		raycast.c \
+		clean.c \
+		init.c \
+		keys.c \
+		draw_minimap.c \
+		draw_line.c \
+		draw_render.c \
+		draw_player.c \
+		wall_collision.c \
+		math_utils.c \
+		wall_ceiling_floor.c \
+		color_buffer.c
 
 
 OBJFNAME = $(SRC:.c=.o)
