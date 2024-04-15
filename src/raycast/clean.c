@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/15 14:58:51 by fszendzi          #+#    #+#             */
+/*   Updated: 2024/04/15 14:58:53 by fszendzi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	destroy_window(t_main_data *data)
@@ -25,8 +37,9 @@ void	destroy_window(t_main_data *data)
 
 int	close_window(void *param)
 {
-	t_main_data *data = (t_main_data *)param;
+	t_main_data	*data;
 
+	data = (t_main_data *)param;
 	destroy_window(data);
 	exit(0);
 	return (0);
