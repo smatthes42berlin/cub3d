@@ -457,10 +457,27 @@ void generate_3d_projection(t_main_data *data, t_ray *rays)
 		int wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
 		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
 
-		int y = wall_top_pixel;
+		// setting color of ceiling
+		int y = 0;
+		while (y < wall_top_pixel)
+		{
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF333333;
+			y++;
+		}
+
+		//rendering the walls
+		y = wall_top_pixel;
 		while (y < wall_bottom_pixel)
 		{
-			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFFFFFFFF;
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
+			y++;
+		}
+
+		// setting color of floor
+		y = wall_bottom_pixel;
+		while (y < WINDOW_HEIGHT)
+		{
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF777777;
 			y++;
 		}
 		i++;
