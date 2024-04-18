@@ -1,6 +1,6 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
-LDFLAGS = -Lmlx -lXext -lX11 -lm
+LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
