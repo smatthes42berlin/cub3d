@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:59:24 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/15 14:59:27 by fszendzi         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:15:17 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_map(t_main_data *data, int *addr)
 		{
 			tile_x = j * TILE_SIZE;
 			tile_y = i * TILE_SIZE;
-			if (map[i][j] != 0)
+			if (data->map.map[i][j] == '1')
 				tile_color = 0xFFFFFF;
 			else
 				tile_color = 0x000000;

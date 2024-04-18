@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:12 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/15 15:00:15 by fszendzi         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:16:59 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	keys(int key, void *param)
 		if (data->player.rotation_angle >= TWO_PI)
 			data->player.rotation_angle -= TWO_PI;
 	}
-	if (!map_has_wall_at(new_player_x, new_player_y))
+	if (!map_has_wall_at(data, new_player_x, new_player_y))
 	{
 		data->player.x = new_player_x;
 		data->player.y = new_player_y;

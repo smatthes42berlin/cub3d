@@ -34,7 +34,7 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 		
 		// rendering the walls
 		y = wall_top_pixel;
-		
+		/*
 		while (y < wall_bottom_pixel) 
 		{
 			if (rays[i].hit_side == NORTH)
@@ -47,14 +47,14 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 				data->color_buffer[(WINDOW_WIDTH * y) + i] = 0x0000FF; // Blue
 			y++;
 		}
-
-		/*
+		*/
+		
 		while (y < wall_bottom_pixel)
 		{
 			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
 			y++;
 		}
-		*/
+
 		// setting color of floor
 		y = wall_bottom_pixel;
 		while (y < WINDOW_HEIGHT)

@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:29 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/18 10:47:33 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:16:51 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 		float x_to_check = next_horz_touch_x;
 		float y_to_check = next_horz_touch_y + (is_ray_facing_up ? -1 : 0);
 
-		if (map_has_wall_at(x_to_check, y_to_check))
+		if (map_has_wall_at(data, x_to_check, y_to_check))
 		{
 			horz_wall_hit_x = next_horz_touch_x;
 			horz_wall_hit_y = next_horz_touch_y;
-			horz_wall_content = map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
+			horz_wall_content = data->map.map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)] -'0';
 			found_horz_wall_hit = TRUE;
 			break;
 		}
@@ -101,11 +101,11 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 		float x_to_check = next_vert_touch_x + (is_ray_facing_left ? -1 : 0);
 		float y_to_check = next_vert_touch_y;
 
-		if (map_has_wall_at(x_to_check, y_to_check))
+		if (map_has_wall_at(data, x_to_check, y_to_check))
 		{
 			vert_wall_hit_x = next_vert_touch_x;
 			vert_wall_hit_y = next_vert_touch_y;
-			vert_wall_content = map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)];
+			vert_wall_content = data->map.map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)] - '0';
 			found_vert_wall_hit = TRUE;
 			break;
 		}

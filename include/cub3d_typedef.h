@@ -6,9 +6,8 @@
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
-#define FALSE 0
-#define TRUE 1
-
+# define FALSE 0
+# define TRUE 1
 
 # define PI 3.1415926535
 # define TWO_PI 6.28318530
@@ -17,18 +16,18 @@
 # define MAP_NUM_ROWS 13
 # define MAP_NUM_COLS 20
 
-#define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-#define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
+# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
-#define FOV_ANGLE (60 * (PI / 180))
+# define FOV_ANGLE (60 * (PI / 180))
 
-#define NUM_RAYS (WINDOW_WIDTH)
-#define MINIMAP_SCALE_FACTOR 0.2
+# define NUM_RAYS (WINDOW_WIDTH)
+# define MINIMAP_SCALE_FACTOR 0.2
 
-#define ROTATION_MOVEMENT 0.1
-#define STRAIGHT_MOVEMENT 10
+# define ROTATION_MOVEMENT 0.1
+# define STRAIGHT_MOVEMENT 10
 
-extern int map[MAP_NUM_ROWS][MAP_NUM_COLS];
+extern int						map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
 # define REM_EMPTY_LINES_MAP_FILE false
 // 111111111111999
@@ -37,74 +36,80 @@ extern int map[MAP_NUM_ROWS][MAP_NUM_COLS];
 // 100111111111119
 // 111199999999999
 
+typedef struct s_parse_state	t_parse_state;
+
 typedef struct s_map
 {
-	int					width;
-	int					height;
-	int size; // size of each tile
-	//
-	char				*texture_north;
-	char				*texture_south;
-	char				*texture_east;
-	char				*texture_west;
-	int					color_ceiling[3];
-	int					color_floor[3];
-	//int					**map;
-}						t_map;
+	int							width;
+	int							height;
+	int							size;
+	char						*texture_north;
+	char						*texture_south;
+	char						*texture_east;
+	char						*texture_west;
+	int							color_ceiling[3];
+	int							color_floor[3];
+	char						**map;
+}								t_map;
 
-typedef enum {
-    NORTH, SOUTH, EAST, WEST
-} 	wall_side_t;
+typedef enum
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}								wall_side_t;
 
 typedef struct s_player
 {
-	float					x;
-	float					y;
-	float					size;
-	float					color;
-	int						turn_direction;
-	int						walk_direction;
-	float 					rotation_angle;
-	int 					straight_movement;
-	float 					walk_speed;
-	float                   turn_speed;
-	float 					delta_x;
-	float 					delta_y;
-}						t_player;
+	float						x;
+	float						y;
+	float						size;
+	float						color;
+	int							turn_direction;
+	int							walk_direction;
+	float						rotation_angle;
+	int							straight_movement;
+	float						walk_speed;
+	float						turn_speed;
+	float						delta_x;
+	float						delta_y;
+}								t_player;
 
-typedef struct s_ray 
+typedef struct s_ray
 {
-	float ray_angle;
-	float wall_hit_x;
-	float wall_hit_y;
-	float distance;
-	int was_hit_vertical;
-	int is_ray_facing_up;
-	int is_ray_facing_down;
-	int is_ray_facing_left;
-	int is_ray_facing_right;
-	int wall_hit_content;
-	wall_side_t hit_side;
-}	t_ray;
+	float						ray_angle;
+	float						wall_hit_x;
+	float						wall_hit_y;
+	float						distance;
+	int							was_hit_vertical;
+	int							is_ray_facing_up;
+	int							is_ray_facing_down;
+	int							is_ray_facing_left;
+	int							is_ray_facing_right;
+	int							wall_hit_content;
+	wall_side_t					hit_side;
+}								t_ray;
 
 typedef struct s_window
 {
-	void				*mlx;
-	void				*mlx_win;
-	int					width;
-	int					height;
-	float				scale_factor;
-}						t_window;
+	void						*mlx;
+	void						*mlx_win;
+	int							width;
+	int							height;
+	float						scale_factor;
+}								t_window;
 
 typedef struct s_main_data
 {
 	// t_map				map;
-	int					argc;
-	char				**argv;
-	t_window			w;
-	t_player			player;
-	t_map				map;
-	u_int32_t			*color_buffer;
+	int							argc;
+	char						**argv;
+	t_window					w;
+	t_player					player;
+	t_map						map;
+	u_int32_t					*color_buffer;
+	t_parse_state				*parse_state;
 	// player start_position
 	// player cur_position
 	// player orientation
@@ -112,8 +117,6 @@ typedef struct s_main_data
 }								t_main_data;
 
 /* map parsing */
-
-typedef struct s_parse_state	t_parse_state;
 
 enum							e_optn_type
 {

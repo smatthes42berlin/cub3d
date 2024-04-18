@@ -157,6 +157,7 @@ int keys(int key, void *param);
 
 /* init.c */
 void init_player(t_main_data *data);
+void init_map(t_main_data *data);
 void setup(t_main_data *data);
 int initialize_window(t_main_data *data);
 int init(t_main_data *data);
@@ -173,7 +174,7 @@ void cast_all_rays(t_main_data *data, t_ray *rays);
 void generate_3d_projection(t_main_data *data, t_ray *rays);
 
 /* wall_collision.c */
-int map_has_wall_at(float x, float y);
+int map_has_wall_at(t_main_data *data, float x, float y);
 
 
 #endif
