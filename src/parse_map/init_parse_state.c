@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+
 int	init_parse_state(t_parse_state *parse_state, t_main_data *main_data,
 		t_list_d *file_lbl)
 {
