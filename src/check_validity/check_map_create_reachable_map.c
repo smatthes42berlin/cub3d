@@ -2,12 +2,15 @@
 
 int	create_reachable_map(t_parse_state *parse_state)
 {
-	// these are values of indexes of the array
-	// int reach_height_min = parse_state->map_parse.reachable_height_min;
-	// int reach_height_max = parse_state->map_parse.reachable_height_max;
-	// int reach_width_min = parse_state->map_parse.reachable_width_min;
-	// int reach_width_max = parse_state->map_parse.reachable_width_max;
-	parse_state++;
-	
+	if (subarr_arr_str(parse_state->map_parse.org_rect,
+						(t_subarr_arr_str){
+							parse_state->map_parse.reachable_height_min - 1,
+							parse_state->map_parse.reachable_height_max + 1,
+							parse_state->map_parse.reachable_width_min - 1,
+							parse_state->map_parse.reachable_width_max + 1,
+						},
+						&(parse_state->map_parse.reachable_rect)))
+		throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
+			"Cannot copy reachable map array!"}, parse_state, true);
 	return (0);
 }

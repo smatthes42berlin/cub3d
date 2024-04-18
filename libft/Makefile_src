@@ -160,7 +160,8 @@ SRC =	ft_atoi.c \
 		str_fill.c \
 		allocate_arr_char.c \
 		allocate_arr_str.c \
-		str_ends_on.c
+		str_ends_on.c \
+		subarr_arr_str.c
 
 
 

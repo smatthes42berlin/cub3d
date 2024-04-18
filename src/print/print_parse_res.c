@@ -41,17 +41,23 @@ int	print_map_parse_res(t_parse_state *parse_state)
 	print_caption("map org");
 	printf("start height %d\n", (parse_state->map_parse.start_pos)[0]);
 	printf("start width %d\n", (parse_state->map_parse.start_pos)[1]);
-	printf("reachable height min %d\n", parse_state->map_parse.reachable_height_min);
-	printf("reachable height max %d\n", parse_state->map_parse.reachable_height_max);
-	printf("reachable width min %d\n", parse_state->map_parse.reachable_width_min);
-	printf("reachable width max %d\n", parse_state->map_parse.reachable_width_max);
+	printf("reachable height min %d\n",
+		parse_state->map_parse.reachable_height_min);
+	printf("reachable height max %d\n",
+		parse_state->map_parse.reachable_height_max);
+	printf("reachable width min %d\n",
+		parse_state->map_parse.reachable_width_min);
+	printf("reachable width max %d\n",
+		parse_state->map_parse.reachable_width_max);
 	print_map(parse_state->map_parse.org_rect,
-				parse_state->map_parse.max_width_org,
-				parse_state->map_parse.max_height_org);
+		parse_state->map_parse.max_width_org,
+		parse_state->map_parse.max_height_org);
 	print_caption("map reachable");
 	print_map(parse_state->map_parse.reachable_rect,
-				parse_state->map_parse.max_width_reachable,
-				parse_state->map_parse.max_height_reachable);
+		parse_state->map_parse.reachable_width_max
+		- parse_state->map_parse.reachable_width_min + 2,
+				parse_state->map_parse.reachable_height_max
+		- parse_state->map_parse.reachable_height_min + 2);
 	return (0);
 }
 

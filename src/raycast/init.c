@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/18 15:12:18 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:12:20 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	init_player(t_main_data *data)
 {
-	data->player.x = data->parse_state->map_parse.start_pos[1] * TILE_SIZE + (TILE_SIZE / 2);
-	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE + (TILE_SIZE / 2);	
+	data->player.x = data->parse_state->map_parse.start_pos[1] * TILE_SIZE
+		+ (TILE_SIZE / 2);
+	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE
+		+ (TILE_SIZE / 2);
 	// data->player.x = WINDOW_WIDTH / 2;
 	// data->player.y = WINDOW_HEIGHT / 2;
 	data->player.size = 1;
 	data->player.color = 0xFFFF00;
 	data->player.turn_direction = 0;
 	data->player.walk_direction = 0;
-	data->player.rotation_angle = PI / 2; // Player view at the beginning
+	// data->player.rotation_angle = PI / 2; // Player view at the beginning
+	data->player.rotation_angle = data->parse_state->map_parse.rotation_angle;
 	data->player.walk_speed = 100;
 	data->player.turn_speed = 45 * (PI / 180);
 }

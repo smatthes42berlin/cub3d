@@ -151,6 +151,7 @@ typedef struct s_map_parse
 	bool						over_size_limit;
 	int							start_pos[2];
 	char						start_orient;
+	float						rotation_angle;
 	bool						more_than_one_start_pos;
 	bool						not_closed;
 	bool						started;
