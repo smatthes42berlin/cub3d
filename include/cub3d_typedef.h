@@ -46,6 +46,10 @@ typedef struct s_map
 	//int					**map;
 }						t_map;
 
+typedef enum {
+    NORTH, SOUTH, EAST, WEST
+} 	wall_side_t;
+
 typedef struct s_player
 {
 	float					x;
@@ -74,6 +78,7 @@ typedef struct s_ray
 	int is_ray_facing_left;
 	int is_ray_facing_right;
 	int wall_hit_content;
+	wall_side_t hit_side;
 }	t_ray;
 
 typedef struct s_window

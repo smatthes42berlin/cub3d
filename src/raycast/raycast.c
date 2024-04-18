@@ -131,6 +131,8 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 		rays[strip_id].wall_hit_y = vert_wall_hit_y;
 		rays[strip_id].wall_hit_content = vert_wall_content;	
 		rays[strip_id].was_hit_vertical = TRUE;
+		rays[strip_id].hit_side = (is_ray_facing_right) ? EAST : WEST;
+
 	}
 	else
 	{
@@ -139,6 +141,8 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 		rays[strip_id].wall_hit_y = horz_wall_hit_y;
 		rays[strip_id].wall_hit_content = horz_wall_content;	
 		rays[strip_id].was_hit_vertical = FALSE;
+		rays[strip_id].hit_side = (is_ray_facing_down) ? SOUTH : NORTH;
+
 	}
 	rays[strip_id].ray_angle = ray_angle;
 	rays[strip_id].is_ray_facing_down = is_ray_facing_down;

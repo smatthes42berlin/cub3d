@@ -31,14 +31,30 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF333333;
 			y++;
 		}
+		
 		// rendering the walls
 		y = wall_top_pixel;
-		while (y < wall_bottom_pixel)
+		
+		while (y < wall_bottom_pixel) 
 		{
-			data->color_buffer[(WINDOW_WIDTH * y)
-				+ i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
+			if (rays[i].hit_side == NORTH)
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF0000; // Red
+			else if (rays[i].hit_side == SOUTH) 
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = 0x00FF00; // Green
+			else if (rays[i].hit_side == EAST)
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFFFF00; // Yellow
+			else if (rays[i].hit_side == WEST)
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = 0x0000FF; // Blue
 			y++;
 		}
+
+		/*
+		while (y < wall_bottom_pixel)
+		{
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
+			y++;
+		}
+		*/
 		// setting color of floor
 		y = wall_bottom_pixel;
 		while (y < WINDOW_HEIGHT)
