@@ -5,12 +5,12 @@ int	print_parse_res(t_parse_state *parse_state)
 	printf("\n***********Result of Parsing map file:********\n");
 	print_gen_parse_res(parse_state);
 	print_map_parse_res(parse_state);
-	// print_optn_parse_res(&(parse_state->texture_south));
-	// print_optn_parse_res(&(parse_state->texture_north));
-	// print_optn_parse_res(&(parse_state->texture_east));
-	// print_optn_parse_res(&(parse_state->texture_west));
-	// print_optn_parse_res(&(parse_state->color_ceiling));
-	// print_optn_parse_res(&(parse_state->color_floor));
+	print_optn_parse_res(&(parse_state->texture_south));
+	print_optn_parse_res(&(parse_state->texture_north));
+	print_optn_parse_res(&(parse_state->texture_east));
+	print_optn_parse_res(&(parse_state->texture_west));
+	print_optn_parse_res(&(parse_state->color_ceiling));
+	print_optn_parse_res(&(parse_state->color_floor));
 	printf("\n***********                           ********\n\n");
 	return (0);
 }

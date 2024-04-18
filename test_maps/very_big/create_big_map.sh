@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 get_char() {
     prop_1=40
     prop_0=60
@@ -72,7 +72,6 @@ write_zeros_ones() {
     full_block+="$floor\n"
     full_block+="$ceil\n"
 
-
     local zeros=$(printf '%*s' $((width + 2)) | tr ' ' '1')
     local block1=$(printf '%s\n' "$zeros")
 
@@ -105,7 +104,7 @@ write_zeros_ones() {
 
 maps=(5 10 20 50 100 200 500 1000 2000 5000 10000 20000)
 maps=(5 10 20 50 100 200 500)
-maps=(50)
+maps=(20)
 
 # Iterate over maps array
 for map in "${maps[@]}"; do
@@ -117,4 +116,8 @@ for map in "${maps[@]}"; do
     write_zeros_ones $width $height "$filename"
 done
 
+# width=5000
+# height=5000
+# filename="${width}x${height}.cub"
 
+# write_zeros $width $height $filename

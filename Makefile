@@ -62,6 +62,8 @@ SRC = 	main.c \
 		check_map_flood_fill_util.c \
 		check_map_flood_fill_rec.c \
 		check_map_flood_fill_rec_lim.c \
+		check_map_undo_flood_fill.c \
+		check_map_create_reachable_map.c
 
 
 

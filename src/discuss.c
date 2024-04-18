@@ -7,3 +7,7 @@
 - replace any minus in input with ?
 - evtl. ignore escaped quotes when checking for quotes
 - put all directions in the same textures
+
+
+= ask slack keyown simultanously
+- xCloseDisplay

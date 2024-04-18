@@ -19,7 +19,7 @@ int	identify_line(t_parse_state *parse_state)
 		return (handle_newline(parse_state));
 	if (check_optn)
 		return (handle_optn(parse_state, check_optn));
-	if (is_map_start(parse_state))
+	if (is_map_start(parse_state) && !map_already_ended(parse_state))
 		return (handle_map_start(parse_state));
 	else
 		return (handle_unknown(parse_state));

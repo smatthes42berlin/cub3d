@@ -8,6 +8,7 @@
 # define PI 3.1415926535
 # define PI2 PI / 2
 # define PI3 3 * PI / 2
+// cannot be '?' or '-'
 # define FLOOD_CHAR '_'
 
 // 111111111111999
