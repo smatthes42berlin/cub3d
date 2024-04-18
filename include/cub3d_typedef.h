@@ -27,14 +27,9 @@
 # define ROTATION_MOVEMENT 0.1
 # define STRAIGHT_MOVEMENT 10
 
-extern int						map[MAP_NUM_ROWS][MAP_NUM_COLS];
+extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
 # define REM_EMPTY_LINES_MAP_FILE false
-// 111111111111999
-// 100000000001111
-// 100000000000001
-// 100111111111119
-// 111199999999999
 
 typedef struct s_parse_state	t_parse_state;
 

@@ -54,7 +54,6 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
 			y++;
 		}
-
 		// setting color of floor
 		y = wall_bottom_pixel;
 		while (y < WINDOW_HEIGHT)
