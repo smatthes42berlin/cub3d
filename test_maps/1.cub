@@ -1,37 +1,22 @@
-NO cub3d-tester/textures/wall.xpm
+NO ./test_maps/textures/bluestone.xpm
 
 
-SO cub3d-tester/textures/bricks.xpm
+SO ./test_maps/textures/bluestone.xpm
 
 
-WE cub3d-tester/textures/gold.xpm
+
+WE ./test_maps/textures/bluestone.xpm
 
 
-EA cub3d-tester/textures/wood.xpm
+EA ./test_maps/textures/bluestone.xpm
 
-F 220,111,119
+F 200,111,119
+
 C 225,111,0
 
 
-
- 1111111111111111111111
-100000000000S00000000001
- 1000000000000000000001
-  10000000000000000001
-   100000000000000001
-    1000000000000001
-     10000000000001
-      100000000001
-       1000000001
-        10000001
-         102201
-          1001
-           11
-
-
-
-
-
-
-
-
+01010101010101
+00E0000
+0000000
+00000000000000
+00000000000000

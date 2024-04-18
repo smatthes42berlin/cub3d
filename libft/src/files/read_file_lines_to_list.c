@@ -1,14 +1,22 @@
 #include "lib_main.h"
 
-int	read_file_lines_to_list(int fd, t_list_d **res)
+int	read_file_lines_to_list(int fd, t_list_dc **res,
+		bool remove_newline_end_of_line)
 {
-	char	*next_line;
-	t_list_d	*new;
+	char		*next_line;
+	int			line_length;
+	t_list_dc	*new;
 
 	*res = NULL;
 	next_line = get_next_line(fd);
 	while (next_line)
 	{
+		if (remove_newline_end_of_line)
+		{
+			line_length = ft_strlen(next_line);
+			if (next_line[line_length - 1] == '\n')
+				next_line[line_length - 1] = '\0';
+		}
 		new = d_lst_new(next_line);
 		if (!new)
 		{

@@ -1,6 +1,6 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
-LDFLAGS = -Lmlx -lmlx -lXext -lX11 -lm
+LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
@@ -15,8 +15,8 @@ PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
 INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
 # if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
-SUBFOLDERSRC = . /error /parse_map /raycast
-BASEPATHSRC = ./src
+SUBFOLDERSRC = . /error /parse_map /raycast /free /print /check_validity/ /parse_util
+BASEPATHSRC = ./src/
 PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
 PATHBUILD = build/
 PATHOBJ = build/
@@ -34,10 +34,35 @@ VPATH = $(PATHSRC) $(INCLUDEPATH)
 SRC = 	main.c \
 		throw_error.c \
 		get_failed_func_str.c \
+		parse_map_file.c \
 		parse_main.c \
+		parse_whole_file.c \
 		init_parse_state.c \
 		parse_util_1.c \
 		parse_util_2.c \
+		parse_util_3.c \
+		parse_util_4.c \
+		handle_map_start.c \
+		handle_newline.c \
+		handle_unknown.c \
+		handle_optn.c \
+		free_everything.c \
+		print_map.c \
+		print_parse_res.c \
+		print_parse_util.c \
+		check_extracted_details.c \
+		check_map_main.c \
+		check_map_start_pos.c \
+		check_map_unknown_chars.c \
+		check_option_col.c \
+		check_option_tex.c \
+		check_map_flood_fill_it.c \
+		check_map_flood_fill_it_util.c \
+		check_map_flood_fill_util.c \
+		check_map_flood_fill_rec.c \
+		check_map_flood_fill_rec_lim.c \
+		check_map_undo_flood_fill.c \
+		check_map_create_reachable_map.c \
 		raycast.c \
 		clean.c \
 		init.c \
@@ -50,7 +75,6 @@ SRC = 	main.c \
 		math_utils.c \
 		wall_ceiling_floor.c \
 		color_buffer.c
-
 
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))

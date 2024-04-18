@@ -1,13 +1,13 @@
 #include "lib_main.h"
 
-static t_list_d	*clear_ret_null(t_list_d **new_head, void (*del)(void *));
+static t_list_dc	*clear_ret_null(t_list_dc **new_head, void (*del)(void *));
 
-t_list_d	*dc_lst_map(t_list_d *lst, void *(*f)(void *), void (*del)(void *))
+t_list_dc	*dc_lst_map(t_list_dc *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list_d	*old_head;
-	t_list_d	*cur_old;
-	t_list_d	*new_head;
-	t_list_d	*new_node;
+	t_list_dc	*old_head;
+	t_list_dc	*cur_old;
+	t_list_dc	*new_head;
+	t_list_dc	*new_node;
 
 	new_head = NULL;
 	old_head = lst;
@@ -28,7 +28,7 @@ t_list_d	*dc_lst_map(t_list_d *lst, void *(*f)(void *), void (*del)(void *))
 	return (new_head);
 }
 
-static t_list_d	*clear_ret_null(t_list_d **new_head, void (*del)(void *))
+static t_list_dc	*clear_ret_null(t_list_dc **new_head, void (*del)(void *))
 {
 	dc_lst_clear(new_head, del);
 	return (NULL);

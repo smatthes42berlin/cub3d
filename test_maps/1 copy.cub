@@ -1,0 +1,26 @@
+NO ./test_maps/textures/bluestone.xpm
+
+
+SO ./test_maps/textures/bluestone.xpm
+
+
+
+WE ./test_maps/textures/bluestone.xpm
+
+
+EA ./test_maps/textures/bluestone.xpm
+
+F 200,111,119
+
+C 225,111,0
+
+
+111111111111111
+1000000E0000001
+101111101111111
+101  110111 1
+101111001111
+ 11  101
+  111111111  1
+
+

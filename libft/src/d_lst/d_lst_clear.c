@@ -1,9 +1,9 @@
 #include "lib_main.h"
 
-void	d_lst_clear(t_list_d **lst, void (*del)(void *))
+void	d_lst_clear(t_list_dc **lst, void (*del)(void *))
 {
-	t_list_d	*temp;
-	t_list_d	*current;
+	t_list_dc	*temp;
+	t_list_dc	*current;
 
 	if (!lst || !*lst)
 		return ;

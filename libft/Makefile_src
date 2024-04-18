@@ -148,12 +148,19 @@ SRC =	ft_atoi.c \
 		rem_str_after_index.c \
 		remove_spaces_inplace.c \
 		str_only_spaces.c \
+		str_only_digits.c \
 		d_lst_is_first.c \
 		d_lst_is_last.c \
 		read_file_lines_to_list.c \
 		str_move_all_by_one.c \
 		str_trim_inplace.c \
-		read_file_list_rem_newlines.c
+		read_file_list_rem_newlines.c \
+		ft_substr_int.c \
+		ft_strtrim_int.c \
+		str_fill.c \
+		allocate_arr_char.c \
+		allocate_arr_str.c \
+		str_ends_on.c
 
 
 

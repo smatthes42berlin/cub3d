@@ -1,8 +1,8 @@
 #include "lib_main.h"
 
-t_list_d	*d_lst_new(void *content)
+t_list_dc	*d_lst_new(void *content)
 {
-	t_list_d	*lst_ptr;
+	t_list_dc	*lst_ptr;
 
 	lst_ptr = malloc(sizeof(*lst_ptr));
 	if (!lst_ptr)

@@ -1,8 +1,8 @@
 #include "lib_main.h"
 
-t_list_d	*d_lst_pop_n(t_list_d **lst, int n)
+t_list_dc	*d_lst_pop_n(t_list_dc **lst, int n)
 {
-	t_list_d	*to_pop;
+	t_list_dc	*to_pop;
 	int			size;
 
 	if (!lst || !*lst)

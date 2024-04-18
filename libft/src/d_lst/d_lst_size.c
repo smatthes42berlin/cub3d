@@ -1,6 +1,6 @@
 #include "lib_main.h"
 
-int	d_lst_size(t_list_d *lst)
+int	d_lst_size(t_list_dc *lst)
 {
 	int			size;
 
