@@ -45,6 +45,8 @@ int	main(int argc, char *argv[])
 	main_data.parse_state = &parse_state;
 	init_main_data(&main_data, argc, argv);
 	parse_main(&main_data);
+
+
 	init(&main_data);
 	// check correct number of args
 	//

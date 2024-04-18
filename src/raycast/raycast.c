@@ -52,7 +52,7 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 	float next_horz_touch_x = xintercept;
 	float next_horz_touch_y = yintercept;
 
-	while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
+	while (next_horz_touch_x >= 0 && next_horz_touch_x <= data->w.width && next_horz_touch_y >= 0 && next_horz_touch_y <= data->w.height)
 	{
 		float x_to_check = next_horz_touch_x;
 		float y_to_check = next_horz_touch_y + (is_ray_facing_up ? -1 : 0);
@@ -96,7 +96,7 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 	float next_vert_touch_x = xintercept;
 	float next_vert_touch_y = yintercept;
 
-	while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
+	while (next_vert_touch_x >= 0 && next_vert_touch_x <= data->w.width && next_vert_touch_y >= 0 && next_vert_touch_y <= data->w.height)
 	{
 		float x_to_check = next_vert_touch_x + (is_ray_facing_left ? -1 : 0);
 		float y_to_check = next_vert_touch_y;

@@ -134,7 +134,7 @@ void destroy_window(t_main_data *data);
 int close_window(void *param);
 
 /* color_buffer.c */
-void fill_color_buffer(u_int32_t color, u_int32_t *color_buffer);
+void fill_color_buffer(t_main_data *data, u_int32_t color);
 
 /* draw_line.c */
 void draw_line_on_image(int *addr, int width, int height, int start_x, int start_y, int end_x, int end_y, int color);

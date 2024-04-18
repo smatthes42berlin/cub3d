@@ -12,18 +12,18 @@
 
 #include "cub3d.h"
 
-void	fill_color_buffer(u_int32_t color, u_int32_t *color_buffer)
+void	fill_color_buffer(t_main_data *data, u_int32_t color)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	while (x < WINDOW_WIDTH)
+	while (x < data->w.width)
 	{
 		y = 0;
-		while (y < WINDOW_HEIGHT)
+		while (y < data->w.height)
 		{
-			color_buffer[(WINDOW_WIDTH * y) + x] = color;
+			data->color_buffer[(data->w.width * y) + x] = color;
 			y++;
 		}
 		x++;

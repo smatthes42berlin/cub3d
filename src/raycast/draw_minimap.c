@@ -47,10 +47,10 @@ void	draw_map(t_main_data *data, int *addr)
 	int	tile_color;
 
 	i = 0;
-	while (i < MAP_NUM_ROWS)
+	while (i < data->map.rows)
 	{
 		j = 0;
-		while (j < MAP_NUM_COLS)
+		while (j < data->map.cols)
 		{
 			tile_x = j * TILE_SIZE;
 			tile_y = i * TILE_SIZE;
