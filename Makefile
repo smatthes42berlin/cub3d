@@ -46,7 +46,6 @@ SRC = 	main.c \
 		handle_newline.c \
 		handle_unknown.c \
 		handle_optn.c \
-		raycast.c \
 		free_everything.c \
 		print_map.c \
 		print_parse_res.c \
@@ -63,10 +62,19 @@ SRC = 	main.c \
 		check_map_flood_fill_rec.c \
 		check_map_flood_fill_rec_lim.c \
 		check_map_undo_flood_fill.c \
-		check_map_create_reachable_map.c
-
-
-
+		check_map_create_reachable_map.c \
+		raycast.c \
+		clean.c \
+		init.c \
+		keys.c \
+		draw_minimap.c \
+		draw_line.c \
+		draw_render.c \
+		draw_player.c \
+		wall_collision.c \
+		math_utils.c \
+		wall_ceiling_floor.c \
+		color_buffer.c
 
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))

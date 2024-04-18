@@ -22,5 +22,6 @@
 # include "mlx.h"
 # include "mlx_int.h"
 # include <math.h>
+# include <float.h>
 
 #endif

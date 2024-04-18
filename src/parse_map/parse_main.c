@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+
 int	parse_main(t_main_data *main_data)
 {
 	int			fd;
@@ -25,3 +26,4 @@ int	parse_main(t_main_data *main_data)
 	parse_map_file(main_data, file_lbl);
 	return (0);
 }
+
