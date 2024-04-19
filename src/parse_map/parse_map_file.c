@@ -10,9 +10,6 @@ int	parse_map_file(t_main_data *main_data, t_list_dc *file_lbl)
 	init_parse_state(parse_state, main_data, file_lbl);
 	parse_whole_file(parse_state);
 	check_extracted_details(parse_state);
-	// check_parse_res_for_errors();
-	print_parse_res(parse_state);
-	exit(1);
-	// free_parse_state(parse_state);
+	check_parse_res_main(parse_state);
 	return (0);
 }

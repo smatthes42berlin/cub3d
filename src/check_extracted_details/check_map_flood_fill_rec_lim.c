@@ -30,7 +30,6 @@ int	flood_check_rec_lim(t_parse_state *parse_state, int height, int width,
 
 	cur_point[0] = height;
 	cur_point[1] = width;
-	// ft_printf("Stack depth: %d\n", rec_depth);
 	rec_depth++;
 	if (cur_point[0] + 1 > parse_state->map_parse.max_height_org
 		|| cur_point[0] < 0)
@@ -54,30 +53,6 @@ int	flood_check_rec_lim(t_parse_state *parse_state, int height, int width,
 					rec_depth);
 			flood_check_rec_lim(parse_state, cur_point[0], cur_point[1] - 1,
 					rec_depth);
-			// if (flood_check_rec_lim(parse_state, cur_point[0] + 1, cur_point[1],
-			// 		rec_depth))
-			// {
-			// 	add_point_to_queue(parse_state, cur_point[0] - 1, cur_point[1]);
-			// 	add_point_to_queue(parse_state, cur_point[0], cur_point[1] + 1);
-			// 	add_point_to_queue(parse_state, cur_point[0], cur_point[1] - 1);
-			// 	return (1);
-			// }
-			// if (flood_check_rec_lim(parse_state, cur_point[0] - 1, cur_point[1],
-			// 		rec_depth))
-			// {
-			// 	add_point_to_queue(parse_state, cur_point[0], cur_point[1] + 1);
-			// 	add_point_to_queue(parse_state, cur_point[0], cur_point[1] - 1);
-			// 	return (1);
-			// }
-			// if (flood_check_rec_lim(parse_state, cur_point[0], cur_point[1] + 1,
-			// 		rec_depth))
-			// {
-			// 	add_point_to_queue(parse_state, cur_point[0], cur_point[1] - 1);
-			// 	return (1);
-			// }
-			// if (flood_check_rec_lim(parse_state, cur_point[0], cur_point[1] - 1,
-			// 		rec_depth))
-			// 	return (1);
 		}
 		else
 		{

@@ -9,6 +9,8 @@
 # define FALSE 0
 # define TRUE 1
 
+# define ERR_MSG "Error\n"
+
 # define PI 3.1415926535
 # define TWO_PI 6.28318530
 
@@ -152,7 +154,6 @@ typedef struct s_map_parse
 	int							start_pos[2];
 	char						start_orient;
 	float						rotation_angle;
-	bool						more_than_one_start_pos;
 	bool						not_closed;
 	bool						started;
 	bool						ended;
@@ -172,6 +173,7 @@ typedef struct s_parse_state
 	char						*cur_line_trimmed;
 	bool						unknown_lines_found;
 	bool						defs_after_map_found;
+	bool						any_error;
 	t_optn_parse				texture_north;
 	t_optn_parse				texture_south;
 	t_optn_parse				texture_east;

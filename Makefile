@@ -1,6 +1,7 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
 LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
+# LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
@@ -15,7 +16,7 @@ PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
 INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
 # if you created a new subfolder in the source dir, you gotta list it here as well, so c-files are found
-SUBFOLDERSRC = . /error /parse_map /raycast /free /print /check_validity/ /parse_util
+SUBFOLDERSRC = . /error /parse_map /raycast /free /print /check_extracted_details/ /parse_util /check_pars_res
 BASEPATHSRC = ./src/
 PATHSRC = $(patsubst %,$(BASEPATHSRC)%,$(SUBFOLDERSRC))
 PATHBUILD = build/
@@ -74,7 +75,8 @@ SRC = 	main.c \
 		wall_collision.c \
 		math_utils.c \
 		wall_ceiling_floor.c \
-		color_buffer.c
+		color_buffer.c \
+		check_parse_res_main.c
 
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))

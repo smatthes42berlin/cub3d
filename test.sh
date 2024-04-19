@@ -18,11 +18,11 @@ map11=./test_maps/very_big/5000x5000.cub
 map12=./test_maps/very_big/10000x10000.cub
 map13=./test_maps/very_big/20000x20000.cub
 
-map=$map3
+map=$map1
 
 # bash ./test_maps/very_big/create_big_map.sh
 
-clear
+# clear
 
 if [ $# -eq 0 ]; then
     ./cub3D $map

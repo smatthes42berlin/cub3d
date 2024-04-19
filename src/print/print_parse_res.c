@@ -5,12 +5,12 @@ int	print_parse_res(t_parse_state *parse_state)
 	printf("\n***********Result of Parsing map file:********\n");
 	print_gen_parse_res(parse_state);
 	print_map_parse_res(parse_state);
-	print_optn_parse_res(&(parse_state->texture_south));
-	print_optn_parse_res(&(parse_state->texture_north));
-	print_optn_parse_res(&(parse_state->texture_east));
-	print_optn_parse_res(&(parse_state->texture_west));
-	print_optn_parse_res(&(parse_state->color_ceiling));
-	print_optn_parse_res(&(parse_state->color_floor));
+	// print_optn_parse_res(&(parse_state->texture_south));
+	// print_optn_parse_res(&(parse_state->texture_north));
+	// print_optn_parse_res(&(parse_state->texture_east));
+	// print_optn_parse_res(&(parse_state->texture_west));
+	// print_optn_parse_res(&(parse_state->color_ceiling));
+	// print_optn_parse_res(&(parse_state->color_floor));
 	printf("\n***********                           ********\n\n");
 	return (0);
 }
@@ -49,15 +49,9 @@ int	print_map_parse_res(t_parse_state *parse_state)
 		parse_state->map_parse.reachable_width_min);
 	printf("reachable width max %d\n",
 		parse_state->map_parse.reachable_width_max);
-	print_map(parse_state->map_parse.org_rect,
-		parse_state->map_parse.max_width_org,
-		parse_state->map_parse.max_height_org);
+	print_map_parsing(parse_state, 'o');
 	print_caption("map reachable");
-	print_map(parse_state->map_parse.reachable_rect,
-		parse_state->map_parse.reachable_width_max
-		- parse_state->map_parse.reachable_width_min + 2,
-				parse_state->map_parse.reachable_height_max
-		- parse_state->map_parse.reachable_height_min + 2);
+	print_map_parsing(parse_state, 'r');
 	return (0);
 }
 

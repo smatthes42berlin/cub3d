@@ -9,9 +9,6 @@ int	flood_fill_it(t_parse_state *parse_state)
 	int	start_width;
 	int	start_height;
 
-	print_map(parse_state->map_parse.org_rect,
-				parse_state->map_parse.max_width_org,
-				parse_state->map_parse.max_height_org);
 	start_height = parse_state->map_parse.start_pos[0];
 	start_width = parse_state->map_parse.start_pos[1];
 	parse_state->map_parse.reachable_width_min = start_width;
