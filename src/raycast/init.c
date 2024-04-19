@@ -80,6 +80,9 @@ int	initialize_window(t_main_data *data)
 int	init(t_main_data *data)
 {
 	init_map(data);
+	printf("%d ", data->map.color_ceiling[0]);
+	printf("%d ", data->map.color_ceiling[1]);
+	printf("%d\n", data->map.color_ceiling[2]);
 	if (!initialize_window(data))
 	{
 		destroy_window(data);

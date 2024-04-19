@@ -1,5 +1,11 @@
 #include "cub3d.h"
 
+unsigned int convert_rgb_to_hex(int *rgb)
+{
+	unsigned int hex_color = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	return hex_color;
+}
+
 void	generate_3d_projection(t_main_data *data, t_ray *rays)
 {
 	int		i;
@@ -26,10 +32,12 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 		wall_bottom_pixel = wall_bottom_pixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wall_bottom_pixel;
 		// setting color of ceiling
 	
+		//unsigned ceiling_color = convert_rgb_to_hex(data->map.color_ceiling);
+
 		y = 0;
 		while (y < wall_top_pixel)
 		{
-			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF333333;
+			data->color_buffer[(WINDOW_WIDTH * y) + i] =  0xFF333333; //ceiling_color;
 			y++;
 		}
 	
@@ -50,16 +58,19 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 		}
 		*/
 		
+
 		while (y < wall_bottom_pixel)
 		{
 			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
 			y++;
 		}
 		// setting color of floor
+		//unsigned floor_color = convert_rgb_to_hex(data->map.color_floor);
+
 		y = wall_bottom_pixel;
 		while (y < WINDOW_HEIGHT)
 		{
-			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF777777;
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = 0xFF777777; //floor_color
 			y++;
 		}
 		i++;

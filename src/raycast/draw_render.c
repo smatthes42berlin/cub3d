@@ -14,9 +14,10 @@
 
 void	render(t_main_data *data, int *addr, t_ray *rays)
 {
+	(void)rays;
 	fill_color_buffer(data, 0xFF000000);
 	generate_3d_projection(data, rays);
-	memcpy(addr, data->color_buffer, WINDOW_WIDTH * WINDOW_HEIGHT
+	ft_memcpy(addr, data->color_buffer, WINDOW_WIDTH * WINDOW_HEIGHT
 		* sizeof(u_int32_t));
 	// display mini-map
 	draw_map(data, addr);
