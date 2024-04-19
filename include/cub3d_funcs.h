@@ -174,7 +174,7 @@ void cast_all_rays(t_main_data *data, t_ray *rays);
 void generate_3d_projection(t_main_data *data, t_ray *rays);
 
 /* wall_collision.c */
-int map_has_wall_at(t_main_data *data, float x, float y);
+int	map_has_wall_at(t_main_data *data, float x, float y);
 
 
 #endif
