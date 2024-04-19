@@ -12,8 +12,7 @@
 
 #include "cub3d.h"
 
-void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color,
-		t_main_data *data)
+void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color)
 {
 	int	scaled_tile_size;
 	int	y;
@@ -27,8 +26,8 @@ void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color,
 		x = 0;
 		while (x < scaled_tile_size)
 		{
-			pixel_index = ((tile_y + y) * data->w.width + (tile_x + x));
-			if (pixel_index < data->w.width * data->w.height)
+			pixel_index = ((tile_y + y) * WINDOW_WIDTH + (tile_x + x));
+			if (pixel_index < WINDOW_WIDTH * WINDOW_HEIGHT)
 			{
 				addr[pixel_index] = tile_color;
 			}
@@ -59,7 +58,7 @@ void	draw_map(t_main_data *data, int *addr)
 			else
 				tile_color = 0x000000;
 			draw_tile(addr, tile_x * MINIMAP_SCALE_FACTOR, tile_y
-				* MINIMAP_SCALE_FACTOR, tile_color, data);
+				* MINIMAP_SCALE_FACTOR, tile_color);
 			j++;
 		}
 		i++;
@@ -73,7 +72,7 @@ void	draw_rays(t_main_data *data, int *addr, t_ray *rays)
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		draw_line_on_image(addr, data->w.width, data->w.height, data->player.x
+		draw_line_on_image(addr, WINDOW_WIDTH, WINDOW_HEIGHT, data->player.x
 			* MINIMAP_SCALE_FACTOR, data->player.y * MINIMAP_SCALE_FACTOR,
 			rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR, rays[i].wall_hit_y
 			* MINIMAP_SCALE_FACTOR, 0xFF0000);

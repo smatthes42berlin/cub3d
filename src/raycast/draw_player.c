@@ -27,7 +27,7 @@ void	draw_player_direction(t_main_data *data, int *addr)
 		* scaled_line_length;
 	line_end_y = start_y + sin(data->player.rotation_angle)
 		* scaled_line_length;
-	draw_line_on_image(addr, data->w.width, data->w.height, start_x, start_y,
+	draw_line_on_image(addr, WINDOW_WIDTH, WINDOW_HEIGHT, start_x, start_y,
 		line_end_x, line_end_y, 0xFFFF00);
 }
 
@@ -49,10 +49,10 @@ void	draw_player(t_main_data *data, int *addr)
 		{
 			scaled_x = data->player.x * MINIMAP_SCALE_FACTOR + x;
 			scaled_y = data->player.y * MINIMAP_SCALE_FACTOR + y;
-			if (scaled_x >= 0 && scaled_x < data->w.width && scaled_y >= 0
-				&& scaled_y < data->w.height)
+			if (scaled_x >= 0 && scaled_x < WINDOW_WIDTH && scaled_y >= 0
+				&& scaled_y < WINDOW_HEIGHT)
 			{
-				pixel_index = scaled_y * data->w.width + scaled_x;
+				pixel_index = scaled_y * WINDOW_WIDTH + scaled_x;
 				addr[pixel_index] = data->player.color;
 			}
 			x++;

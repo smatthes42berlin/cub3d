@@ -141,7 +141,7 @@ void draw_line_on_image(int *addr, int width, int height, int start_x, int start
 
 /* draw_minimap.c */
 void draw_map(t_main_data *data, int *addr);
-void draw_tile(int *addr, int tile_x, int tile_y, int tile_color, t_main_data *data);
+void draw_tile(int *addr, int tile_x, int tile_y, int tile_color);
 void draw_rays(t_main_data *data, int *addr, t_ray *rays);
 
 /* draw_player.c */

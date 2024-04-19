@@ -58,8 +58,8 @@ void	setup(t_main_data *data)
 	printf("Map Num Rows St: %d\n", data->map.rows);
 	printf("Map Num Cols St: %d\n", data->map.cols);
 	free_parse_state(data->parse_state);
-	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * data->w.width
-			* data->w.height);
+	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH
+			* WINDOW_HEIGHT);
 }
 
 int	initialize_window(t_main_data *data)
@@ -70,7 +70,7 @@ int	initialize_window(t_main_data *data)
 	data->w.mlx = mlx_init();
 	if (data->w.mlx == NULL)
 		return (FALSE);
-	data->w.mlx_win = mlx_new_window(data->w.mlx, data->w.width, data->w.height,
+	data->w.mlx_win = mlx_new_window(data->w.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"Cub3d");
 	if (data->w.mlx_win == NULL)
 		return (FALSE);
