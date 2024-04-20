@@ -10,3 +10,5 @@
 
 - derive rotation angle from start pos for friedrich
 - remove discuss from repo, remove main from libft
+
+- add 42 header

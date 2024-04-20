@@ -86,6 +86,10 @@ int				flood_check(t_parse_state *parse_state, int height, int width,
 int				flood_fill_rec_lim(t_parse_state *parse_state);
 int				flood_check_rec_lim(t_parse_state *parse_state, int height,
 					int width, int rec_depth);
+bool	check_end_point_reached(t_parse_state *parse_state, int cur_point[2]);
+int	recursion_surrounding_points(t_parse_state *parse_state, int cur_point[2], int rec_depth);
+
+
 
 /* flood fill util */
 
