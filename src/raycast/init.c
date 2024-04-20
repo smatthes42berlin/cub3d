@@ -80,6 +80,7 @@ int	initialize_window(t_main_data *data)
 int	init(t_main_data *data)
 {
 	init_map(data);
+	update_minimap_scale_factor(data);
 	if (!initialize_window(data))
 	{
 		destroy_window(data);

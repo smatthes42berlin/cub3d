@@ -12,56 +12,61 @@
 
 #include "cub3d.h"
 
-void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color)
+#define MINIMAP_WIDTH 300  // Width of the minimap display in pixels
+#define MINIMAP_HEIGHT 300 // Height of the minimap display in pixels
+
+void	update_minimap_scale_factor(t_main_data *data)
+{
+	float	scale_width;
+	float	scale_height;
+
+	scale_width = (float)MINIMAP_WIDTH / (data->map.cols * TILE_SIZE);
+	scale_height = (float)MINIMAP_HEIGHT / (data->map.rows * TILE_SIZE);
+	data->w.scale_factor = fmin(scale_width, scale_height);
+}
+
+void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color,
+		float scale_factor, int base_x, int base_y)
 {
 	int	scaled_tile_size;
-	int	y;
-	int	x;
+	int	px;
+	int	py;
 	int	pixel_index;
 
-	scaled_tile_size = (int)(TILE_SIZE * MINIMAP_SCALE_FACTOR);
-	y = 0;
-	while (y < scaled_tile_size)
+	scaled_tile_size = (int)(TILE_SIZE * scale_factor);
+	for (int y = 0; y < scaled_tile_size; y++)
 	{
-		x = 0;
-		while (x < scaled_tile_size)
+		for (int x = 0; x < scaled_tile_size; x++)
 		{
-			pixel_index = ((tile_y + y) * WINDOW_WIDTH + (tile_x + x));
-			if (pixel_index < WINDOW_WIDTH * WINDOW_HEIGHT)
+			px = base_x + tile_x + x;
+			py = base_y + tile_y + y;
+			if (px < WINDOW_WIDTH && py < WINDOW_HEIGHT)
 			{
+				pixel_index = py * WINDOW_WIDTH + px;
 				addr[pixel_index] = tile_color;
 			}
-			x++;
 		}
-		y++;
 	}
 }
 
 void	draw_map(t_main_data *data, int *addr)
 {
-	int	i;
-	int	j;
 	int	tile_x;
 	int	tile_y;
 	int	tile_color;
 
-	i = 0;
-	while (i < data->map.rows)
+	int base_x = 0; // Center the minimap horizontally
+	int base_y = 0; // Center the minimap vertically
+	for (int i = 0; i < data->map.rows; i++)
 	{
-		j = 0;
-		while (j < data->map.cols)
+		for (int j = 0; j < data->map.cols; j++)
 		{
-			tile_x = j * TILE_SIZE;
-			tile_y = i * TILE_SIZE;
-			if (data->map.map[i][j] == '1')
-				tile_color = 0xFFFFFF;
-			else
-				tile_color = 0x000000;
-			draw_tile(addr, tile_x * MINIMAP_SCALE_FACTOR, tile_y
-				* MINIMAP_SCALE_FACTOR, tile_color);
-			j++;
+			tile_x = j * TILE_SIZE * data->w.scale_factor;
+			tile_y = i * TILE_SIZE * data->w.scale_factor;
+			tile_color = data->map.map[i][j] == '1' ? 0xFFFFFF : 0x000000;
+			draw_tile(addr, tile_x, tile_y, tile_color, data->w.scale_factor,
+				base_x, base_y);
 		}
-		i++;
 	}
 }
 
@@ -73,9 +78,9 @@ void	draw_rays(t_main_data *data, int *addr, t_ray *rays)
 	while (i < NUM_RAYS)
 	{
 		draw_line_on_image(addr, WINDOW_WIDTH, WINDOW_HEIGHT, data->player.x
-			* MINIMAP_SCALE_FACTOR, data->player.y * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR, rays[i].wall_hit_y
-			* MINIMAP_SCALE_FACTOR, 0xFF0000);
+			* data->w.scale_factor, data->player.y * data->w.scale_factor,
+			rays[i].wall_hit_x * data->w.scale_factor, rays[i].wall_hit_y
+			* data->w.scale_factor, 0xFF0000);
 		i++;
 	}
 }

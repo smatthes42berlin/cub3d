@@ -22,8 +22,8 @@ void	render(t_main_data *data, int *addr, t_ray *rays)
 	
 	draw_map(data, addr);
 	draw_player(data, addr);
-	//draw_player_direction(data, addr);
-	//draw_rays(data, addr, rays);
+	draw_player_direction(data, addr);
+	draw_rays(data, addr, rays);
 }
 
 int	draw(t_main_data *data)

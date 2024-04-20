@@ -26,8 +26,7 @@
 
 #define MINIMAP_X_OFFSET 0  // X offset from the window's left edge
 #define MINIMAP_Y_OFFSET 0  // Y offset from the window's top edge
-#define MINIMAP_WIDTH 300    // Width of the minimap
-#define MINIMAP_HEIGHT 200 
+
 #define VIEWPORT_SIZE 20  // Height of the minimap
 #define MINIMAP_SCALE_FACTOR (MINIMAP_WIDTH / (float)(VIEWPORT_SIZE * TILE_SIZE))
 

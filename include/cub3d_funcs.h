@@ -141,7 +141,7 @@ void draw_line_on_image(int *addr, int width, int height, int start_x, int start
 
 /* draw_minimap.c */
 void draw_map(t_main_data *data, int *addr);
-void draw_tile(int *addr, int tile_x, int tile_y, int tile_color);
+void draw_tile(int *addr, int tile_x, int tile_y, int tile_color, float scale_factor, int base_x, int base_y);
 void draw_rays(t_main_data *data, int *addr, t_ray *rays);
 
 /* draw_player.c */
@@ -175,6 +175,8 @@ void generate_3d_projection(t_main_data *data, t_ray *rays);
 
 /* wall_collision.c */
 int	map_has_wall_at(t_main_data *data, float x, float y);
+
+void update_minimap_scale_factor(t_main_data *data);
 
 
 #endif
