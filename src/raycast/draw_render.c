@@ -19,11 +19,11 @@ void	render(t_main_data *data, int *addr, t_ray *rays)
 	generate_3d_projection(data, rays);
 	ft_memcpy(addr, data->color_buffer, WINDOW_WIDTH * WINDOW_HEIGHT
 		* sizeof(u_int32_t));
-	// display mini-map
+	
 	draw_map(data, addr);
 	draw_player(data, addr);
-	draw_player_direction(data, addr);
-	draw_rays(data, addr, rays);
+	//draw_player_direction(data, addr);
+	//draw_rays(data, addr, rays);
 }
 
 int	draw(t_main_data *data)

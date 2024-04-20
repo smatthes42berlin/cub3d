@@ -109,16 +109,15 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
     int map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
     int map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
 
-    // Check if indices are within the map bounds
     if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols ||
         map_grid_index_y < 0 || map_grid_index_y >= data->map.rows) {
-        break; // Stop processing this ray to avoid accessing invalid memory
+        break;
     }
 
     if (data->map.map[map_grid_index_y][map_grid_index_x] == '1') {
         vert_wall_hit_x = next_vert_touch_x;
         vert_wall_hit_y = next_vert_touch_y;
-        vert_wall_content = data->map.map[map_grid_index_y][map_grid_index_x]; // no need to subtract '0' since it's already a character
+        vert_wall_content = data->map.map[map_grid_index_y][map_grid_index_x];
         found_vert_wall_hit = TRUE;
         break;
     } else {

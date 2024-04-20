@@ -18,7 +18,7 @@ void	init_player(t_main_data *data)
 	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE + (TILE_SIZE / 2);	
 	// data->player.x = data->w.width / 2;
 	// data->player.y = data->w.height / 2;
-	data->player.size = 1;
+	data->player.size = 10;
 	data->player.color = 0xFFFF00;
 	data->player.turn_direction = 0;
 	data->player.walk_direction = 0;
