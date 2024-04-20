@@ -3,6 +3,7 @@
 
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define MIN(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
@@ -21,7 +22,15 @@
 # define FOV_ANGLE (60 * (PI / 180))
 
 # define NUM_RAYS (WINDOW_WIDTH)
-# define MINIMAP_SCALE_FACTOR 0.2
+//# define MINIMAP_SCALE_FACTOR 0.2
+
+#define MINIMAP_X_OFFSET 0  // X offset from the window's left edge
+#define MINIMAP_Y_OFFSET 0  // Y offset from the window's top edge
+#define MINIMAP_WIDTH 300    // Width of the minimap
+#define MINIMAP_HEIGHT 200 
+#define VIEWPORT_SIZE 20  // Height of the minimap
+#define MINIMAP_SCALE_FACTOR (MINIMAP_WIDTH / (float)(VIEWPORT_SIZE * TILE_SIZE))
+
 
 # define ROTATION_MOVEMENT 0.1
 # define STRAIGHT_MOVEMENT 10

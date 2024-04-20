@@ -60,3 +60,41 @@ void	draw_player(t_main_data *data, int *addr)
 		y++;
 	}
 }
+
+/*
+void draw_player(t_main_data *data, int *addr) {
+    int viewport_size = VIEWPORT_SIZE;  // Define how many tiles around the player to show
+    int player_tile_x = data->player.x / TILE_SIZE;  // Player's tile X
+    int player_tile_y = data->player.y / TILE_SIZE;  // Player's tile Y
+    int scaled_size = data->player.size * MINIMAP_SCALE_FACTOR;  // Player's representation size on the minimap
+
+    // Calculate the player's position relative to the viewport
+    int start_col = MAX(0, player_tile_x - viewport_size / 2);
+    int start_row = MAX(0, player_tile_y - viewport_size / 2);
+    if (start_col + viewport_size > data->map.cols) {
+        start_col = data->map.cols - viewport_size;
+    }
+    if (start_row + viewport_size > data->map.rows) {
+        start_row = data->map.rows - viewport_size;
+    }
+
+    // Calculate player's minimap coordinates
+    int minimap_x = MINIMAP_X_OFFSET + (player_tile_x - start_col) * TILE_SIZE * MINIMAP_SCALE_FACTOR;
+    int minimap_y = MINIMAP_Y_OFFSET + (player_tile_y - start_row) * TILE_SIZE * MINIMAP_SCALE_FACTOR;
+
+    // Draw the player on the minimap
+    for (int y = 0; y < scaled_size; y++) {
+        for (int x = 0; x < scaled_size; x++) {
+            int px = minimap_x + x - scaled_size / 2;  // Center the player's icon
+            int py = minimap_y + y - scaled_size / 2;
+            if (px >= MINIMAP_X_OFFSET && px < MINIMAP_X_OFFSET + MINIMAP_WIDTH &&
+                py >= MINIMAP_Y_OFFSET && py < MINIMAP_Y_OFFSET + MINIMAP_HEIGHT) {
+                int pixel_index = py * WINDOW_WIDTH + px;
+                if (pixel_index >= 0 && pixel_index < WINDOW_WIDTH * WINDOW_HEIGHT) { // Check to prevent buffer overflow
+                    addr[pixel_index] = data->player.color; // Set player's color
+                }
+            }
+        }
+    }
+}
+*/
