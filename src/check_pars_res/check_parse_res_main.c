@@ -54,18 +54,18 @@ int	check_option_errors(t_parse_state *parse_state, t_optn_parse *optn)
 		print_error_msg(parse_state, "file cannot be opened", optn->identifier);
 	if (optn->rgb_out_of_range)
 		print_error_msg(parse_state, "rgb col def out of range",
-				optn->identifier);
+			optn->identifier);
 	return (0);
 }
 
-int	print_error_msg(t_parse_state *parse_state, char *msg, const char *identifier)
+int	print_error_msg(t_parse_state *parse_state, char *msg, const char *ident)
 {
 	if (!parse_state->any_error)
 	{
 		parse_state->any_error = true;
 		printf("Error\n");
 	}
-	printf("%s: ", identifier);
+	printf("%s: ", ident);
 	printf("%s\n", msg);
 	return (0);
 }

@@ -33,9 +33,9 @@ int	flood_check_rec_lim(t_parse_state *parse_state, int height, int width,
 	rec_depth++;
 	if (check_end_point_reached(parse_state, cur_point))
 		return (0);
-	if (parse_state->map_parse.org_rect[cur_point[0]][cur_point[1]] == '0')
+	if (parse_state->map_parse.org_rect[height][width] == '0')
 	{
-		parse_state->map_parse.org_rect[cur_point[0]][cur_point[1]] = FLOOD_CHAR;
+		parse_state->map_parse.org_rect[height][width] = FLOOD_CHAR;
 		if (rec_depth < 35000)
 			recursion_surrounding_points(parse_state, cur_point, rec_depth);
 		else
@@ -44,26 +44,32 @@ int	flood_check_rec_lim(t_parse_state *parse_state, int height, int width,
 			return (1);
 		}
 	}
-	check_map_not_closed(parse_state, cur_point[0], cur_point[1]);
-	adjust_reachable_map(parse_state, cur_point[0], cur_point[1]);
+	check_map_not_closed(parse_state, height, width);
+	adjust_reachable_map(parse_state, height, width);
 	return (0);
 }
 
 bool	check_end_point_reached(t_parse_state *parse_state, int cur_point[2])
 {
+	int	height;
+	int	width;
+
+	height = cur_point[0];
+	width = cur_point[1];
 	if (cur_point[0] + 1 > parse_state->map_parse.max_height_org
 		|| cur_point[0] < 0)
 		return (true);
 	if (cur_point[1] + 1 > parse_state->map_parse.max_width_org
 		|| cur_point[1] < 0)
 		return (true);
-	if (parse_state->map_parse.org_rect[cur_point[0]][cur_point[1]] == FLOOD_CHAR
-		|| parse_state->map_parse.org_rect[cur_point[0]][cur_point[1]] == '1')
+	if (parse_state->map_parse.org_rect[height][width] == FLOOD_CHAR
+		|| parse_state->map_parse.org_rect[height][width] == '1')
 		return (true);
 	return (false);
 }
 
-int	recursion_surrounding_points(t_parse_state *parse_state, int cur_point[2], int rec_depth)
+int	recursion_surrounding_points(t_parse_state *parse_state, int cur_point[2],
+		int rec_depth)
 {
 	flood_check_rec_lim(parse_state, cur_point[0] + 1, cur_point[1], rec_depth);
 	flood_check_rec_lim(parse_state, cur_point[0] - 1, cur_point[1], rec_depth);

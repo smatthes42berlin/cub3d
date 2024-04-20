@@ -6,8 +6,8 @@ int	print_map_parsing(t_parse_state *parse_state, const char which)
 	{
 		printf("original map\n");
 		print_map(parse_state->map_parse.org_rect,
-					parse_state->map_parse.max_width_org,
-					parse_state->map_parse.max_height_org);
+			parse_state->map_parse.max_width_org,
+			parse_state->map_parse.max_height_org);
 	}
 	if (which == 'r')
 	{
@@ -15,10 +15,10 @@ int	print_map_parsing(t_parse_state *parse_state, const char which)
 		if (!parse_state->map_parse.reachable_rect)
 			printf("not defined\n");
 		print_map(parse_state->map_parse.reachable_rect,
-					parse_state->map_parse.reachable_width_max
-						- parse_state->map_parse.reachable_width_min + 3,
-					parse_state->map_parse.reachable_height_max
-						- parse_state->map_parse.reachable_height_min + 3);
+			parse_state->map_parse.reachable_width_max
+			- parse_state->map_parse.reachable_width_min + 3,
+			parse_state->map_parse.reachable_height_max
+			- parse_state->map_parse.reachable_height_min + 3);
 	}
 	return (0);
 }

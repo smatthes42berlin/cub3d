@@ -51,4 +51,3 @@ bool	is_map_start(t_parse_state *parse_state)
 		return (true);
 	return (false);
 }
-

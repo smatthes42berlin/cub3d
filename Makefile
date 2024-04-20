@@ -57,6 +57,7 @@ SRC = 	main.c \
 		check_map_unknown_chars.c \
 		check_option_col.c \
 		check_option_tex.c \
+		check_option_tex_2.c \
 		check_map_flood_fill_util.c \
 		check_map_flood_fill_util_2.c \
 		check_map_flood_fill_rec_lim.c \

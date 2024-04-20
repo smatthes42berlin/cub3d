@@ -17,17 +17,23 @@ int	check_option_col(t_optn_parse *col)
 	splitted = ft_split_str(col->line_in_map_file, ",");
 	if (!splitted)
 		throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot split col def line!"}, col->parse_state, true);
+			"Cannot split col def line!"}, col->parse_state, true);
 	if (ft_arr_len_char(splitted) != 3)
 	{
 		free_str_arr_null(splitted);
 		col->wrong_format = true;
 		return (0);
 	}
+	get_rgb(col, splitted);
+	free_str_arr_null(splitted);
+	return (0);
+}
+
+int	get_rgb(t_optn_parse *col, char **splitted)
+{
 	get_val_rgb(col, splitted, 0);
 	get_val_rgb(col, splitted, 1);
 	get_val_rgb(col, splitted, 2);
-	free_str_arr_null(splitted);
 	return (0);
 }
 
@@ -65,23 +71,30 @@ bool	check_comma_error(t_optn_parse *col)
 	}
 	while ((col->line_in_map_file)[i])
 	{
-		if ((col->line_in_map_file)[i] == ',')
-		{
-			if (one_comma)
-			{
-				col->wrong_format = true;
-				return (true);
-			}
-			one_comma = true;
-		}
-		else
-			one_comma = false;
-		i++;
+		if (check_for_2_commas_in_row(col, &one_comma, &i))
+			return (true);
 	}
 	if ((col->line_in_map_file)[i - 1] == ',')
 	{
 		col->wrong_format = true;
 		return (true);
 	}
+	return (false);
+}
+
+bool	check_for_2_commas_in_row(t_optn_parse *col, bool *one_comma, int *i)
+{
+	if ((col->line_in_map_file)[*i] == ',')
+	{
+		if (*one_comma)
+		{
+			col->wrong_format = true;
+			return (true);
+		}
+		*one_comma = true;
+	}
+	else
+		*one_comma = false;
+	(*i)++;
 	return (false);
 }

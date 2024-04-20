@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 int	init_parse_state(t_parse_state *parse_state, t_main_data *main_data,
 		t_list_dc *file_lbl)
 {
@@ -34,7 +33,6 @@ int	init_parse_state_map(t_parse_state *parse_state)
 	parse_state->map_parse.ended = false;
 	parse_state->map_parse.over_size_limit = false;
 	parse_state->map_parse.org_rect = NULL;
-	// parse_state->map_parse.flood_fill_queue = NULL;
 	parse_state->map_parse.queue = NULL;
 	parse_state->map_parse.reachable_rect = NULL;
 	parse_state->map_parse.max_height_org = 0;

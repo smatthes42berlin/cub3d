@@ -34,7 +34,9 @@ int				parse_whole_file(t_parse_state *parse_state);
 int				check_extracted_details(t_parse_state *parse_state);
 int				check_map_validity(t_parse_state *parse_state);
 int				check_option_col(t_optn_parse *col);
+int				get_rgb(t_optn_parse *col, char **splitted);
 int				check_option_tex(t_optn_parse *col);
+int				wrong_format_ret_code(t_optn_parse *col, int code);
 int				check_file_access(t_optn_parse *col);
 int				check_path_extension(t_optn_parse *col);
 int				check_path_format(t_optn_parse *col);
@@ -42,6 +44,8 @@ int				handle_unquoted_path(t_optn_parse *col);
 int				handle_quoted_path(t_optn_parse *col);
 int				get_val_rgb(t_optn_parse *col, char **splitted, int index);
 bool			check_comma_error(t_optn_parse *col);
+bool			check_for_2_commas_in_row(t_optn_parse *col, bool *one_comma,
+					int *i);
 int				check_exactly_one_start_pos(t_parse_state *parse_state);
 int				check_unknown_characters(t_parse_state *parse_state);
 int				get_start_pos(t_parse_state *parse_state, int height, int width,
@@ -86,10 +90,11 @@ int				flood_check(t_parse_state *parse_state, int height, int width,
 int				flood_fill_rec_lim(t_parse_state *parse_state);
 int				flood_check_rec_lim(t_parse_state *parse_state, int height,
 					int width, int rec_depth);
-bool	check_end_point_reached(t_parse_state *parse_state, int cur_point[2]);
-int	recursion_surrounding_points(t_parse_state *parse_state, int cur_point[2], int rec_depth);
-
-
+bool	check_end_point_reached(t_parse_state *parse_state,
+								int cur_point[2]);
+int	recursion_surrounding_points(t_parse_state *parse_state,
+									int cur_point[2],
+									int rec_depth);
 
 /* flood fill util */
 

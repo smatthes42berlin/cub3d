@@ -23,9 +23,9 @@ char	*get_failed_func_str(enum e_failed_func failed_func)
 	if (failed_func == ERROR_EXIT)
 		return ("ERROR_EXIT");
 	return (NULL);
-	// return (get_failed_func_str_2(failed_func));
 }
 
+// return (get_failed_func_str_2(failed_func));
 // char	*get_failed_func_str_2(enum e_failed_func failed_func)
 // {
 // 	return (NULL);
