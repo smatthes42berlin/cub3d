@@ -75,7 +75,8 @@ SRC = 	main.c \
 		math_utils.c \
 		wall_ceiling_floor.c \
 		color_buffer.c \
-		check_parse_res_main.c
+		check_parse_res_main.c \
+		print_debug_parse.c
 
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))

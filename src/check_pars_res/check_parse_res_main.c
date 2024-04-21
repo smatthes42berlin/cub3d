@@ -46,6 +46,8 @@ int	check_map_errors(t_parse_state *parse_state)
 
 int	check_option_errors(t_parse_state *parse_state, t_optn_parse *optn)
 {
+	if (!optn->line_in_map_file)
+		print_error_msg(parse_state, "definition not found", optn->identifier);
 	if (optn->multi_def)
 		print_error_msg(parse_state, "multiple definitions", optn->identifier);
 	if (optn->wrong_format)

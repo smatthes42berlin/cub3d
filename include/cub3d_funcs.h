@@ -148,6 +148,9 @@ int				print_gen_parse_res(t_parse_state *parse_state);
 int				print_res(char *caption, bool val);
 int				print_caption(char *caption);
 int				print_map_parsing(t_parse_state *parse_state, const char which);
+int				print_debug_org_map(t_parse_state *parse_state);
+int				print_debug_reach_map(t_parse_state *parse_state);
+int				print_debug_parse_res(t_parse_state *parse_state);
 
 /////////////////////////////////////////
 /////// raycast folder friedrich ////////

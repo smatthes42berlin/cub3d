@@ -2,10 +2,13 @@
 
 int	handle_optn(t_parse_state *parse_state, t_optn_parse *optn)
 {
+	char	*tmp;
+
 	if (optn_not_def_map_not_started(parse_state, optn))
 	{
-		optn->line_in_map_file = ft_strdup((parse_state->cur_line_trimmed)
-				+ ft_strlen(optn->identifier));
+		tmp = str_move_ptr_by_n_or_until_end(parse_state->cur_line_trimmed,
+				ft_strlen(optn->identifier));
+		optn->line_in_map_file = ft_strdup(tmp);
 		if (!optn->line_in_map_file)
 			throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
 				"Cannot duplicate line of file!"}, parse_state, true);

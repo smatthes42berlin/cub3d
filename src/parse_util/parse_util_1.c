@@ -27,7 +27,7 @@ int	get_cur_line_trimmed(t_parse_state *parse_state)
 {
 	free(parse_state->cur_line_trimmed);
 	parse_state->cur_line_trimmed = NULL;
-	if (!parse_state->cur_line)
+	if (!parse_state->cur_line || !parse_state->cur_line->content)
 		return (0);
 	if (ft_strtrim_int(parse_state->cur_line->content, " \n\v\t\f\r",
 			&(parse_state->cur_line_trimmed)))

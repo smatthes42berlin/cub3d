@@ -8,10 +8,10 @@ int	main(int argc, char *argv[])
 	main_data.parse_state = &parse_state;
 	init_main_data(&main_data, argc, argv);
 	parse_main(&main_data);
-	print_parse_res(&parse_state);
 	free_parse_state(&parse_state);
+	printf("Success\n");
 	exit(1);
-	init(&main_data);
+	// init(&main_data);
 	return (0);
 }
 

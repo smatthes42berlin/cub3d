@@ -1,6 +1,5 @@
 #include "lib_main.h"
 
-
 int	move_all_by_one(char **str, int i)
 {
 	int	j;
@@ -11,5 +10,6 @@ int	move_all_by_one(char **str, int i)
 		(*str)[i + j] = (*str)[i + j + 1];
 		j++;
 	}
+	(*str)[i + j] = '\0';
 	return (0);
 }

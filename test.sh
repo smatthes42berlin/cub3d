@@ -1,5 +1,8 @@
 clear
+
 make
+
+make -C "./libft"
 printf "\n\n"
 
 maps=(5 10 20 50 100 200 500)
@@ -17,6 +20,8 @@ map10=./test_maps/very_big/2000x2000.cub
 map11=./test_maps/very_big/5000x5000.cub
 map12=./test_maps/very_big/10000x10000.cub
 map13=./test_maps/very_big/20000x20000.cub
+
+maperror=./test_maps/error/spaces_at_end_of_file_1.cub
 
 map=$map1
 

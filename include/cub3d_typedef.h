@@ -1,15 +1,22 @@
 #ifndef CUB3D_TYPEDEF_H
 # define CUB3D_TYPEDEF_H
 
+/* parser Macros */
+
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
+# define MAX_REC_DEPTH 35000
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
+# define ERR_MSG "Error\n"
+# define PRINT_DEBUG false
+# define MAP_DIAG_CHECK false
+
 # define FALSE 0
 # define TRUE 1
 
-# define ERR_MSG "Error\n"
+
 
 # define PI 3.1415926535
 # define TWO_PI 6.28318530

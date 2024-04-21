@@ -1,6 +1,6 @@
-NO cub3d-tester/textures/wall.xpm
-SO cub3d-tester/textures/bricks.xpm
-WE cub3d-tester/textures/gold.xpm
+NO ./textures/wall.xpm
+SO ./textures/bricks.xpm
+WE ./textures/gold.xpm
 
 F 220,111,119
 C 225,111,0

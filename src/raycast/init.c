@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/20 14:09:46 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/21 09:08:44 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ void	init_player(t_main_data *data)
 
 void	init_map(t_main_data *data)
 {
-	data->map.width = data->parse_state->map_parse.max_width_org;
-	data->map.height = data->parse_state->map_parse.max_height_org;
+	// data->map.width = data->parse_state->map_parse.max_width_org;
+	// data->map.height = data->parse_state->map_parse.max_height_org;
+	data->map.width = data->parse_state->map_parse.max_width_reachable
+		- data->parse_state->map_parse.reachable_width_min + 3;
+	data->map.height = data->parse_state->map_parse.max_height_reachable
+		- data->parse_state->map_parse.reachable_height_min + 3;
 	data->map.texture_north = data->parse_state->texture_north.line_in_map_file;
 	data->map.texture_south = data->parse_state->texture_south.line_in_map_file;
 	data->map.texture_east = data->parse_state->texture_east.line_in_map_file;

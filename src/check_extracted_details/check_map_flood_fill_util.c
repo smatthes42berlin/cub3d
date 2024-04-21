@@ -15,14 +15,18 @@ int	adjust_reachable_map(t_parse_state *parse_state, int height, int width)
 
 int	check_map_not_closed(t_parse_state *parse_state, int height, int width)
 {
-	if (parse_state->map_parse.org_rect[height][width] == ' ')
+	if (parse_state->map_parse.org_rect[height][width] == ' '
+		|| parse_state->map_parse.org_rect[height][width] == '-')
 		set_bool_field(&(parse_state->map_parse.not_closed),
-			true, 0);
+						true,
+						0);
 	if (height + 1 == parse_state->map_parse.max_height_org || height == 0)
 		set_bool_field(&(parse_state->map_parse.not_closed),
-			true, 0);
+						true,
+						0);
 	if (width + 1 == parse_state->map_parse.max_width_org || width == 0)
 		set_bool_field(&(parse_state->map_parse.not_closed),
-			true, 0);
+						true,
+						0);
 	return (0);
 }

@@ -15,7 +15,7 @@ int	check_map_validity(t_parse_state *parse_state)
 		|| parse_state->map_parse.unknown_char)
 		return (0);
 	flood_fill_rec_lim(parse_state);
-	print_map_parsing(parse_state, 'o');
+	print_debug_org_map(parse_state);
 	undo_flood_fill(parse_state);
 	if (parse_state->map_parse.not_closed)
 		return (0);
