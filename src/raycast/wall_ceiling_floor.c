@@ -40,10 +40,75 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 			data->color_buffer[(WINDOW_WIDTH * y) + i] =  0xFF333333; //ceiling_color;
 			y++;
 		}
-	
-		// rendering the walls
+
+		///////////////////////////////////////
+		////// rendering the walls ////////////
+		///////////////////////////////////////
+		
+		/*// walls in coded texture
 		y = wall_top_pixel;
-		/*
+		int texture_offset_x;
+
+		if (rays[i].was_hit_vertical)
+			texture_offset_x = (int)rays[i].wall_hit_y % TILE_SIZE;
+		else
+			texture_offset_x = (int)rays[i].wall_hit_x % TILE_SIZE;
+
+
+		while (y < wall_bottom_pixel)
+		{
+			int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+			int texture_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+			u_int32_t texel_color = data->wall_texture[(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+			data->color_buffer[(WINDOW_WIDTH * y) + i] = texel_color;
+			y++;
+		}
+		*/
+		y = wall_top_pixel;
+		int texture_offset_x;
+
+		if (rays[i].was_hit_vertical)
+			texture_offset_x = (int)rays[i].wall_hit_y % TILE_SIZE;
+		else
+			texture_offset_x = (int)rays[i].wall_hit_x % TILE_SIZE;
+
+
+		while (y < wall_bottom_pixel)
+		{
+			if (rays[i].hit_side == NORTH)
+			{
+				int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+				int texture_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+				u_int32_t texel_color = data->wall_texture[0][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = texel_color;
+			}
+			else if (rays[i].hit_side == SOUTH)
+			{
+				int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+				int texture_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+				u_int32_t texel_color = data->wall_texture[1][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = texel_color;
+			}
+			else if (rays[i].hit_side == EAST)
+			{
+				int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+				int texture_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+				u_int32_t texel_color = data->wall_texture[2][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = texel_color;
+			}
+			else if (rays[i].hit_side == WEST)
+			{
+				int distance_from_top = y + (wall_strip_height / 2) - (WINDOW_HEIGHT / 2);
+				int texture_offset_y = distance_from_top * ((float)TEXTURE_HEIGHT / wall_strip_height);
+				u_int32_t texel_color = data->wall_texture[3][(TEXTURE_WIDTH * texture_offset_y) + texture_offset_x];
+				data->color_buffer[(WINDOW_WIDTH * y) + i] = texel_color;
+
+			}
+			y++;
+		}
+
+		/* Walls in Four Colours
+		y = wall_top_pixel;
 		while (y < wall_bottom_pixel) 
 		{
 			if (rays[i].hit_side == NORTH)
@@ -58,12 +123,15 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 		}
 		*/
 		
-
+		/* Wall in two colours
+		y = wall_top_pixel;
 		while (y < wall_bottom_pixel)
 		{
 			data->color_buffer[(WINDOW_WIDTH * y) + i] = rays[i].was_hit_vertical ? 0xFFFFFFFF : 0xFFCCCCCC;
 			y++;
 		}
+		*/
+
 		// setting color of floor
 		//unsigned floor_color = convert_rgb_to_hex(data->map.color_floor);
 

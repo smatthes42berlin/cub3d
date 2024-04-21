@@ -18,7 +18,7 @@ void	init_player(t_main_data *data)
 	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE + (TILE_SIZE / 2);	
 	// data->player.x = data->w.width / 2;
 	// data->player.y = data->w.height / 2;
-	data->player.size = 10;
+	data->player.size = 1;
 	data->player.color = 0xFFFF00;
 	data->player.turn_direction = 0;
 	data->player.walk_direction = 0;
@@ -49,17 +49,45 @@ void	init_map(t_main_data *data)
 	data->parse_state->texture_west.line_in_map_file = NULL;
 }
 
+void create_wall_texture(t_main_data *data)
+{
+	int i = 0;
+
+	int color[4] = {0xFF0000, 0x00FF00, 0xFF0000FF, 0xFFFF00}; // red, green, blue, yellow
+	while (i < 4)
+	{
+		data->wall_texture[i] = (u_int32_t *)malloc(sizeof(u_int32_t) * TEXTURE_WIDTH * TEXTURE_HEIGHT);
+		int x = 0;
+		int y;
+		while (x < TEXTURE_WIDTH)
+		{
+			y = 0;
+			while (y < TEXTURE_HEIGHT)
+			{
+				data->wall_texture[i][(TEXTURE_WIDTH * y) + x] = (x % 8 && y % 8) ? color[i] : 0xFF000000;
+				y++;
+			}
+			x++;
+		}
+		i++;
+	}
+	
+
+}
+
+
 void	setup(t_main_data *data)
 {
 	init_player(data);
-	printf("Map Num Rows: %d\n", data->map.rows);
-	printf("Map Num Cols: %d\n", data->map.cols);
-
-	printf("Map Num Rows St: %d\n", data->map.rows);
-	printf("Map Num Cols St: %d\n", data->map.cols);
 	free_parse_state(data->parse_state);
+
 	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH
 			* WINDOW_HEIGHT);
+	
+	// create space for texture array
+	data->wall_texture = (u_int32_t **)malloc(sizeof(u_int32_t *) * 4);
+	
+	create_wall_texture(data);
 }
 
 int	initialize_window(t_main_data *data)

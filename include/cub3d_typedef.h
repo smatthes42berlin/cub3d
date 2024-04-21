@@ -14,6 +14,8 @@
 # define TWO_PI 6.28318530
 
 # define TILE_SIZE 64
+# define TEXTURE_WIDTH TILE_SIZE
+# define TEXTURE_HEIGHT TILE_SIZE
 
 
 # define WINDOW_WIDTH 1280
@@ -24,13 +26,7 @@
 # define NUM_RAYS (WINDOW_WIDTH)
 //# define MINIMAP_SCALE_FACTOR 0.2
 
-#define MINIMAP_X_OFFSET 0  // X offset from the window's left edge
-#define MINIMAP_Y_OFFSET 0  // Y offset from the window's top edge
-#define MINIMAP_WIDTH 300    // Width of the minimap
-#define MINIMAP_HEIGHT 200 
-#define VIEWPORT_SIZE 20  // Height of the minimap
-#define MINIMAP_SCALE_FACTOR (MINIMAP_WIDTH / (float)(VIEWPORT_SIZE * TILE_SIZE))
-
+#define MINIMAP_SCALE_FACTOR 0.2
 
 # define ROTATION_MOVEMENT 0.1
 # define STRAIGHT_MOVEMENT 10
@@ -111,6 +107,8 @@ typedef struct s_main_data
 	t_player					player;
 	t_map						map;
 	u_int32_t					*color_buffer;
+	u_int32_t 					**wall_texture;
+	
 	t_parse_state				*parse_state;
 	// player start_position
 	// player cur_position
