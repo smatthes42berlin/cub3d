@@ -51,30 +51,31 @@ void	init_map(t_main_data *data)
 
 void create_wall_texture(t_main_data *data)
 {
+    int texture_width = TEXTURE_WIDTH;
+    int texture_height = TEXTURE_HEIGHT;
+    void *img_ptr;
+    int bits_per_pixel, size_line, endian;
+
+    data->wall_texture = malloc(sizeof(u_int32_t*) * 4); 
+
+    char *texture_files[4] = {
+        data->map.texture_north,
+        data->map.texture_south,
+        data->map.texture_west,
+        data->map.texture_east
+    };
+
 	int i = 0;
-
-	int color[4] = {0xFF0000, 0x00FF00, 0xFF0000FF, 0xFFFF00}; // red, green, blue, yellow
-	while (i < 4)
-	{
-		data->wall_texture[i] = (u_int32_t *)malloc(sizeof(u_int32_t) * TEXTURE_WIDTH * TEXTURE_HEIGHT);
-		int x = 0;
-		int y;
-		while (x < TEXTURE_WIDTH)
-		{
-			y = 0;
-			while (y < TEXTURE_HEIGHT)
-			{
-				data->wall_texture[i][(TEXTURE_WIDTH * y) + x] = (x % 8 && y % 8) ? color[i] : 0xFF000000;
-				y++;
-			}
-			x++;
-		}
+    while (i < 4){
+        img_ptr = mlx_xpm_file_to_image(data->w.mlx, texture_files[i], &texture_width, &texture_height);
+        if (!img_ptr) {
+            ft_printf_fd(2, "Failed to load texture: %s\n", texture_files[i]);
+            exit(1);
+        }
+        data->wall_texture[i] = (u_int32_t *)mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
 		i++;
-	}
-	
-
+    }
 }
-
 
 void	setup(t_main_data *data)
 {

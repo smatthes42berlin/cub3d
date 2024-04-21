@@ -16,7 +16,6 @@ void	destroy_window(t_main_data *data)
 {
 	t_xvar	*xvar;
 
-	int i = 0;
 	if (data->w.mlx_win != NULL)
 	{
 		mlx_destroy_window(data->w.mlx, data->w.mlx_win);
@@ -31,15 +30,6 @@ void	destroy_window(t_main_data *data)
 		}
 		free(data->w.mlx);
 		data->w.mlx = NULL;
-	}
-	if (data->wall_texture)
-	{
-		while (i < 4)
-		{
-			free(data->wall_texture[i]);
-			i++;
-		}
-		free(data->wall_texture);
 	}
 	if (data->color_buffer)
 		free(data->color_buffer);
