@@ -46,11 +46,11 @@ int				get_val_rgb(t_optn_parse *col, char **splitted, int index);
 bool			check_comma_error(t_optn_parse *col);
 bool			check_for_2_commas_in_row(t_optn_parse *col, bool *one_comma,
 					int *i);
-int				check_exactly_one_start_pos(t_parse_state *parse_state);
+int				check_exactly_one_start_pos_o(t_parse_state *parse_state);
 int				check_unknown_characters(t_parse_state *parse_state);
-int				get_start_pos(t_parse_state *parse_state, int height, int width,
-					int *num_start_pos);
-int				set_start_pos_n_angle(t_parse_state *parse_state, char orient,
+int				get_start_pos_o(t_parse_state *parse_state, int height, int width,
+					int *num_start_pos_o);
+int				set_start_pos_o_n_angle(t_parse_state *parse_state, char orient,
 					float angle);
 int				undo_flood_fill(t_parse_state *parse_state);
 int				create_reachable_map(t_parse_state *parse_state);

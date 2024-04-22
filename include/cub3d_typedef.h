@@ -11,7 +11,7 @@
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
 # define ERR_MSG "Error\n"
-# define PRINT_DEBUG false
+# define PRINT_DEBUG true
 # define MAP_DIAG_CHECK false
 
 # define FALSE 0
@@ -119,7 +119,7 @@ typedef struct s_main_data
 	u_int32_t 					**wall_texture;
 	
 	t_parse_state				*parse_state;
-	// player start_position
+	// player start_pos_oition
 	// player cur_position
 	// player orientation
 	//
@@ -154,11 +154,12 @@ typedef struct s_map_parse
 	int							reachable_height_max;
 	int							reachable_width_min;
 	int							reachable_width_max;
-	bool						multi_start_pos;
+	bool						multi_start_pos_o;
 	bool						unknown_char;
-	bool						no_start_pos;
+	bool						no_start_pos_o;
 	bool						over_size_limit;
-	int							start_pos[2];
+	int							start_pos_o[2];
+	int							start_pos_r[2];
 	char						start_orient;
 	float						rotation_angle;
 	bool						not_closed;
