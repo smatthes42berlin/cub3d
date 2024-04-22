@@ -161,17 +161,20 @@ void			destroy_window(t_main_data *data);
 int				close_window(void *param);
 
 /* color_buffer.c */
-void			fill_color_buffer(u_int32_t color, u_int32_t *color_buffer);
+
+void fill_color_buffer(t_main_data *data, u_int32_t color);
+
 
 /* draw_line.c */
 void			draw_line_on_image(int *addr, int width, int height,
 					int start_x, int start_y, int end_x, int end_y, int color);
 
 /* draw_minimap.c */
-void			draw_map(t_main_data *data, int *addr);
-void			draw_tile(int *addr, int tile_x, int tile_y, int tile_color,
-					t_main_data *data);
-void			draw_rays(t_main_data *data, int *addr, t_ray *rays);
+
+void draw_map(t_main_data *data, int *addr);
+void draw_tile(int *addr, int tile_x, int tile_y, int tile_color);
+void draw_rays(t_main_data *data, int *addr, t_ray *rays);
+
 
 /* draw_player.c */
 void			draw_player_direction(t_main_data *data, int *addr);
@@ -204,6 +207,8 @@ void			cast_all_rays(t_main_data *data, t_ray *rays);
 void			generate_3d_projection(t_main_data *data, t_ray *rays);
 
 /* wall_collision.c */
+
 int				map_has_wall_at(t_main_data *data, float x, float y);
+
 
 #endif

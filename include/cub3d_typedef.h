@@ -5,6 +5,7 @@
 
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define MIN(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
 # define MAX_REC_DEPTH 35000
 // cannot be '?' or '-'
@@ -22,35 +23,33 @@
 # define TWO_PI 6.28318530
 
 # define TILE_SIZE 64
-# define MAP_NUM_ROWS 13
-# define MAP_NUM_COLS 20
+# define TEXTURE_WIDTH TILE_SIZE
+# define TEXTURE_HEIGHT TILE_SIZE
 
-# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 800
 
 # define FOV_ANGLE (60 * (PI / 180))
 
 # define NUM_RAYS (WINDOW_WIDTH)
-# define MINIMAP_SCALE_FACTOR 0.2
+//# define MINIMAP_SCALE_FACTOR 0.2
+
+#define MINIMAP_SCALE_FACTOR 0.2
 
 # define ROTATION_MOVEMENT 0.1
 # define STRAIGHT_MOVEMENT 10
 
-extern int						map[MAP_NUM_ROWS][MAP_NUM_COLS];
+//extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
 # define REM_EMPTY_LINES_MAP_FILE false
-// 111111111111999
-// 100000000001111
-// 100000000000001
-// 100111111111119
-// 111199999999999
 
 typedef struct s_parse_state	t_parse_state;
 
 typedef struct s_map
 {
-	int							width;
-	int							height;
+	int							cols;
+	int							rows;
 	int							size;
 	char						*texture_north;
 	char						*texture_south;
@@ -111,13 +110,14 @@ typedef struct s_window
 
 typedef struct s_main_data
 {
-	// t_map				map;
 	int							argc;
 	char						**argv;
 	t_window					w;
 	t_player					player;
 	t_map						map;
 	u_int32_t					*color_buffer;
+	u_int32_t 					**wall_texture;
+	
 	t_parse_state				*parse_state;
 	// player start_position
 	// player cur_position

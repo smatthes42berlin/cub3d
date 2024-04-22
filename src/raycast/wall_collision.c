@@ -17,8 +17,7 @@ int	map_has_wall_at(t_main_data *data, float x, float y)
 	int	map_grid_index_x;
 	int	map_grid_index_y;
 
-	if (x < 0 || x >= MAP_NUM_COLS * TILE_SIZE || y < 0 || y >= MAP_NUM_ROWS
-		* TILE_SIZE)
+	if (x < 0 || x >= data->w.width || y < 0 || y >= data->w.height)
 		return (TRUE);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
