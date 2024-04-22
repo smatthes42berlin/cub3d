@@ -36,24 +36,28 @@ void	init_player(t_main_data *data)
 
 void	init_map(t_main_data *data)
 {
+	data->textures.north.path = data->parse_state->texture_north.line_in_map_file;
+	data->textures.south.path = data->parse_state->texture_south.line_in_map_file;
+	data->textures.east.path = data->parse_state->texture_east.line_in_map_file;
+	data->textures.west.path = data->parse_state->texture_west.line_in_map_file;
+	data->textures.all[0] = &(data->textures.north);
+	data->textures.all[1] = &(data->textures.south);
+	data->textures.all[2] = &(data->textures.east);
+	data->textures.all[3] = &(data->textures.west);
 	// data->map.width = data->parse_state->map_parse.max_width_org;
 	// data->map.height = data->parse_state->map_parse.max_height_org;
 	data->map.rows = data->parse_state->map_parse.max_height_reachable;
 	data->map.cols = data->parse_state->map_parse.max_width_reachable;
-	data->map.texture_north = data->parse_state->texture_north.line_in_map_file;
-	data->map.texture_south = data->parse_state->texture_south.line_in_map_file;
-	data->map.texture_east = data->parse_state->texture_east.line_in_map_file;
-	data->map.texture_west = data->parse_state->texture_west.line_in_map_file;
 	data->map.color_ceiling[0] = (data->parse_state->color_ceiling.color)[0];
 	data->map.color_ceiling[1] = (data->parse_state->color_ceiling.color)[1];
 	data->map.color_ceiling[2] = (data->parse_state->color_ceiling.color)[2];
 	data->map.color_floor[0] = (data->parse_state->color_floor.color)[0];
 	data->map.color_floor[1] = (data->parse_state->color_floor.color)[1];
 	data->map.color_floor[2] = (data->parse_state->color_floor.color)[2];
-	// data->map.map = data->parse_state->map_parse.org_rect;
-	// data->parse_state->map_parse.org_rect = NULL;
-	data->map.map = data->parse_state->map_parse.reachable_rect;
-	data->parse_state->map_parse.reachable_rect = NULL;
+	data->map.map = data->parse_state->map_parse.org_rect;
+	data->parse_state->map_parse.org_rect = NULL;
+	// data->map.map = data->parse_state->map_parse.reachable_rect;
+	// data->parse_state->map_parse.reachable_rect = NULL;
 	data->parse_state->texture_north.line_in_map_file = NULL;
 	data->parse_state->texture_south.line_in_map_file = NULL;
 	data->parse_state->texture_east.line_in_map_file = NULL;
@@ -62,30 +66,21 @@ void	init_map(t_main_data *data)
 
 void	create_wall_texture(t_main_data *data)
 {
-	int		texture_width;
-	int		texture_height;
 	void	*img_ptr;
-	char	*texture_files[4] = {data->map.texture_north,
-			data->map.texture_south, data->map.texture_west,
-			data->map.texture_east};
+	t_tex	*tmp;
 	int		i;
 
-	texture_width = TEXTURE_WIDTH;
-	texture_height = TEXTURE_HEIGHT;
-	int bits_per_pixel, size_line, endian;
-	data->wall_texture = malloc(sizeof(u_int32_t *) * 4);
 	i = 0;
 	while (i < 4)
 	{
-		img_ptr = mlx_xpm_file_to_image(data->w.mlx, texture_files[i],
-				&texture_width, &texture_height);
+		tmp = data->textures.all[i];
+		img_ptr = mlx_xpm_file_to_image(data->w.mlx, tmp->path, &(tmp->width), &(tmp->height));
 		if (!img_ptr)
 		{
-			ft_printf_fd(2, "Failed to load texture: %s\n", texture_files[i]);
+			ft_printf_fd(2, "Failed to load texture: %s\n", tmp->path);
 			exit(1);
 		}
-		data->wall_texture[i] = (u_int32_t *)mlx_get_data_addr(img_ptr,
-				&bits_per_pixel, &size_line, &endian);
+		tmp->mem = (u_int32_t *)mlx_get_data_addr(img_ptr, &(tmp->bits_per_pixel), &(tmp->line_size), &(tmp->endian));
 		i++;
 	}
 }
@@ -96,8 +91,6 @@ void	setup(t_main_data *data)
 	free_parse_state(data->parse_state);
 	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH
 			* WINDOW_HEIGHT);
-	// create space for texture array
-	data->wall_texture = (u_int32_t **)malloc(sizeof(u_int32_t *) * 4);
 	create_wall_texture(data);
 }
 

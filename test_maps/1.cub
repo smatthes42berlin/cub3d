@@ -1,13 +1,13 @@
    WE                            ./test_maps/textures/wall.xpm
-NO ./test_maps/textures/wall.xpm
+NO ./test_maps/textures/wall_1.xpm
 
 
 
-SO ./test_maps/textures/wall.xpm
+SO ./test_maps/textures/wall_2.xpm
 
 F      17,    38,     64
 
-EA ./test_maps/textures/wall.xpm
+EA ./test_maps/textures/wall_3.xpm
 
 
 

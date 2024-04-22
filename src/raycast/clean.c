@@ -31,8 +31,15 @@ void	destroy_window(t_main_data *data)
 		free(data->w.mlx);
 		data->w.mlx = NULL;
 	}
+
 	if (data->color_buffer)
 		free(data->color_buffer);
+
+	free_str_arr_null(data->map.map);
+	free(data->textures.north.path);
+	free(data->textures.south.path);
+	free(data->textures.east.path);
+	free(data->textures.west.path);
 }
 
 int	close_window(void *param)
