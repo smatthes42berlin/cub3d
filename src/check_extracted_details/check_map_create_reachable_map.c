@@ -21,7 +21,5 @@ int	create_reachable_map(t_parse_state *parse_state)
 	tmp->start_pos_r[0] = tmp->start_pos_o[0] - tmp->reachable_height_min + 1;
 	tmp->start_pos_r[1] = tmp->start_pos_o[1]
 		- parse_state->map_parse.reachable_width_min + 1;
-	printf("start pos r height %d\n", tmp->start_pos_r[0]);
-	printf("start pos r width %d\n", tmp->start_pos_r[1]);
 	return (0);
 }
