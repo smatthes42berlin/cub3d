@@ -1,14 +1,23 @@
 #ifndef CUB3D_TYPEDEF_H
 # define CUB3D_TYPEDEF_H
 
+/* parser Macros */
+
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MIN(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
+# define MAX_REC_DEPTH 35000
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
+# define ERR_MSG "Error\n"
+# define PRINT_DEBUG false
+# define MAP_DIAG_CHECK false
+
 # define FALSE 0
 # define TRUE 1
+
+
 
 # define PI 3.1415926535
 # define TWO_PI 6.28318530
@@ -151,7 +160,7 @@ typedef struct s_map_parse
 	bool						over_size_limit;
 	int							start_pos[2];
 	char						start_orient;
-	bool						more_than_one_start_pos;
+	float						rotation_angle;
 	bool						not_closed;
 	bool						started;
 	bool						ended;
@@ -171,6 +180,7 @@ typedef struct s_parse_state
 	char						*cur_line_trimmed;
 	bool						unknown_lines_found;
 	bool						defs_after_map_found;
+	bool						any_error;
 	t_optn_parse				texture_north;
 	t_optn_parse				texture_south;
 	t_optn_parse				texture_east;

@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 int	parse_main(t_main_data *main_data)
 {
 	int			fd;
@@ -14,16 +13,15 @@ int	parse_main(t_main_data *main_data)
 	fd = open(main_data->argv[1], O_RDONLY);
 	if (fd == -1)
 		throw_error_sys_call((t_error_ms){errno, ERROR_OPEN,
-				"Cannot open Map file!"}, true);
+			"Cannot open Map file!"}, true);
 	if (read_file_lines_to_list(fd, &file_lbl, true))
 		throw_error_sys_call((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot read Map file!"}, true);
+			"Cannot read Map file!"}, true);
 	if (REM_EMPTY_LINES_MAP_FILE)
 		read_file_list_rem_empty_lines(file_lbl);
 	if (close(fd))
 		throw_error_sys_call((t_error_ms){errno, ERROR_CLOSE,
-				"Cannot close Map file!"}, true);
+			"Cannot close Map file!"}, true);
 	parse_map_file(main_data, file_lbl);
 	return (0);
 }
-

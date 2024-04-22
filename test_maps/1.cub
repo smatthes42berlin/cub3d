@@ -1,18 +1,17 @@
-NO ./test_maps/textures/bluestone.xpm
-
-
-SO ./test_maps/textures/bluestone.xpm
+   WE                            ./test_maps/textures/wall.xpm
+NO ./test_maps/textures/wall.xpm
 
 
 
-WE ./test_maps/textures/bluestone.xpm
+SO ./test_maps/textures/wall.xpm
+
+F      17,    38,     64
+
+EA ./test_maps/textures/wall.xpm
 
 
-EA ./test_maps/textures/bluestone.xpm
 
-F 200,111,119
-
-C 225,111,0
+C 218, 234, 235
 
 
 01111111111111111110
@@ -40,3 +39,4 @@ C 225,111,0
 10000000000000000001
 10000000000000000001
 11111111111111111111
+

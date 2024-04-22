@@ -1,16 +1,16 @@
-NO cub3d-tester/textures/wall.xpm dsf ds af dsf
-NO cub3d-tester/textures/wall.xpm asdf as
+NO ./textures/wall.xpm dsf ds af dsf
+NO ./textures/wall.xpm asdf as
 
 
-SO cub3d-tester/textures/bricks.xpm asdf
-SO cub3d-tester/textures/bricks.xpm adsf
+SO ./textures/bricks.xpm asdf
+SO ./textures/bricks.xpm adsf
 
 
-WE cub3d-tester/textures/gold.xpm asdf
-WE cub3d-tester/textures/gold.xpm asdf
+WE ./textures/gold.xpm asdf
+WE ./textures/gold.xpm asdf
 
 
-EA cub3d-tester/textures/wood.xpm asdf
+EA ./textures/wood.xpm asdf
 
 F 220,111,119
 C 225,111,0

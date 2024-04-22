@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/18 15:12:18 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/21 09:08:44 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,31 @@
 
 void	init_player(t_main_data *data)
 {
+
 	data->player.x = data->parse_state->map_parse.start_pos[1] * TILE_SIZE + (TILE_SIZE / 2);
 	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE + (TILE_SIZE / 2);	
 	// data->player.x = data->w.width / 2;
 	// data->player.y = data->w.height / 2;
+
 	data->player.size = 1;
 	data->player.color = 0xFFFF00;
 	data->player.turn_direction = 0;
 	data->player.walk_direction = 0;
-	data->player.rotation_angle = PI / 2; // Player view at the beginning
+	// data->player.rotation_angle = PI / 2; // Player view at the beginning
+	data->player.rotation_angle = data->parse_state->map_parse.rotation_angle;
 	data->player.walk_speed = 100;
 	data->player.turn_speed = 45 * (PI / 180);
 }
 
 void	init_map(t_main_data *data)
 {
-	data->map.cols = data->parse_state->map_parse.max_width_org;
-	data->map.rows = data->parse_state->map_parse.max_height_org;
+
+	// data->map.width = data->parse_state->map_parse.max_width_org;
+	// data->map.height = data->parse_state->map_parse.max_height_org;
+	data->map.width = data->parse_state->map_parse.max_width_reachable
+		- data->parse_state->map_parse.reachable_width_min + 3;
+	data->map.height = data->parse_state->map_parse.max_height_reachable
+		- data->parse_state->map_parse.reachable_height_min + 3;
 	data->map.texture_north = data->parse_state->texture_north.line_in_map_file;
 	data->map.texture_south = data->parse_state->texture_south.line_in_map_file;
 	data->map.texture_east = data->parse_state->texture_east.line_in_map_file;
@@ -41,8 +49,10 @@ void	init_map(t_main_data *data)
 	data->map.color_floor[0] = (data->parse_state->color_floor.color)[0];
 	data->map.color_floor[1] = (data->parse_state->color_floor.color)[1];
 	data->map.color_floor[2] = (data->parse_state->color_floor.color)[2];
-	data->map.map = data->parse_state->map_parse.org_rect;
-	data->parse_state->map_parse.org_rect = NULL;
+	// data->map.map = data->parse_state->map_parse.org_rect;
+	// data->parse_state->map_parse.org_rect = NULL;
+	data->map.map = data->parse_state->map_parse.reachable_rect;
+	data->parse_state->map_parse.reachable_rect = NULL;
 	data->parse_state->texture_north.line_in_map_file = NULL;
 	data->parse_state->texture_south.line_in_map_file = NULL;
 	data->parse_state->texture_east.line_in_map_file = NULL;

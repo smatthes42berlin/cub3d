@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 int	init_parse_state(t_parse_state *parse_state, t_main_data *main_data,
 		t_list_dc *file_lbl)
 {
@@ -20,21 +19,20 @@ int	init_parse_state_gen(t_parse_state *parse_state, t_main_data *main_data,
 	get_cur_line_trimmed(parse_state);
 	parse_state->unknown_lines_found = false;
 	parse_state->defs_after_map_found = false;
+	parse_state->any_error = false;
 	return (0);
 }
 
 int	init_parse_state_map(t_parse_state *parse_state)
 {
-	parse_state->map_parse.multi_start_pos = false;
 	parse_state->map_parse.unknown_char = false;
 	parse_state->map_parse.no_start_pos = false;
-	parse_state->map_parse.more_than_one_start_pos = false;
+	parse_state->map_parse.multi_start_pos = false;
 	parse_state->map_parse.not_closed = false;
 	parse_state->map_parse.started = false;
 	parse_state->map_parse.ended = false;
 	parse_state->map_parse.over_size_limit = false;
 	parse_state->map_parse.org_rect = NULL;
-	// parse_state->map_parse.flood_fill_queue = NULL;
 	parse_state->map_parse.queue = NULL;
 	parse_state->map_parse.reachable_rect = NULL;
 	parse_state->map_parse.max_height_org = 0;
