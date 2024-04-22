@@ -33,14 +33,14 @@ int	print_optn_parse_res(t_optn_parse *optn)
 int	print_map_parse_res(t_parse_state *parse_state)
 {
 	print_caption("map parsing");
-	print_res("multi_start_pos", parse_state->map_parse.multi_start_pos);
+	print_res("multi_start_pos_o", parse_state->map_parse.multi_start_pos_o);
 	print_res("unknown_char", parse_state->map_parse.unknown_char);
-	print_res("no_start_pos", parse_state->map_parse.no_start_pos);
+	print_res("no_start_pos_o", parse_state->map_parse.no_start_pos_o);
 	print_res("not_closed", parse_state->map_parse.not_closed);
 	print_res("not_found", !parse_state->map_parse.org_rect);
 	print_caption("map org");
-	printf("start height %d\n", (parse_state->map_parse.start_pos)[0]);
-	printf("start width %d\n", (parse_state->map_parse.start_pos)[1]);
+	printf("start height %d\n", (parse_state->map_parse.start_pos_o)[0]);
+	printf("start width %d\n", (parse_state->map_parse.start_pos_o)[1]);
 	printf("reachable height min %d\n",
 		parse_state->map_parse.reachable_height_min);
 	printf("reachable height max %d\n",

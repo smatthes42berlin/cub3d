@@ -137,7 +137,7 @@ typedef struct s_main_data
 	t_tex_all 					textures;
 
 	t_parse_state				*parse_state;
-	// player start_position
+	// player start_pos_oition
 	// player cur_position
 	// player orientation
 	//
@@ -172,11 +172,12 @@ typedef struct s_map_parse
 	int							reachable_height_max;
 	int							reachable_width_min;
 	int							reachable_width_max;
-	bool						multi_start_pos;
+	bool						multi_start_pos_o;
 	bool						unknown_char;
-	bool						no_start_pos;
+	bool						no_start_pos_o;
 	bool						over_size_limit;
-	int							start_pos[2];
+	int							start_pos_o[2];
+	int							start_pos_r[2];
 	char						start_orient;
 	float						rotation_angle;
 	bool						not_closed;

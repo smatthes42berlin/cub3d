@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/21 09:08:44 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:21:29 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	init_player(t_main_data *data)
 {
-	data->player.x = data->parse_state->map_parse.start_pos[1] * TILE_SIZE
+	data->player.x = data->parse_state->map_parse.start_pos_r[1] * TILE_SIZE
 		+ (TILE_SIZE / 2);
-	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE
+	data->player.y = data->parse_state->map_parse.start_pos_r[0] * TILE_SIZE
 		+ (TILE_SIZE / 2);
+	// data->player.x = data->parse_state->map_parse.start_pos_o[1] * TILE_SIZE
+	// 	+ (TILE_SIZE / 2);
+	// data->player.y = data->parse_state->map_parse.start_pos_o[0] * TILE_SIZE
+	// 	+ (TILE_SIZE / 2);
 	// data->player.x = data->w.width / 2;
 	// data->player.y = data->w.height / 2;
 	data->player.size = 1;
@@ -32,12 +36,6 @@ void	init_player(t_main_data *data)
 
 void	init_map(t_main_data *data)
 {
-	data->map.cols = data->parse_state->map_parse.max_width_org;
-	data->map.rows = data->parse_state->map_parse.max_height_org;
-	// data->map.cols = data->parse_state->map_parse.max_width_reachable
-	// 	- data->parse_state->map_parse.reachable_width_min + 3;
-	// data->map.rows = data->parse_state->map_parse.max_height_reachable
-	// 	- data->parse_state->map_parse.reachable_height_min + 3;
 	data->textures.north.path = data->parse_state->texture_north.line_in_map_file;
 	data->textures.south.path = data->parse_state->texture_south.line_in_map_file;
 	data->textures.east.path = data->parse_state->texture_east.line_in_map_file;
@@ -46,6 +44,10 @@ void	init_map(t_main_data *data)
 	data->textures.all[1] = &(data->textures.south);
 	data->textures.all[2] = &(data->textures.east);
 	data->textures.all[3] = &(data->textures.west);
+	// data->map.width = data->parse_state->map_parse.max_width_org;
+	// data->map.height = data->parse_state->map_parse.max_height_org;
+	data->map.rows = data->parse_state->map_parse.max_height_reachable;
+	data->map.cols = data->parse_state->map_parse.max_width_reachable;
 	data->map.color_ceiling[0] = (data->parse_state->color_ceiling.color)[0];
 	data->map.color_ceiling[1] = (data->parse_state->color_ceiling.color)[1];
 	data->map.color_ceiling[2] = (data->parse_state->color_ceiling.color)[2];
