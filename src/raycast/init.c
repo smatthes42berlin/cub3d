@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/22 15:21:29 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:59:05 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	init_map(t_main_data *data)
 	data->map.color_floor[0] = (data->parse_state->color_floor.color)[0];
 	data->map.color_floor[1] = (data->parse_state->color_floor.color)[1];
 	data->map.color_floor[2] = (data->parse_state->color_floor.color)[2];
-	data->map.map = data->parse_state->map_parse.org_rect;
-	data->parse_state->map_parse.org_rect = NULL;
-	// data->map.map = data->parse_state->map_parse.reachable_rect;
-	// data->parse_state->map_parse.reachable_rect = NULL;
+	// data->map.map = data->parse_state->map_parse.org_rect;
+	// data->parse_state->map_parse.org_rect = NULL;
+	data->map.map = data->parse_state->map_parse.reachable_rect;
+	data->parse_state->map_parse.reachable_rect = NULL;
 	data->parse_state->texture_north.line_in_map_file = NULL;
 	data->parse_state->texture_south.line_in_map_file = NULL;
 	data->parse_state->texture_east.line_in_map_file = NULL;
