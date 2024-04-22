@@ -26,8 +26,8 @@ int	init_parse_state_gen(t_parse_state *parse_state, t_main_data *main_data,
 int	init_parse_state_map(t_parse_state *parse_state)
 {
 	parse_state->map_parse.unknown_char = false;
-	parse_state->map_parse.no_start_pos = false;
-	parse_state->map_parse.multi_start_pos = false;
+	parse_state->map_parse.no_start_pos_o = false;
+	parse_state->map_parse.multi_start_pos_o = false;
 	parse_state->map_parse.not_closed = false;
 	parse_state->map_parse.started = false;
 	parse_state->map_parse.ended = false;
@@ -44,8 +44,10 @@ int	init_parse_state_map(t_parse_state *parse_state)
 	parse_state->map_parse.reachable_height_max = 0;
 	parse_state->map_parse.reachable_width_min = 0;
 	parse_state->map_parse.reachable_width_max = 0;
-	parse_state->map_parse.start_pos[0] = 0;
-	parse_state->map_parse.start_pos[1] = 0;
+	parse_state->map_parse.start_pos_o[0] = 0;
+	parse_state->map_parse.start_pos_o[1] = 0;
+	parse_state->map_parse.start_pos_r[0] = 0;
+	parse_state->map_parse.start_pos_r[1] = 0;
 	parse_state->map_parse.parse_state = parse_state;
 	return (0);
 }

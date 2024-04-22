@@ -6,7 +6,7 @@
 /*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:00:06 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/21 09:08:44 by smatthes         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:21:29 by smatthes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	init_player(t_main_data *data)
 {
-
-	data->player.x = data->parse_state->map_parse.start_pos[1] * TILE_SIZE + (TILE_SIZE / 2);
-	data->player.y = data->parse_state->map_parse.start_pos[0] * TILE_SIZE + (TILE_SIZE / 2);	
+	data->player.x = data->parse_state->map_parse.start_pos_r[1] * TILE_SIZE
+		+ (TILE_SIZE / 2);
+	data->player.y = data->parse_state->map_parse.start_pos_r[0] * TILE_SIZE
+		+ (TILE_SIZE / 2);
+	// data->player.x = data->parse_state->map_parse.start_pos_o[1] * TILE_SIZE
+	// 	+ (TILE_SIZE / 2);
+	// data->player.y = data->parse_state->map_parse.start_pos_o[0] * TILE_SIZE
+	// 	+ (TILE_SIZE / 2);
 	// data->player.x = data->w.width / 2;
 	// data->player.y = data->w.height / 2;
-
 	data->player.size = 1;
 	data->player.color = 0xFFFF00;
 	data->player.turn_direction = 0;
@@ -32,13 +36,10 @@ void	init_player(t_main_data *data)
 
 void	init_map(t_main_data *data)
 {
-
 	// data->map.width = data->parse_state->map_parse.max_width_org;
 	// data->map.height = data->parse_state->map_parse.max_height_org;
-	data->map.width = data->parse_state->map_parse.max_width_reachable
-		- data->parse_state->map_parse.reachable_width_min + 3;
-	data->map.height = data->parse_state->map_parse.max_height_reachable
-		- data->parse_state->map_parse.reachable_height_min + 3;
+	data->map.rows = data->parse_state->map_parse.max_height_reachable;
+	data->map.cols = data->parse_state->map_parse.max_width_reachable;
 	data->map.texture_north = data->parse_state->texture_north.line_in_map_file;
 	data->map.texture_south = data->parse_state->texture_south.line_in_map_file;
 	data->map.texture_east = data->parse_state->texture_east.line_in_map_file;
@@ -59,51 +60,49 @@ void	init_map(t_main_data *data)
 	data->parse_state->texture_west.line_in_map_file = NULL;
 }
 
-void create_wall_texture(t_main_data *data)
+void	create_wall_texture(t_main_data *data)
 {
-    int texture_width = TEXTURE_WIDTH;
-    int texture_height = TEXTURE_HEIGHT;
-    void *img_ptr;
-    int bits_per_pixel, size_line, endian;
+	int		texture_width;
+	int		texture_height;
+	void	*img_ptr;
+	char	*texture_files[4] = {data->map.texture_north,
+			data->map.texture_south, data->map.texture_west,
+			data->map.texture_east};
+	int		i;
 
-    data->wall_texture = malloc(sizeof(u_int32_t*) * 4); 
-
-    char *texture_files[4] = {
-        data->map.texture_north,
-        data->map.texture_south,
-        data->map.texture_west,
-        data->map.texture_east
-    };
-
-	int i = 0;
-    while (i < 4){
-        img_ptr = mlx_xpm_file_to_image(data->w.mlx, texture_files[i], &texture_width, &texture_height);
-        if (!img_ptr) {
-            ft_printf_fd(2, "Failed to load texture: %s\n", texture_files[i]);
-            exit(1);
-        }
-        data->wall_texture[i] = (u_int32_t *)mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+	texture_width = TEXTURE_WIDTH;
+	texture_height = TEXTURE_HEIGHT;
+	int bits_per_pixel, size_line, endian;
+	data->wall_texture = malloc(sizeof(u_int32_t *) * 4);
+	i = 0;
+	while (i < 4)
+	{
+		img_ptr = mlx_xpm_file_to_image(data->w.mlx, texture_files[i],
+				&texture_width, &texture_height);
+		if (!img_ptr)
+		{
+			ft_printf_fd(2, "Failed to load texture: %s\n", texture_files[i]);
+			exit(1);
+		}
+		data->wall_texture[i] = (u_int32_t *)mlx_get_data_addr(img_ptr,
+				&bits_per_pixel, &size_line, &endian);
 		i++;
-    }
+	}
 }
 
 void	setup(t_main_data *data)
 {
 	init_player(data);
 	free_parse_state(data->parse_state);
-
 	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH
 			* WINDOW_HEIGHT);
-	
 	// create space for texture array
 	data->wall_texture = (u_int32_t **)malloc(sizeof(u_int32_t *) * 4);
-	
 	create_wall_texture(data);
 }
 
 int	initialize_window(t_main_data *data)
 {
-
 	data->w.height = data->map.rows * TILE_SIZE;
 	data->w.width = data->map.cols * TILE_SIZE;
 	data->w.mlx = mlx_init();
