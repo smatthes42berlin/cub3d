@@ -4,7 +4,6 @@ int	parse_whole_file(t_parse_state *parse_state)
 {
 	while (parse_state->cur_line)
 	{
-		// printf("l: %s\n", (char *)parse_state->cur_line->content);
 		identify_line(parse_state);
 	}
 	return (0);

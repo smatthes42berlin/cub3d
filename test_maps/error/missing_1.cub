@@ -1,6 +1,6 @@
-SO cub3d-tester/textures/bricks.xpm
-WE cub3d-tester/textures/gold.xpm
-EA cub3d-tester/textures/wood.xpm
+SO ./textures/bricks.xpm
+WE ./textures/gold.xpm
+EA ./textures/wood.xpm
 
 F 220,111,119
 C 225,111,0

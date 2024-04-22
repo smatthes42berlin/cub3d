@@ -11,8 +11,8 @@ int	remove_spaces_inplace(char **str)
 	{
 		if (ft_isspace((*str)[i]))
 			move_all_by_one(str, i);
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }
-

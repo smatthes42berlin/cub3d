@@ -58,6 +58,14 @@ typedef struct s_ins_repl_str
 	int					search_start_index;
 }						t_ins_repl_str;
 
+typedef struct s_subarr_arr_str
+{
+	int					str_num_start;
+	int					str_num_end;
+	int					str_start;
+	int					str_end;
+}						t_subarr_arr_str;
+
 /* ascci char checks n manip */
 
 int						ft_isprint(int c);
@@ -123,6 +131,7 @@ int						ft_substr_int(char const *s, unsigned int start,
 int						ft_strtrim_int(char const *s1, char const *set,
 							char **res);
 int						str_fill(char *str, int len, char c);
+char					*str_move_ptr_by_n_or_until_end(const char *str, int n);
 
 /* split */
 
@@ -255,6 +264,8 @@ int						allocate_arr_char(char ***res, char prefill,
 							int num_elem, int str_len);
 int						allocate_arr_str(char ***res, char prefill,
 							int num_elem, int str_len);
+int						subarr_arr_str(char **org_arr, t_subarr_arr_str sub_def,
+							char ***res);
 
 /* math */
 

@@ -1,5 +1,8 @@
 clear
+
 make
+
+make -C "./libft"
 printf "\n\n"
 
 maps=(5 10 20 50 100 200 500)
@@ -18,11 +21,13 @@ map11=./test_maps/very_big/5000x5000.cub
 map12=./test_maps/very_big/10000x10000.cub
 map13=./test_maps/very_big/20000x20000.cub
 
-map=$map4
+maperror=./test_maps/error/spaces_at_end_of_file_1.cub
+
+map=$map1
 
 # bash ./test_maps/very_big/create_big_map.sh
 
-clear
+# clear
 
 if [ $# -eq 0 ]; then
     ./cub3D $map

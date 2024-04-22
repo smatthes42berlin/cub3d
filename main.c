@@ -1,31 +1,17 @@
 #include "cub3d.h"
 
-// int	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {{0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-// 		1, 1, 1, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-// 		1}, {1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1}, {1, 0,
-// 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0,
-// 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 0, 0, 0, 1, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-// 		1, 1, 1, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-// 		0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, {0, 1, 1,
-// 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0}};
-
 int	main(int argc, char *argv[])
 {
-	t_main_data	main_data;
-	t_parse_state parse_state;
+	t_main_data		main_data;
+	t_parse_state	parse_state;
 
 	main_data.parse_state = &parse_state;
 	init_main_data(&main_data, argc, argv);
 	parse_main(&main_data);
-	init(&main_data);
-	// check correct number of args
-	//
-	// (void)argc;
-	// (void)argv;
+	free_parse_state(&parse_state);
+	printf("Success\n");
+	exit(1);
+	// init(&main_data);
 	return (0);
 }
 
