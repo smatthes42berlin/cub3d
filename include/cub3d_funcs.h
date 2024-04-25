@@ -166,8 +166,7 @@ void fill_color_buffer(t_main_data *data, u_int32_t color);
 
 
 /* draw_line.c */
-void			draw_line_on_image(int *addr, int width, int height,
-					int start_x, int start_y, int end_x, int end_y, int color);
+void			draw_line_on_image(int *addr, t_line *line);
 
 /* draw_minimap.c */
 
@@ -207,7 +206,7 @@ void			cast_all_rays(t_main_data *data, t_ray *rays);
 void			generate_3d_projection(t_main_data *data, t_ray *rays);
 
 /* wall_collision.c */
-
+bool			check_collision(t_main_data *data, float new_x, float new_y);
 int				map_has_wall_at(t_main_data *data, float x, float y);
 
 

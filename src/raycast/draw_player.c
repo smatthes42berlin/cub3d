@@ -14,49 +14,45 @@
 
 void	draw_player_direction(t_main_data *data, int *addr)
 {
-	int	start_x;
-	int	start_y;
-	int	line_end_x;
-	int	line_end_y;
-	int	scaled_line_length;
+	int		scaled_line_length;
+	t_line	line;
 
+	line.width = WINDOW_WIDTH;
+	line.height = WINDOW_HEIGHT;
+	line.color = 0xFFFF00;
 	scaled_line_length = 30 * MINIMAP_SCALE_FACTOR;
-	start_x = (data->player.x + data->player.size / 2) * MINIMAP_SCALE_FACTOR;
-	start_y = (data->player.y + data->player.size / 2) * MINIMAP_SCALE_FACTOR;
-	line_end_x = start_x + cos(data->player.rotation_angle)
+	line.start_x = (data->player.x + data->player.size / 2)
+		* MINIMAP_SCALE_FACTOR;
+	line.start_y = (data->player.y + data->player.size / 2)
+		* MINIMAP_SCALE_FACTOR;
+	line.end_x = line.start_x + cos(data->player.rotation_angle)
 		* scaled_line_length;
-	line_end_y = start_y + sin(data->player.rotation_angle)
+	line.end_y = line.start_y + sin(data->player.rotation_angle)
 		* scaled_line_length;
-	draw_line_on_image(addr, WINDOW_WIDTH, WINDOW_HEIGHT, start_x, start_y,
-		line_end_x, line_end_y, 0xFFFF00);
+	draw_line_on_image(addr, &line);
 }
 
 void	draw_player(t_main_data *data, int *addr)
 {
-	int	y;
-	int	x;
-	int	scaled_x;
-	int	scaled_y;
-	int	pixel_index;
-	int	scaled_size;
+	t_draw_player	dp;
 
-	y = 0;
-	scaled_size = data->player.size * MINIMAP_SCALE_FACTOR;
-	while (y < scaled_size)
+	dp.y = 0;
+	dp.scaled_size = data->player.size * MINIMAP_SCALE_FACTOR;
+	while (dp.y < dp.scaled_size)
 	{
-		x = 0;
-		while (x < scaled_size)
+		dp.x = 0;
+		while (dp.x < dp.scaled_size)
 		{
-			scaled_x = data->player.x * MINIMAP_SCALE_FACTOR + x;
-			scaled_y = data->player.y * MINIMAP_SCALE_FACTOR + y;
-			if (scaled_x >= 0 && scaled_x < WINDOW_WIDTH && scaled_y >= 0
-				&& scaled_y < WINDOW_HEIGHT)
+			dp.scaled_x = data->player.x * MINIMAP_SCALE_FACTOR + dp.x;
+			dp.scaled_y = data->player.y * MINIMAP_SCALE_FACTOR + dp.y;
+			if (dp.scaled_x >= 0 && dp.scaled_x < WINDOW_WIDTH
+				&& dp.scaled_y >= 0 && dp.scaled_y < WINDOW_HEIGHT)
 			{
-				pixel_index = scaled_y * WINDOW_WIDTH + scaled_x;
-				addr[pixel_index] = data->player.color;
+				dp.pixel_index = dp.scaled_y * WINDOW_WIDTH + dp.scaled_x;
+				addr[dp.pixel_index] = data->player.color;
 			}
-			x++;
+			dp.x++;
 		}
-		y++;
+		dp.y++;
 	}
 }

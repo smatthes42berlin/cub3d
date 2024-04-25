@@ -96,6 +96,40 @@ typedef struct s_ray
 	wall_side_t					hit_side;
 }								t_ray;
 
+typedef struct s_line
+{
+	int		width;
+	int		height;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	int		color;
+}	t_line;
+
+typedef struct s_draw_line
+{
+    int x;
+	int y;
+    int step_x;
+	int step_y;
+    int error;
+	int error2;
+    int delta_x;
+	int delta_y;
+} t_draw_line;
+
+typedef struct s_draw_player
+{
+	int	y;
+	int	x;
+	int	scaled_x;
+	int	scaled_y;
+	int	pixel_index;
+	int	scaled_size;
+}	t_draw_player;
+
+
 typedef struct s_window
 {
 	void						*mlx;

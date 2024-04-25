@@ -67,15 +67,20 @@ void	draw_map(t_main_data *data, int *addr)
 
 void	draw_rays(t_main_data *data, int *addr, t_ray *rays)
 {
-	int	i;
+	int		i;
+	t_line	line;
 
+	line.width = WINDOW_WIDTH;
+	line.height = WINDOW_HEIGHT;
+	line.start_x = data->player.x * MINIMAP_SCALE_FACTOR;
+	line.start_y = data->player.y * MINIMAP_SCALE_FACTOR;
+	line.color = 0xFF0000;
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		draw_line_on_image(addr, WINDOW_WIDTH, WINDOW_HEIGHT, data->player.x
-			* MINIMAP_SCALE_FACTOR, data->player.y * MINIMAP_SCALE_FACTOR,
-			rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR, rays[i].wall_hit_y
-			* MINIMAP_SCALE_FACTOR, 0xFF0000);
+		line.end_x = rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR;
+		line.end_y = rays[i].wall_hit_y * MINIMAP_SCALE_FACTOR;
+		draw_line_on_image(addr, &line);
 		i++;
 	}
 }
