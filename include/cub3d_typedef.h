@@ -57,13 +57,13 @@ typedef struct s_map
 	char						**map;
 }								t_map;
 
-typedef enum
+typedef enum e_wall_side
 {
 	NORTH,
 	SOUTH,
 	EAST,
 	WEST
-}								wall_side_t;
+}	t_wall_side;
 
 typedef struct s_player
 {
@@ -93,7 +93,7 @@ typedef struct s_ray
 	int							is_ray_facing_left;
 	int							is_ray_facing_right;
 	int							wall_hit_content;
-	wall_side_t					hit_side;
+	t_wall_side					hit_side;
 }								t_ray;
 
 typedef struct s_line
@@ -129,16 +129,6 @@ typedef struct s_draw_player
 	int	scaled_size;
 }	t_draw_player;
 
-
-typedef struct s_window
-{
-	void						*mlx;
-	void						*mlx_win;
-	int							width;
-	int							height;
-	float						scale_factor;
-}								t_window;
-
 typedef struct s_tex
 {
 	char						*path;
@@ -149,6 +139,41 @@ typedef struct s_tex
 	int							bits_per_pixel;
 	u_int32_t					*mem;
 }								t_tex;
+
+typedef struct s_render_wall
+{
+	t_tex		*tex;
+	int			texture_offset_x;
+	int			distance_from_top;
+	int			texture_offset_y;
+	u_int32_t	texel_color;
+
+} t_render_wall;
+
+
+typedef struct s_window
+{
+	void						*mlx;
+	void						*mlx_win;
+	int							width;
+	int							height;
+	float						scale_factor;
+}								t_window;
+
+typedef struct s_wall
+{
+	float		perp_distance;
+	float		distance_proj_plane;
+	float		projected_wall_height;
+	int			wall_strip_height;
+	int			wall_top_pixel;
+	int			wall_bottom_pixel;
+	int			y;
+	u_int32_t	texel_color;
+	int			texture_offset_x;
+	int			texture_offset_y;
+	int			distance_from_top;
+}	t_wall;
 
 typedef struct s_tex_all
 {
