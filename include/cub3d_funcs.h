@@ -196,11 +196,20 @@ int				init(t_main_data *data);
 /* math_utils.c */
 float			normalize_angle(float angle);
 float			distance_between_points(float x1, float y1, float x2, float y2);
+u_int32_t	convert_rgb_to_hex(int *rgb);
 
 /* raycast.c */
 void			cast_ray(t_main_data *data, t_ray *rays, float ray_angle,
 					int strip_id);
 void			cast_all_rays(t_main_data *data, t_ray *rays);
+
+/* ray_horizontal.c */
+void cast_horizontal_ray(t_main_data *data, t_raycast *r);
+void update_ray_with_horizontal_hit(t_ray *ray, t_raycast *r, float distance);
+
+/* ray_vertical.c */
+void cast_vertical_ray(t_main_data *data, t_raycast *r);
+void update_ray_with_vertical_hit(t_ray *ray, t_raycast *r, float distance);
 
 /* wall_ceiling_floor*/
 void			generate_3d_projection(t_main_data *data, t_ray *rays);

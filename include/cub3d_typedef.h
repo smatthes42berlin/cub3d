@@ -94,7 +94,32 @@ typedef struct s_ray
 	int							is_ray_facing_right;
 	int							wall_hit_content;
 	t_wall_side					hit_side;
-}								t_ray;
+}							t_ray;
+
+typedef struct s_raycast
+{
+	int is_ray_facing_down;
+	int is_ray_facing_up;
+	int is_ray_facing_right;
+	int is_ray_facing_left;
+	float xintercept;
+	float yintercept;
+	float xstep;
+	float ystep;
+	int found_horz_wall_hit;
+	int found_vert_wall_hit;
+	float horz_wall_hit_x;
+	float horz_wall_hit_y;
+	float vert_wall_hit_x;
+	float vert_wall_hit_y;
+	float next_horz_touch_x;
+	float next_horz_touch_y;
+	float next_vert_touch_x;
+	float next_vert_touch_y;
+	int horz_wall_content;
+	int vert_wall_content;
+	float ray_angle;
+}	t_raycast;
 
 typedef struct s_line
 {

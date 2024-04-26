@@ -64,6 +64,8 @@ SRC = 	main.c \
 		check_map_undo_flood_fill.c \
 		check_map_create_reachable_map.c \
 		raycast.c \
+		ray_horizontal.c \
+		ray_vertical.c \
 		clean.c \
 		init.c \
 		keys.c \
