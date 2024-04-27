@@ -15,9 +15,9 @@
 void	init_raycast(t_raycast *r, float ray_angle)
 {
 	r->ray_angle = normalize_angle(ray_angle);
-	r->is_ray_facing_down = ray_angle > 0 && ray_angle < PI;
+	r->is_ray_facing_down = r->ray_angle > 0 && r->ray_angle < PI;
 	r->is_ray_facing_up = !r->is_ray_facing_down;
-	r->is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
+	r->is_ray_facing_right = r->ray_angle < 0.5 * PI || r->ray_angle > 1.5 * PI;
 	r->is_ray_facing_left = !r->is_ray_facing_right;
 }
 
