@@ -159,6 +159,7 @@ int				print_debug_parse_res(t_parse_state *parse_state);
 /* clean.c */
 void			destroy_window(t_main_data *data);
 int				close_window(void *param);
+void			cleanup_resources(t_main_data *data);
 
 /* color_buffer.c */
 

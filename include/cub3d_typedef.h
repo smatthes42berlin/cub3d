@@ -163,6 +163,7 @@ typedef struct s_tex
 	int							line_size;
 	int							bits_per_pixel;
 	u_int32_t					*mem;
+	void						*img_ptr;
 }								t_tex;
 
 typedef struct s_render_wall

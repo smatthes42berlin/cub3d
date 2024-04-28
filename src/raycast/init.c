@@ -61,8 +61,10 @@ void	create_wall_texture(t_main_data *data)
 			destroy_window(data);
 			exit(1);
 		}
+		tmp->img_ptr = img_ptr;
 		tmp->mem = (u_int32_t *)mlx_get_data_addr(img_ptr,
 				&(tmp->bits_per_pixel), &(tmp->line_size), &(tmp->endian));
+		//free(img_ptr);
 		i++;
 	}
 }
