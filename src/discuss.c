@@ -12,3 +12,5 @@
 - remove discuss from repo, remove main from libft
 
 - add 42 header
+- one question regarding suctracting -1 when going to next grid point
+- textures werden scheinbar falsch herum gerendert?

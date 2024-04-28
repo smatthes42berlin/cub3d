@@ -94,6 +94,6 @@ int	initialize_window(t_main_data *data)
 	data->color_buffer = (u_int32_t *)malloc(sizeof(u_int32_t) * WINDOW_WIDTH
 			* WINDOW_HEIGHT);
 	if (!data->color_buffer)
-		return (false);
+		return (FALSE);
 	return (TRUE);
 }
