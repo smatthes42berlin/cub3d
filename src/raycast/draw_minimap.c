@@ -1,24 +1,22 @@
 #include "cub3d.h"
 
-void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color)
+void	draw_tile(t_main_data *data, int *addr, t_tile *tile)
 {
 	int	scaled_tile_size;
 	int	y;
 	int	x;
 	int	pixel_index;
 
-	scaled_tile_size = (int)(TILE_SIZE * MINIMAP_SCALE_FACTOR);
+	scaled_tile_size = (int)(TILE_SIZE * data->scale_factor);
 	y = 0;
 	while (y < scaled_tile_size)
 	{
 		x = 0;
 		while (x < scaled_tile_size)
 		{
-			pixel_index = ((tile_y + y) * WINDOW_WIDTH + (tile_x + x));
+			pixel_index = ((tile->y + y) * WINDOW_WIDTH + (tile->x + x));
 			if (pixel_index < WINDOW_WIDTH * WINDOW_HEIGHT)
-			{
-				addr[pixel_index] = tile_color;
-			}
+				addr[pixel_index] = tile->color;
 			x++;
 		}
 		y++;
@@ -27,11 +25,9 @@ void	draw_tile(int *addr, int tile_x, int tile_y, int tile_color)
 
 void	draw_map(t_main_data *data, int *addr)
 {
-	int	i;
-	int	j;
-	int	tile_x;
-	int	tile_y;
-	int	tile_color;
+	int		i;
+	int		j;
+	t_tile	tile;
 
 	i = 0;
 	while (i < data->map.rows)
@@ -39,14 +35,15 @@ void	draw_map(t_main_data *data, int *addr)
 		j = 0;
 		while (j < data->map.cols)
 		{
-			tile_x = j * TILE_SIZE;
-			tile_y = i * TILE_SIZE;
+			tile.x = j * TILE_SIZE;
+			tile.y = i * TILE_SIZE;
 			if (data->map.map[i][j] == '1')
-				tile_color = 0xFFFFFF;
+				tile.color = 0xFFFFFF;
 			else
-				tile_color = 0x000000;
-			draw_tile(addr, tile_x * MINIMAP_SCALE_FACTOR, tile_y
-				* MINIMAP_SCALE_FACTOR, tile_color);
+				tile.color = 0x000000;
+			tile.x *= data->scale_factor;
+			tile.y *= data->scale_factor;
+			draw_tile(data, addr, &tile);
 			j++;
 		}
 		i++;
@@ -60,14 +57,14 @@ void	draw_rays(t_main_data *data, int *addr, t_ray *rays)
 
 	line.width = WINDOW_WIDTH;
 	line.height = WINDOW_HEIGHT;
-	line.start_x = data->player.x * MINIMAP_SCALE_FACTOR;
-	line.start_y = data->player.y * MINIMAP_SCALE_FACTOR;
+	line.start_x = data->player.x * data->scale_factor;
+	line.start_y = data->player.y * data->scale_factor;
 	line.color = 0xFF0000;
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		line.end_x = rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR;
-		line.end_y = rays[i].wall_hit_y * MINIMAP_SCALE_FACTOR;
+		line.end_x = rays[i].wall_hit_x * data->scale_factor;
+		line.end_y = rays[i].wall_hit_y * data->scale_factor;
 		draw_line_on_image(addr, &line);
 		i++;
 	}

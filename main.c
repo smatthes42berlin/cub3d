@@ -23,5 +23,9 @@ int	init_main_data(t_main_data *main_data, int argc, char *argv[])
 	main_data->map.color_floor[0] = 0;
 	main_data->map.color_floor[1] = 0;
 	main_data->map.color_floor[2] = 0;
+	main_data->scale_factor = 0.2;
+	main_data->movement = 10;
+	main_data->minimap_height = 0;
+	main_data->minimap_width = 0;
 	return (0);
 }

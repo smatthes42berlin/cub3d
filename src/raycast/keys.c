@@ -3,30 +3,28 @@
 void	calculate_new_position(t_main_data *data, int key, float *new_x,
 		float *new_y)
 {
-	float	move_step;
 	float	angle;
 
-	move_step = STRAIGHT_MOVEMENT;
 	angle = data->player.rotation_angle;
 	if (key == 'a')
 	{
-		*new_x += sin(angle) * move_step;
-		*new_y -= cos(angle) * move_step;
+		*new_x += sin(angle) * data->movement;
+		*new_y -= cos(angle) * data->movement;
 	}
 	else if (key == 'd')
 	{
-		*new_x -= sin(angle) * move_step;
-		*new_y += cos(angle) * move_step;
+		*new_x -= sin(angle) * data->movement;
+		*new_y += cos(angle) * data->movement;
 	}
 	else if (key == 'w')
 	{
-		*new_x += cos(angle) * move_step;
-		*new_y += sin(angle) * move_step;
+		*new_x += cos(angle) * data->movement;
+		*new_y += sin(angle) * data->movement;
 	}
 	else if (key == 's')
 	{
-		*new_x -= cos(angle) * move_step;
-		*new_y -= sin(angle) * move_step;
+		*new_x -= cos(angle) * data->movement;
+		*new_y -= sin(angle) * data->movement;
 	}
 }
 

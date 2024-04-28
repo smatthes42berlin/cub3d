@@ -30,12 +30,11 @@
 # define FOV_ANGLE (60 * (PI / 180))
 
 # define NUM_RAYS (WINDOW_WIDTH)
+
 //# define MINIMAP_SCALE_FACTOR 0.2
 
-# define MINIMAP_SCALE_FACTOR 0.2
-
 # define ROTATION_MOVEMENT 0.1
-# define STRAIGHT_MOVEMENT 10
+//# define STRAIGHT_MOVEMENT 15
 
 // extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
@@ -132,6 +131,13 @@ typedef struct s_line
 	int							color;
 }								t_line;
 
+typedef struct s_tile
+{
+	int	x;
+	int	y;
+	int	color;
+}	t_tile;
+
 typedef struct s_draw_line
 {
 	int							x;
@@ -209,6 +215,15 @@ typedef struct s_tex_all
 	t_tex						*all[4];
 }								t_tex_all;
 
+typedef struct s_minimap
+{
+	int offset_x;
+	int offset_y;
+	int width;
+	int height;
+	u_int32_t color;
+}	t_minimap;
+
 typedef struct s_main_data
 {
 	int							argc;
@@ -218,8 +233,11 @@ typedef struct s_main_data
 	t_map						map;
 	u_int32_t					*color_buffer;
 	t_tex_all					textures;
-
 	t_parse_state				*parse_state;
+	float						scale_factor;
+	int							movement;
+	int							minimap_width;
+	int							minimap_height;
 }								t_main_data;
 
 /* map parsing */
