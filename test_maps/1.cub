@@ -7,7 +7,7 @@ SO ./test_maps/textures/wall_big.xpm
 
 F      17,    38,     64
 
-EA ./test_maps/textures/wall_2.xpm
+EA ./test_maps/textures/wall_small_uneven.xpm
 
 
 
