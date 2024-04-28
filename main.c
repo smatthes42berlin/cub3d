@@ -11,7 +11,7 @@ int	main(int argc, char *argv[])
 	free_parse_state(&parse_state);
 	printf("Success\n");
 	exit(1);
-	// init(&main_data);
+	init(&main_data);
 	return (0);
 }
 

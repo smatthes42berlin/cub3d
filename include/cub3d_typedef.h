@@ -6,7 +6,8 @@
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
-# define MAX_REC_DEPTH 35000
+# define MAX_REC_DEPTH 
+  
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
 # define ERR_MSG "Error\n"

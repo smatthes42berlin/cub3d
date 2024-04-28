@@ -15,8 +15,8 @@ while IFS= read -r -d '' file; do
     # res=$(../cub3D $file 2>&1)
     # echo $res
     # echo $file
-    # valgrind ../cub3D $file 2>&1 >> test_res
-    ../cub3D $file 2>&1 >> test_res
+    valgrind ../cub3D $file 2>&1 >> test_res
+    # ../cub3D $file 2>&1 >> test_res
     echo $file >> test_res
     printf "\n\n" >> test_res
     # printf "\n"
