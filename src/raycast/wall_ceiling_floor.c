@@ -63,7 +63,7 @@ void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 		rw.texture_offset_y = rw.distance_from_top * ((float)(rw.tex)->height
 				/ w->wall_strip_height);
 		index = (rw.tex->width * rw.texture_offset_y) + rw.texture_offset_x;
-		if (index > tex_tot_size)
+		if (index > tex_tot_size - 1)
 			index = index % tex_tot_size;
 		rw.texel_color = rw.tex->mem[index];
 		data->color_buffer[(WINDOW_WIDTH * y) + i] = rw.texel_color;
