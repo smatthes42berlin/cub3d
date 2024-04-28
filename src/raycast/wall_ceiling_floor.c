@@ -42,26 +42,12 @@ void	calculate_wall_size(t_main_data *data, t_ray *rays, t_wall *w, int *i)
 		w->wall_bottom_pixel = w->wall_bottom_pixel;
 }
 
-t_tex	*select_texture(t_main_data *data, int hit_side)
-{
-	if (hit_side == NORTH)
-		return (&data->textures.north);
-	else if (hit_side == SOUTH)
-		return (&data->textures.south);
-	else if (hit_side == EAST)
-		return (&data->textures.east);
-	else if (hit_side == WEST)
-		return (&data->textures.west);
-	else
-		return (NULL);
-}
-
 void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 {
 	int				y;
 	t_render_wall	rw;
 
-	rw.tex = select_texture(data, ray->hit_side);
+	rw.tex = ray->hit_side;
 	if (ray->was_hit_vertical)
 		rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
 	else

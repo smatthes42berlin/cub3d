@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_render.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fszendzi <fszendzi@student.42berlin.d      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 14:59:49 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/15 14:59:51 by fszendzi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 void	render(t_main_data *data, int *addr, t_ray *rays)
 {
-	(void)rays;
 	fill_color_buffer(data, 0xFF000000);
 	generate_3d_projection(data, rays);
 	ft_memcpy(addr, data->color_buffer, WINDOW_WIDTH * WINDOW_HEIGHT
