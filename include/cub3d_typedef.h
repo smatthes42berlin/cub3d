@@ -5,58 +5,54 @@
 
 # define REM_EMPTY_LINES_MAP_FILE false
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define MIN(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
 # define MAX_REC_DEPTH 
   
 // cannot be '?' or '-'
 # define FLOOD_CHAR '_'
 # define ERR_MSG "Error\n"
-# define PRINT_DEBUG false
+# define PRINT_DEBUG true
 # define MAP_DIAG_CHECK false
 
 # define FALSE 0
 # define TRUE 1
 
-
-
 # define PI 3.1415926535
 # define TWO_PI 6.28318530
 
 # define TILE_SIZE 64
-# define MAP_NUM_ROWS 13
-# define MAP_NUM_COLS 20
+# define TEXTURE_WIDTH TILE_SIZE
+# define TEXTURE_HEIGHT TILE_SIZE
 
-# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 800
 
 # define FOV_ANGLE (60 * (PI / 180))
 
 # define NUM_RAYS (WINDOW_WIDTH)
+//# define MINIMAP_SCALE_FACTOR 0.2
+
 # define MINIMAP_SCALE_FACTOR 0.2
 
 # define ROTATION_MOVEMENT 0.1
 # define STRAIGHT_MOVEMENT 10
 
-extern int						map[MAP_NUM_ROWS][MAP_NUM_COLS];
+// extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
 # define REM_EMPTY_LINES_MAP_FILE false
-// 111111111111999
-// 100000000001111
-// 100000000000001
-// 100111111111119
-// 111199999999999
 
 typedef struct s_parse_state	t_parse_state;
 
 typedef struct s_map
 {
-	int							width;
-	int							height;
+	int							cols;
+	int							rows;
 	int							size;
-	char						*texture_north;
-	char						*texture_south;
-	char						*texture_east;
-	char						*texture_west;
+	// char						*texture_north;
+	// char						*texture_south;
+	// char						*texture_east;
+	// char						*texture_west;
 	int							color_ceiling[3];
 	int							color_floor[3];
 	char						**map;
@@ -110,17 +106,39 @@ typedef struct s_window
 	float						scale_factor;
 }								t_window;
 
+typedef struct s_tex
+{
+	char						*path;
+	int							height;
+	int							width;
+	int							endian;
+	int							line_size;
+	int							bits_per_pixel;
+	u_int32_t					*mem;
+}								t_tex;
+
+typedef struct s_tex_all
+{
+	t_tex						north;
+	t_tex						south;
+	t_tex						east;
+	t_tex						west;
+	t_tex						*all[4];
+}								t_tex_all;
+
 typedef struct s_main_data
 {
-	// t_map				map;
 	int							argc;
 	char						**argv;
 	t_window					w;
 	t_player					player;
 	t_map						map;
 	u_int32_t					*color_buffer;
+	//u_int32_t					*wall_texture[4];
+	t_tex_all 					textures;
+
 	t_parse_state				*parse_state;
-	// player start_position
+	// player start_pos_oition
 	// player cur_position
 	// player orientation
 	//
@@ -155,11 +173,12 @@ typedef struct s_map_parse
 	int							reachable_height_max;
 	int							reachable_width_min;
 	int							reachable_width_max;
-	bool						multi_start_pos;
+	bool						multi_start_pos_o;
 	bool						unknown_char;
-	bool						no_start_pos;
+	bool						no_start_pos_o;
 	bool						over_size_limit;
-	int							start_pos[2];
+	int							start_pos_o[2];
+	int							start_pos_r[2];
 	char						start_orient;
 	float						rotation_angle;
 	bool						not_closed;

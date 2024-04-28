@@ -29,11 +29,11 @@ int	check_gen_errors(t_parse_state *parse_state)
 
 int	check_map_errors(t_parse_state *parse_state)
 {
-	if (parse_state->map_parse.multi_start_pos)
+	if (parse_state->map_parse.multi_start_pos_o)
 		print_error_msg(parse_state, "multiple start pos", "map");
 	if (parse_state->map_parse.unknown_char)
 		print_error_msg(parse_state, "unknown char found", "map");
-	if (parse_state->map_parse.no_start_pos)
+	if (parse_state->map_parse.no_start_pos_o)
 		print_error_msg(parse_state, "no start pos", "map");
 	if (parse_state->map_parse.over_size_limit)
 		print_error_msg(parse_state, "map bigger than size limit", "map");

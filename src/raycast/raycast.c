@@ -52,25 +52,31 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 	float next_horz_touch_x = xintercept;
 	float next_horz_touch_y = yintercept;
 
-	while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
+	while (next_horz_touch_x >= 0 && next_horz_touch_x <= data->w.width && next_horz_touch_y >= 0 && next_horz_touch_y <= data->w.height)
 	{
 		float x_to_check = next_horz_touch_x;
 		float y_to_check = next_horz_touch_y + (is_ray_facing_up ? -1 : 0);
 
-		if (map_has_wall_at(data, x_to_check, y_to_check))
-		{
+		int map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
+		int map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
+
+		// Check if indices are within the map bounds
+		if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols ||
+			map_grid_index_y < 0 || map_grid_index_y >= data->map.rows) {
+			break;}
+
+		if (data->map.map[map_grid_index_y][map_grid_index_x] == '1') {
 			horz_wall_hit_x = next_horz_touch_x;
 			horz_wall_hit_y = next_horz_touch_y;
-			horz_wall_content = data->map.map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)] -'0';
+			horz_wall_content = data->map.map[map_grid_index_y][map_grid_index_x]; // no need for '-0' as it's already char
 			found_horz_wall_hit = TRUE;
 			break;
-		}
-		else
-		{
+		} else {
 			next_horz_touch_x += xstep;
 			next_horz_touch_y += ystep;
 		}
 	}
+
 
 	////////////////////////////////////////
 	/// VERTICAL GRID INTERSECTION CODE
@@ -96,25 +102,29 @@ void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
 	float next_vert_touch_x = xintercept;
 	float next_vert_touch_y = yintercept;
 
-	while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
-	{
-		float x_to_check = next_vert_touch_x + (is_ray_facing_left ? -1 : 0);
-		float y_to_check = next_vert_touch_y;
+	while (next_vert_touch_x >= 0 && next_vert_touch_x <= data->w.width && next_vert_touch_y >= 0 && next_vert_touch_y <= data->w.height) {
+    float x_to_check = next_vert_touch_x + (is_ray_facing_left ? -1 : 0);
+    float y_to_check = next_vert_touch_y;
 
-		if (map_has_wall_at(data, x_to_check, y_to_check))
-		{
-			vert_wall_hit_x = next_vert_touch_x;
-			vert_wall_hit_y = next_vert_touch_y;
-			vert_wall_content = data->map.map[(int)floor(y_to_check / TILE_SIZE)][(int)floor(x_to_check / TILE_SIZE)] - '0';
-			found_vert_wall_hit = TRUE;
-			break;
-		}
-		else
-		{
-			next_vert_touch_x += xstep;
-			next_vert_touch_y += ystep;
-		}
-	}
+    int map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
+    int map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
+
+    if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols ||
+        map_grid_index_y < 0 || map_grid_index_y >= data->map.rows) {
+        break;
+    }
+
+    if (data->map.map[map_grid_index_y][map_grid_index_x] == '1') {
+        vert_wall_hit_x = next_vert_touch_x;
+        vert_wall_hit_y = next_vert_touch_y;
+        vert_wall_content = data->map.map[map_grid_index_y][map_grid_index_x];
+        found_vert_wall_hit = TRUE;
+        break;
+    } else {
+        next_vert_touch_x += xstep;
+        next_vert_touch_y += ystep;
+    }
+}
 
 	float horz_hit_distance = found_horz_wall_hit
 		? distance_between_points(data->player.x, data->player.y, horz_wall_hit_x, horz_wall_hit_y)

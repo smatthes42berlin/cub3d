@@ -23,5 +23,6 @@
 # include "mlx_int.h"
 # include <math.h>
 # include <float.h>
+# include <limits.h>
 
 #endif

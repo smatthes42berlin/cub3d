@@ -6,8 +6,8 @@ int	flood_fill_rec_lim(t_parse_state *parse_state)
 	int	start_height;
 	int	cur_point[2];
 
-	start_height = parse_state->map_parse.start_pos[0];
-	start_width = parse_state->map_parse.start_pos[1];
+	start_height = parse_state->map_parse.start_pos_o[0];
+	start_width = parse_state->map_parse.start_pos_o[1];
 	parse_state->map_parse.reachable_width_min = start_width;
 	parse_state->map_parse.reachable_width_max = start_width;
 	parse_state->map_parse.reachable_height_min = start_height;
