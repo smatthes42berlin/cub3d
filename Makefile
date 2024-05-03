@@ -87,7 +87,7 @@ SRC = 	main.c \
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
-.PHONY: all clean fclean re fcleanall reall leaks
+.PHONY: all clean fclean re fcleanall reall leaks eval
 
 all: $(NAME)
 
@@ -113,7 +113,11 @@ fclean: clean
 
 leaks:
 	@make
-	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./test_maps/1.cub
+	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./eval.cub
+
+eval:
+	@make
+	@./cub3D ./eval.cub
 
 reall: fcleanall all
 
