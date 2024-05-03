@@ -78,13 +78,13 @@ int	recursion_surrounding_points(t_parse_state *parse_state, int cur_point[2],
 	if (MAP_DIAG_CHECK)
 	{
 		flood_check_rec_lim(parse_state, cur_point[0] + 1, cur_point[1] + 1,
-				rec_depth);
+			rec_depth);
 		flood_check_rec_lim(parse_state, cur_point[0] - 1, cur_point[1] - 1,
-				rec_depth);
+			rec_depth);
 		flood_check_rec_lim(parse_state, cur_point[0] + 1, cur_point[1] - 1,
-				rec_depth);
+			rec_depth);
 		flood_check_rec_lim(parse_state, cur_point[0] - 1, cur_point[1] + 1,
-				rec_depth);
+			rec_depth);
 	}
 	return (0);
 }

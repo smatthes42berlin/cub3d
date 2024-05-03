@@ -21,8 +21,7 @@ find ./libft/include -name \*.h -exec cp {} submission/libft \;
 cp ./libft/Makefile_submit.submit ./submission/libft/Makefile
 cp ./libft/Makefile_src ./submission/libft/Makefile_src
 
-rm ./submission/libft/src/main.c
-rm ./submission/src/discuss.c
+
 
 cp ./Makefile ./submission/Makefile
 cp ./main.c ./submission/main.c
@@ -114,4 +113,6 @@ done
 
 cp ./test_maps/eval.cub ./submission/eval.cub
 
-pwd
+rm ./submission/libft/src/main.c
+rm ./submission/src/discuss.c
+
