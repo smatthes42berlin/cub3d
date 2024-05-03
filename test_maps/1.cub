@@ -1,13 +1,13 @@
-   WE                            ./test_maps/textures/wall_fit.xpm
-NO ./test_maps/textures/wall_small_hor.xpm
+   WE                            ./test_maps/textures/wall_small_uneven.xpm
+NO ./test_maps/textures/wall_small_uneven_1.xpm
 
 
 
-SO ./test_maps/textures/wall_big.xpm
+SO ./test_maps/textures/wall_small_uneven_2.xpm
 
 F      17,    38,     64
 
-EA ./test_maps/textures/wall_small_uneven.xpm
+EA ./test_maps/textures/wall_small_uneven_3.xpm
 
 
 

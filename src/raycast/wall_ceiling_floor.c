@@ -49,10 +49,26 @@ void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 	int				index;
 
 	rw.tex = ray->hit_side;
-	if (ray->was_hit_vertical)
+	/*if (ray->was_hit_vertical)
 		rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
 	else
-		rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
+		rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;*/
+
+	if (ray->was_hit_vertical)
+	{
+    	if (ray->is_ray_facing_right) // EAST -> red / green / white
+        	rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
+		else // WEST -> red / whie
+        	rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_y % TILE_SIZE);
+	}
+	else
+	{
+		if (ray->is_ray_facing_up) //NORTH -> red / green
+        	rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
+		else // SOUTH -> red /blue
+        	rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_x % TILE_SIZE);
+	}
+
 	y = w->wall_top_pixel;
 	while (y < w->wall_bottom_pixel)
 	{
