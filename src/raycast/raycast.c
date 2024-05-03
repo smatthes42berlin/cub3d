@@ -28,12 +28,12 @@ void	cast_all_rays(t_main_data *data, t_ray *rays)
 	float	ray_angle;
 	int		strip_id;
 
-	ray_angle = data->player.rotation_angle - (FOV_ANGLE / 2);
+	ray_angle = data->player.rotation_angle - (data->fov_angle / 2);
 	strip_id = 0;
-	while (strip_id < NUM_RAYS)
+	while (strip_id < data->num_rays)
 	{
 		cast_ray(data, &(rays[strip_id]), ray_angle);
 		strip_id++;
-		ray_angle += FOV_ANGLE / NUM_RAYS;
+		ray_angle += data->fov_angle / data->num_rays;
 	}
 }

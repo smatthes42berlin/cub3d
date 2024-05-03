@@ -27,5 +27,7 @@ int	init_main_data(t_main_data *main_data, int argc, char *argv[])
 	main_data->movement = 10;
 	main_data->minimap_height = 0;
 	main_data->minimap_width = 0;
+	main_data->fov_angle = (60 * (PI / 180));
+	main_data->num_rays = WINDOW_WIDTH;
 	return (0);
 }

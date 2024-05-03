@@ -70,7 +70,7 @@ int	draw(t_main_data *data)
 {
 	void			*frame;
 	int				*addr;
-	static t_ray	rays[NUM_RAYS];
+	static t_ray	rays[WINDOW_WIDTH];
 
 	frame = mlx_new_image(data->w.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	addr = (int *)mlx_get_data_addr(frame, &(int){32}, &(int){WINDOW_WIDTH * 4},

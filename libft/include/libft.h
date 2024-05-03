@@ -91,7 +91,7 @@ int						ft_str_cont_duplic(const char *str);
 int						ft_str_cont_chars(const char *str, const char *set);
 int						str_are_equal(const char *s1, const char *s2);
 int						str_is_empty(const char *str);
-int	str_contains_str_index(const char *big,
+int						str_contains_str_index(const char *big,
 							const char *little);
 bool					str_ends_on(const char *str, const char *ends_on);
 bool					str_only_digits(char *str);
@@ -115,14 +115,12 @@ char					*ft_strtrim(char const *s1, char const *set);
 char					*ft_strmapi(char const *s, char (*f)(unsigned int,
 								char));
 void					ft_striteri(char *s, void (*f)(unsigned int, char *));
-int	split_str_str_after_index(char const *s,
-								char const *split_at,
-								char ***res,
-								int index);
-int	ins_replace_str_after_index(char **res,
-								t_ins_repl_str replace_info);
-int	rem_str_after_index(char **res,
-						t_ins_repl_str replace_info);
+int						split_str_str_after_index(char const *s,
+							char const *split_at, char ***res, int index);
+int						ins_replace_str_after_index(char **res,
+							t_ins_repl_str replace_info);
+int						rem_str_after_index(char **res,
+							t_ins_repl_str replace_info);
 int						remove_spaces_inplace(char **str);
 int						str_trim_inplace(char **str);
 int						move_all_by_one(char **str, int i);
@@ -170,9 +168,8 @@ t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 t_list_dc				*dc_lst_new(void *content);
 
-void	dc_lst_print_whole(t_list_dc *lst_ptr,
-						const char *longShort,
-						const char *type);
+void					dc_lst_print_whole(t_list_dc *lst_ptr,
+							const char *longShort, const char *type);
 void					dc_lst_print_one_str_long(void *lst_ptr_void);
 void					dc_lst_print_one_str_short(void *lst_ptr_void);
 void					dc_lst_print_one_int_long(void *lst_ptr_void);
@@ -230,7 +227,7 @@ void					ft_putnbr_fd(int n, int fd);
 size_t					ft_putnbr_base_fd_l(int fd, long nbr, const char *base);
 size_t					ft_putnbr_base_fd_ul(int fd, unsigned long nbr,
 							const char *base);
-size_t	ft_putnbr_base_check(const char *base,
+size_t					ft_putnbr_base_check(const char *base,
 							t_base_info *base_info);
 
 /* atoi itoa */
@@ -271,19 +268,20 @@ int						subarr_arr_str(char **org_arr, t_subarr_arr_str sub_def,
 
 int						ft_pow(int nb, int power);
 int						ft_abs(int nb);
+int						ft_max(int a, int b);
 
 /* files */
 
 int						count_lines_filename(char *filename);
-int	count_lines_size_filename(char *filename,
-								t_file_info *file_info);
+int						count_lines_size_filename(char *filename,
+							t_file_info *file_info);
 int						count_lines_fd(int fd);
 int						count_lines_size_fd(int fd, t_file_info *file_info);
 void					free_file_info_ptr(t_file_info *file_info);
 void					free_file_info(t_file_info file_info);
 int						count_cols_per_line_fd(int fd, t_file_info *file_info);
-int	count_cols_per_line_filename(char *filename,
-									t_file_info *file_info);
+int						count_cols_per_line_filename(char *filename,
+							t_file_info *file_info);
 int						get_file_size_filename(char *filename);
 int						get_file_size_fd(int fd);
 int						read_whole_file(int fd, char **res);

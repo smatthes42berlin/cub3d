@@ -61,7 +61,7 @@ void	draw_rays(t_main_data *data, int *addr, t_ray *rays)
 	line.start_y = data->player.y * data->scale_factor;
 	line.color = 0xFF0000;
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < data->num_rays)
 	{
 		line.end_x = rays[i].wall_hit_x * data->scale_factor;
 		line.end_y = rays[i].wall_hit_y * data->scale_factor;

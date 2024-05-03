@@ -9,12 +9,10 @@ int				init_main_data(t_main_data *main_data, int argc, char *argv[]);
 
 int				parse_main(t_main_data *main_data);
 int				parse_map_file(t_main_data *main_data, t_list_dc *file_lbl);
-int	init_parse_state(t_parse_state *parse_state,
-						t_main_data *main_data,
-						t_list_dc *file_lbl);
-int	init_parse_state_gen(t_parse_state *parse_state,
-							t_main_data *main_data,
-							t_list_dc *file_lbl);
+int				init_parse_state(t_parse_state *parse_state,
+					t_main_data *main_data, t_list_dc *file_lbl);
+int				init_parse_state_gen(t_parse_state *parse_state,
+					t_main_data *main_data, t_list_dc *file_lbl);
 int				init_parse_state_map(t_parse_state *parse_state);
 int				init_parse_state_optns(t_parse_state *parse_state);
 int				init_optn(t_optn_parse *optn, const char *name,
@@ -62,8 +60,8 @@ int				print_error_msg(t_parse_state *parse_state, char *msg,
 					const char *identifier);
 int				check_gen_errors(t_parse_state *parse_state);
 int				check_map_errors(t_parse_state *parse_state);
-int	check_option_errors(t_parse_state *parse_state,
-						t_optn_parse *optn);
+int				check_option_errors(t_parse_state *parse_state,
+					t_optn_parse *optn);
 
 /* flood fill it */
 
@@ -72,12 +70,12 @@ int				flood_check_it(t_parse_state *parse_state);
 int				add_point_to_queue(t_parse_state *parse_state, int height,
 					int width);
 int				remove_point_from_queue(t_parse_state *parse_state);
-int	get_cur_point_queue(t_parse_state *parse_state,
-						int cur_point[2]);
-int	add_surrounding_points_queue(t_parse_state *parse_state,
-									int *cur_point);
-bool	check_point_needs_test(t_parse_state *parse_state,
-							int *cur_point);
+int				get_cur_point_queue(t_parse_state *parse_state,
+					int cur_point[2]);
+int				add_surrounding_points_queue(t_parse_state *parse_state,
+					int *cur_point);
+bool			check_point_needs_test(t_parse_state *parse_state,
+					int *cur_point);
 
 /* flood fill rec */
 
@@ -90,11 +88,10 @@ int				flood_check(t_parse_state *parse_state, int height, int width,
 int				flood_fill_rec_lim(t_parse_state *parse_state);
 int				flood_check_rec_lim(t_parse_state *parse_state, int height,
 					int width, int rec_depth);
-bool	check_end_point_reached(t_parse_state *parse_state,
-								int cur_point[2]);
-int	recursion_surrounding_points(t_parse_state *parse_state,
-									int cur_point[2],
-									int rec_depth);
+bool			check_end_point_reached(t_parse_state *parse_state,
+					int cur_point[2]);
+int				recursion_surrounding_points(t_parse_state *parse_state,
+					int cur_point[2], int rec_depth);
 
 /* flood fill util */
 
@@ -111,8 +108,8 @@ bool			is_map_start(t_parse_state *parse_state);
 t_optn_parse	*is_optn(t_parse_state *parse_state);
 int				go_to_next_line(t_parse_state *parse_state);
 int				get_cur_line_trimmed(t_parse_state *parse_state);
-bool	optn_not_def_map_not_started(t_parse_state *parse_state,
-									t_optn_parse *optn);
+bool			optn_not_def_map_not_started(t_parse_state *parse_state,
+					t_optn_parse *optn);
 bool			optn_alr_def(t_optn_parse *optn);
 bool			map_already_ended(t_parse_state *parse_state);
 bool			is_quote(char c);
@@ -126,9 +123,8 @@ int				set_bool_field(bool *field, bool val, int code);
 
 int				throw_error_gen(int code, char *msg, bool exit_program);
 int				throw_error_sys_call(t_error_ms error_info, bool exit_program);
-int	throw_error_sys_call_parse(t_error_ms error_info,
-								t_parse_state *parse_state,
-								bool exit_program);
+int				throw_error_sys_call_parse(t_error_ms error_info,
+					t_parse_state *parse_state, bool exit_program);
 int				throw_error_map_file(int code, t_parse_state *parse_state,
 					bool exit_program);
 char			*get_failed_func_str(enum e_failed_func failed_func);

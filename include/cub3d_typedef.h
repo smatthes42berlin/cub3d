@@ -4,12 +4,8 @@
 /* parser Macros */
 
 # define REM_EMPTY_LINES_MAP_FILE false
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define MIN(a, b) ((a) > (b) ? (a) : (b))
 # define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
 # define MAX_REC_DEPTH 35000
-// cannot be '?' or '-'
-# define FLOOD_CHAR '_'
 # define ERR_MSG "Error\n"
 # define PRINT_DEBUG false
 # define MAP_DIAG_CHECK false
@@ -27,22 +23,13 @@
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 800
 
-# define FOV_ANGLE (60 * (PI / 180))
-
-# define NUM_RAYS (WINDOW_WIDTH)
-
-//# define MINIMAP_SCALE_FACTOR 0.2
-
+//# define FOV_ANGLE (60 * (PI / 180))
+//# define NUM_RAYS (WINDOW_WIDTH)
 # define ROTATION_MOVEMENT 0.1
-//# define STRAIGHT_MOVEMENT 15
-
-// extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
-
 # define REM_EMPTY_LINES_MAP_FILE false
 
 typedef struct s_parse_state	t_parse_state;
 typedef struct s_main_data		t_main_data;
-
 typedef struct s_tex			t_tex;
 
 typedef struct s_map
@@ -54,14 +41,6 @@ typedef struct s_map
 	int							color_floor[3];
 	char						**map;
 }								t_map;
-
-// typedef enum e_wall_side
-// {
-// 	NORTH,
-// 	SOUTH,
-// 	EAST,
-// 	WEST
-// }	t_wall_side;
 
 typedef struct s_player
 {
@@ -133,10 +112,10 @@ typedef struct s_line
 
 typedef struct s_tile
 {
-	int	x;
-	int	y;
-	int	color;
-}	t_tile;
+	int							x;
+	int							y;
+	int							color;
+}								t_tile;
 
 typedef struct s_draw_line
 {
@@ -217,12 +196,12 @@ typedef struct s_tex_all
 
 typedef struct s_minimap
 {
-	int offset_x;
-	int offset_y;
-	int width;
-	int height;
-	u_int32_t color;
-}	t_minimap;
+	int							offset_x;
+	int							offset_y;
+	int							width;
+	int							height;
+	u_int32_t					color;
+}								t_minimap;
 
 typedef struct s_main_data
 {
@@ -238,6 +217,8 @@ typedef struct s_main_data
 	int							movement;
 	int							minimap_width;
 	int							minimap_height;
+	float						fov_angle;
+	int							num_rays;
 }								t_main_data;
 
 /* map parsing */

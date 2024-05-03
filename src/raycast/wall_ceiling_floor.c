@@ -26,7 +26,7 @@ void	calculate_wall_size(t_main_data *data, t_ray *rays, t_wall *w, int *i)
 {
 	w->perp_distance = rays[(*i)].distance * cos(rays[(*i)].ray_angle
 			- data->player.rotation_angle);
-	w->distance_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
+	w->distance_proj_plane = (WINDOW_WIDTH / 2) / tan(data->fov_angle / 2);
 	w->projected_wall_height = (TILE_SIZE / w->perp_distance)
 		* w->distance_proj_plane;
 	w->wall_strip_height = w->projected_wall_height;
@@ -42,6 +42,26 @@ void	calculate_wall_size(t_main_data *data, t_ray *rays, t_wall *w, int *i)
 		w->wall_bottom_pixel = w->wall_bottom_pixel;
 }
 
+void	calculating_wall_offset(t_ray *ray, t_render_wall *rw)
+{
+	if (ray->was_hit_vertical)
+	{
+		if (ray->is_ray_facing_right)
+			rw->texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
+		else
+			rw->texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_y
+					% TILE_SIZE);
+	}
+	else
+	{
+		if (ray->is_ray_facing_up)
+			rw->texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
+		else
+			rw->texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_x
+					% TILE_SIZE);
+	}
+}
+
 void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 {
 	int				y;
@@ -49,22 +69,7 @@ void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 	int				index;
 
 	rw.tex = ray->hit_side;
-	if (ray->was_hit_vertical)
-	{
-		if (ray->is_ray_facing_right)
-			rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
-		else
-			rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_y
-					% TILE_SIZE);
-	}
-	else
-	{
-		if (ray->is_ray_facing_up)
-			rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
-		else
-			rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_x
-					% TILE_SIZE);
-	}
+	calculating_wall_offset(ray, &rw);
 	y = w->wall_top_pixel;
 	while (y < w->wall_bottom_pixel)
 	{
@@ -86,7 +91,7 @@ void	generate_3d_projection(t_main_data *data, t_ray *rays)
 	int		i;
 
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < data->num_rays)
 	{
 		calculate_wall_size(data, rays, &w, &i);
 		draw_floor_and_ceiling(data, &w, &i);
