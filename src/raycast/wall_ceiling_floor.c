@@ -31,41 +31,44 @@ void	calculate_wall_size(t_main_data *data, t_ray *rays, t_wall *w, int *i)
 		* w->distance_proj_plane;
 	w->wall_strip_height = w->projected_wall_height;
 	w->wall_top_pixel = (WINDOW_HEIGHT / 2) - (w->wall_strip_height / 2);
-	if (w->wall_top_pixel < 0) 
+	if (w->wall_top_pixel < 0)
 		w->wall_top_pixel = 0;
-	else 
+	else
 		w->wall_top_pixel = w->wall_top_pixel;
 	w->wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (w->wall_strip_height / 2);
-	if (w->wall_bottom_pixel > WINDOW_HEIGHT) 
+	if (w->wall_bottom_pixel > WINDOW_HEIGHT)
 		w->wall_bottom_pixel = WINDOW_HEIGHT;
 	else
 		w->wall_bottom_pixel = w->wall_bottom_pixel;
-}
-
-t_tex	*select_texture(t_main_data *data, int hit_side)
-{
-	if (hit_side == NORTH)
-		return (&data->textures.north);
-	else if (hit_side == SOUTH)
-		return (&data->textures.south);
-	else if (hit_side == EAST)
-		return (&data->textures.east);
-	else if (hit_side == WEST)
-		return (&data->textures.west);
-	else
-		return (NULL);
 }
 
 void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 {
 	int				y;
 	t_render_wall	rw;
+	int				index;
 
-	rw.tex = select_texture(data, ray->hit_side);
-	if (ray->was_hit_vertical)
+	rw.tex = ray->hit_side;
+	/*if (ray->was_hit_vertical)
 		rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
 	else
-		rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
+		rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;*/
+
+	if (ray->was_hit_vertical)
+	{
+    	if (ray->is_ray_facing_right) // EAST -> red / green / white
+        	rw.texture_offset_x = (int)ray->wall_hit_y % TILE_SIZE;
+		else // WEST -> red / whie
+        	rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_y % TILE_SIZE);
+	}
+	else
+	{
+		if (ray->is_ray_facing_up) //NORTH -> red / green
+        	rw.texture_offset_x = (int)ray->wall_hit_x % TILE_SIZE;
+		else // SOUTH -> red /blue
+        	rw.texture_offset_x = TILE_SIZE - 1 - ((int)ray->wall_hit_x % TILE_SIZE);
+	}
+
 	y = w->wall_top_pixel;
 	while (y < w->wall_bottom_pixel)
 	{
@@ -73,8 +76,9 @@ void	render_wall_side(t_main_data *data, t_ray *ray, t_wall *w, int i)
 				/ 2);
 		rw.texture_offset_y = rw.distance_from_top * ((float)(rw.tex)->height
 				/ w->wall_strip_height);
-		rw.texel_color = rw.tex->mem[(rw.tex->width * rw.texture_offset_y)
-			+ rw.texture_offset_x];
+		index = (rw.tex->width * (rw.texture_offset_y % rw.tex->height))
+			+ rw.texture_offset_x % rw.tex->width;
+		rw.texel_color = rw.tex->mem[index];
 		data->color_buffer[(WINDOW_WIDTH * y) + i] = rw.texel_color;
 		y++;
 	}

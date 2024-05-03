@@ -64,6 +64,7 @@ SRC = 	main.c \
 		check_map_undo_flood_fill.c \
 		check_map_create_reachable_map.c \
 		raycast.c \
+		graphics_main.c \
 		ray_horizontal.c \
 		ray_vertical.c \
 		clean.c \
@@ -78,6 +79,9 @@ SRC = 	main.c \
 		wall_ceiling_floor.c \
 		color_buffer.c \
 		check_parse_res_main.c \
+		ray_util.c \
+		ray_util_2.c \
+		ray_util_3.c \
 		print_debug_parse.c
 
 OBJFNAME = $(SRC:.c=.o)

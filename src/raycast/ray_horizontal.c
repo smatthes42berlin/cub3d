@@ -21,6 +21,7 @@ void	init_horizontal_ray(t_main_data *data, t_raycast *r)
 		r->xstep *= -1;
 	r->next_horz_touch_x = r->xintercept;
 	r->next_horz_touch_y = r->yintercept;
+	r->main_data = data;
 }
 
 void	cast_horizontal_ray(t_main_data *data, t_raycast *r)
@@ -31,29 +32,22 @@ void	cast_horizontal_ray(t_main_data *data, t_raycast *r)
 	int		map_grid_index_y;
 
 	init_horizontal_ray(data, r);
-	while (r->next_horz_touch_x >= 0 && r->next_horz_touch_x <= data->w.width
-		&& r->next_horz_touch_y >= 0 && r->next_horz_touch_y <= data->w.height)
+	while (next_grid_pt_within_window(data, r->next_horz_touch_x,
+			r->next_horz_touch_y))
 	{
-		x_to_check = r->next_horz_touch_x;
-		y_to_check = r->next_horz_touch_y + (r->is_ray_facing_up ? -1 : 0);
-		map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
-		map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
-		if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols
-			|| map_grid_index_y < 0 || map_grid_index_y >= data->map.rows)
+		get_next_pt_to_check_hor(&x_to_check, &y_to_check, r);
+		get_ray_grid_index(&map_grid_index_x, &map_grid_index_y, x_to_check,
+			y_to_check);
+		if (grid_index_outside_map(data, map_grid_index_x, map_grid_index_y))
 			break ;
-		if (data->map.map[map_grid_index_y][map_grid_index_x] == '1')
+		if (wall_hit(data, map_grid_index_x, map_grid_index_y))
 		{
-			r->horz_wall_hit_x = r->next_horz_touch_x;
-			r->horz_wall_hit_y = r->next_horz_touch_y;
-			r->horz_wall_content = data->map.map[map_grid_index_y][map_grid_index_x];
-			r->found_horz_wall_hit = TRUE;
+			update_ray_hit_data_hor(data, r, map_grid_index_x,
+				map_grid_index_y);
 			break ;
 		}
 		else
-		{
-			r->next_horz_touch_x += r->xstep;
-			r->next_horz_touch_y += r->ystep;
-		}
+			step_grid(r, &(r->next_horz_touch_x), &(r->next_horz_touch_y));
 	}
 }
 
@@ -64,7 +58,9 @@ void	update_ray_with_horizontal_hit(t_ray *ray, t_raycast *r, float distance)
 	ray->wall_hit_y = r->horz_wall_hit_y;
 	ray->wall_hit_content = r->horz_wall_content;
 	ray->was_hit_vertical = FALSE;
-	ray->hit_side = r->is_ray_facing_down ? SOUTH : NORTH;
+	ray->hit_side = &(r->main_data->textures.north);
+	if (r->is_ray_facing_down)
+		ray->hit_side = &(r->main_data->textures.south);
 	ray->ray_angle = r->ray_angle;
 	ray->is_ray_facing_down = r->is_ray_facing_down;
 	ray->is_ray_facing_up = r->is_ray_facing_up;

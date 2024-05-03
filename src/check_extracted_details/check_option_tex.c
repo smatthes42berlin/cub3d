@@ -30,12 +30,13 @@ int	check_file_access(t_optn_parse *col)
 	return (0);
 }
 
+// if (str_ends_on(col->line_in_map_file, ".png"))
+// 	col->wrong_format = false;
+
 int	check_path_extension(t_optn_parse *col)
 {
 	col->wrong_format = true;
 	if (str_ends_on(col->line_in_map_file, ".xpm"))
-		col->wrong_format = false;
-	if (str_ends_on(col->line_in_map_file, ".png"))
 		col->wrong_format = false;
 	return (0);
 }
