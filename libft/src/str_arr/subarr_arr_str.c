@@ -42,7 +42,7 @@ static int	handle_range(t_subarr_arr_str *sub_def, int *num_elem, int *str_len)
 
 static int	sort_start_end(t_subarr_arr_str *sub_def)
 {
-	int tmp;
+	int	tmp;
 
 	if (sub_def->str_start > sub_def->str_end)
 	{

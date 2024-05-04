@@ -16,7 +16,8 @@ int	ft_strtrim_int(char const *s1, char const *set, char **res)
 		return (0);
 	while (s1[rem_c_start] && ft_strchr((char *)set, s1[rem_c_start]) != NULL)
 		rem_c_start += 1;
-	while (s1[rem_c_start] && ft_strrchr((char *)set, s1[s1_len - rem_c_end - 1]) != NULL)
+	while (s1[rem_c_start] && ft_strrchr((char *)set, 
+			s1[s1_len - rem_c_end - 1]) != NULL)
 		rem_c_end += 1;
 	if (ft_substr_int(s1, rem_c_start, s1_len - rem_c_start - rem_c_end, res))
 		return (1);

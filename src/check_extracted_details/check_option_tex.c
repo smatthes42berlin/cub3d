@@ -26,16 +26,17 @@ int	check_file_access(t_optn_parse *col)
 	}
 	if (close(fd) < 0)
 		throw_error_sys_call_parse((t_error_ms){errno, ERROR_CLOSE,
-				"Cannot close texture image file!"}, col->parse_state, true);
+			"Cannot close texture image file!"}, col->parse_state, true);
 	return (0);
 }
+
+// if (str_ends_on(col->line_in_map_file, ".png"))
+// 	col->wrong_format = false;
 
 int	check_path_extension(t_optn_parse *col)
 {
 	col->wrong_format = true;
 	if (str_ends_on(col->line_in_map_file, ".xpm"))
-		col->wrong_format = false;
-	if (str_ends_on(col->line_in_map_file, ".png"))
 		col->wrong_format = false;
 	return (0);
 }
@@ -56,7 +57,7 @@ int	handle_unquoted_path(t_optn_parse *col)
 	splitted = ft_split(col->line_in_map_file, ' ');
 	if (!splitted)
 		throw_error_sys_call_parse((t_error_ms){errno, ERROR_MALLOC,
-				"Cannot split tex def line!"}, col->parse_state, true);
+			"Cannot split tex def line!"}, col->parse_state, true);
 	if (ft_arr_len_char(splitted) != 1)
 	{
 		free_str_arr_null(splitted);

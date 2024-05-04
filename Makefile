@@ -1,7 +1,6 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
 LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
-# LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
@@ -10,8 +9,11 @@ LINK= cc
 CC = cc
 
 NAMELIBFT = libft.a
+NAMEMLX = libmlx.a
 FOLDERLIBFT = ./libft/
+FOLDERMLX = ./mlx/
 PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
+PATHMLX = $(FOLDERMLX)$(NAMEMLX)
 
 INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
@@ -64,6 +66,9 @@ SRC = 	main.c \
 		check_map_undo_flood_fill.c \
 		check_map_create_reachable_map.c \
 		raycast.c \
+		graphics_main.c \
+		ray_horizontal.c \
+		ray_vertical.c \
 		clean.c \
 		init.c \
 		keys.c \
@@ -76,41 +81,60 @@ SRC = 	main.c \
 		wall_ceiling_floor.c \
 		color_buffer.c \
 		check_parse_res_main.c \
+		ray_util.c \
+		ray_util_2.c \
+		ray_util_3.c \
 		print_debug_parse.c
 
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
-.PHONY: all clean fclean re fcleanall reall leaks
+.PHONY: all clean fclean re fcleanall reall leaks eval libs cleanlibs norm
 
 all: $(NAME)
 
-$(NAME): $(PATHLIBFT) $(OBJ)
-	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) $(PATHLIBFT) $(LDFLAGS)
+$(NAME): $(PATHLIBFT) $(PATHMLX) $(OBJ)
+	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) -L$(FOLDERLIBFT) -lft -L$(FOLDERMLX) -lmlx $(LDFLAGS)
 
 $(PATHOBJ)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(PATHLIBFT): 
-	make -C $(FOLDERLIBFT)
-
 clean:
-	make -C $(FOLDERLIBFT) clean
 	$(RM) $(OBJ)
 
-fcleanall: clean
-	make -C libft fclean
-	$(RM) $(NAME)
+re: fclean all
 
 fclean: clean
 	$(RM) $(NAME)
 
 leaks:
 	@make
-	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./test_maps/1.cub
+	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./eval.cub
+
+eval:
+	@make
+	@./cub3D ./eval.cub
+
+norm:
+	@norminette ./src || true
+	@norminette ./include || true
+	@norminette ./libft || true
+
+libs: $(PATHLIBFT) $(PATHMLX)
+
+$(PATHLIBFT): 
+	make -C $(FOLDERLIBFT)
+
+$(PATHMLX): 
+	make -C $(FOLDERMLX) -f Makefile.gen
+
+cleanlibs:
+	make -C $(FOLDERLIBFT) clean
+	make -C $(FOLDERMLX) -f Makefile.gen clean
+
+fcleanall: fclean cleanlibs
+	make -C libft fclean
 
 reall: fcleanall all
-
-re: fclean all
 
 .PRECIOUS: $(PATHOBJ)%.o

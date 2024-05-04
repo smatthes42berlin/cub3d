@@ -16,7 +16,7 @@ int	undo_flood_fill(t_parse_state *parse_state)
 		width = 0;
 		while (width < parse_state->map_parse.max_width_org)
 		{
-			if (parse_state->map_parse.org_rect[height][width] == FLOOD_CHAR)
+			if (parse_state->map_parse.org_rect[height][width] == '_')
 				parse_state->map_parse.org_rect[height][width] = '0';
 			width++;
 		}

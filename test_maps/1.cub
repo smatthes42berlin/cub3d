@@ -1,26 +1,25 @@
-   WE                            ./test_maps/textures/wall.xpm
-NO ./test_maps/textures/wall_1.xpm
+   WE                            ./test_maps/textures/wall_small_uneven.xpm
+NO ./test_maps/textures/wall_big.xpm
 
 
 
-SO ./test_maps/textures/wall_2.xpm
+SO ./test_maps/textures/wall_small_uneven_2.xpm
 
 F      17,    38,     64
 
-EA ./test_maps/textures/wall_3.xpm
+EA ./test_maps/textures/wall_small_uneven_3.xpm
 
 
 
 C 218, 234, 235
 
 
-01111111111111111110
-10000000000000000001
-10000000000000000001
-10001010101010101001
-10000000111000000001
-10000000101000000101
-10000000101111110101
-100000001N000001101
-11111111111111111111
-
+111111111
+100000001
+100010001
+100000001
+1010W0101
+100000001
+100010001
+100000001
+111111111

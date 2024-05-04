@@ -1,13 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    test.sh                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/03 15:02:02 by smatthes          #+#    #+#              #
+#    Updated: 2024/05/03 16:53:07 by smatthes         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 clear
+# make -C "./libft"
 
 make
 
-make -C "./libft"
 printf "\n\n"
 
 maps=(5 10 20 50 100 200 500)
 
 map1=./test_maps/1.cub
+map111=./test_maps/2.cub
 map2=./test_maps/very_big/5x5.cub
 map3=./test_maps/very_big/10x10.cub
 map4=./test_maps/very_big/20x20.cub
@@ -23,7 +36,7 @@ map13=./test_maps/very_big/20000x20000.cub
 
 maperror=./test_maps/error/spaces_at_end_of_file_1.cub
 
-map=$map1
+map=$map7
 
 # bash ./test_maps/very_big/create_big_map.sh
 

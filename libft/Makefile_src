@@ -162,7 +162,8 @@ SRC =	ft_atoi.c \
 		allocate_arr_str.c \
 		str_ends_on.c \
 		subarr_arr_str.c \
-		str_move_ptr_by_n_or_until_end.c
+		str_move_ptr_by_n_or_until_end.c \
+		ft_max.c
 
 
 

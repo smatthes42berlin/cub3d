@@ -30,7 +30,7 @@ int	copy_array_from_file(t_parse_state *parse_state)
 		while (cur_line[i])
 		{
 			(parse_state->map_parse.org_rect)[j][i] = cur_line[i];
-			if (cur_line[i] == FLOOD_CHAR)
+			if (cur_line[i] == '_')
 				(parse_state->map_parse.org_rect)[j][i] = '?';
 			i++;
 		}
@@ -52,7 +52,7 @@ int	get_map_max_dim(t_parse_state *parse_state)
 	{
 		parse_state->map_parse.max_height_org++;
 		parse_state->map_parse.max_width_org = 
-			MAX((int)ft_strlen((char *)cur_line->content),
+			ft_max((int)ft_strlen((char *)cur_line->content),
 				parse_state->map_parse.max_width_org);
 		cur_line = cur_line->next;
 	}

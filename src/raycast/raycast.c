@@ -1,178 +1,39 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: smatthes <smatthes@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 15:00:29 by fszendzi          #+#    #+#             */
-/*   Updated: 2024/04/18 15:16:51 by smatthes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
-void cast_ray(t_main_data *data, t_ray *rays, float ray_angle, int strip_id)
+void	init_raycast(t_raycast *r, float ray_angle)
 {
-	ray_angle = normalize_angle(ray_angle);
-
-	int is_ray_facing_down = ray_angle > 0 && ray_angle < PI;
-	int is_ray_facing_up = !is_ray_facing_down;
-
-	int is_ray_facing_right = ray_angle < 0.5 * PI || ray_angle > 1.5 * PI;
-	int is_ray_facing_left = !is_ray_facing_right;
-
-	////////////////////////////////////////
-	/// HORIZONTAL GRID INTERSECTION CODE
-	////////////////////////////////////////
-
-	float xintercept;
-	float yintercept;
-
-	float xstep;
-	float ystep;
-
-	int found_horz_wall_hit = FALSE;
-	float horz_wall_hit_x = 0;
-	float horz_wall_hit_y = 0;
-	int horz_wall_content = 0;
-
-	yintercept = floor(data->player.y / TILE_SIZE) * TILE_SIZE;
-	yintercept += is_ray_facing_down ? TILE_SIZE : 0;
-
-	xintercept = data->player.x + (yintercept - data->player.y) / tan(ray_angle);
-
-	ystep = TILE_SIZE;
-	ystep *= is_ray_facing_up ? -1 : 1;
-
-	xstep = TILE_SIZE / tan(ray_angle);
-	xstep *= (is_ray_facing_left && xstep > 0) ? -1 : 1;
-	xstep *= (is_ray_facing_right && xstep < 0) ? -1 : 1;
-
-	float next_horz_touch_x = xintercept;
-	float next_horz_touch_y = yintercept;
-
-	while (next_horz_touch_x >= 0 && next_horz_touch_x <= data->w.width && next_horz_touch_y >= 0 && next_horz_touch_y <= data->w.height)
-	{
-		float x_to_check = next_horz_touch_x;
-		float y_to_check = next_horz_touch_y + (is_ray_facing_up ? -1 : 0);
-
-		int map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
-		int map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
-
-		// Check if indices are within the map bounds
-		if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols ||
-			map_grid_index_y < 0 || map_grid_index_y >= data->map.rows) {
-			break;}
-
-		if (data->map.map[map_grid_index_y][map_grid_index_x] == '1') {
-			horz_wall_hit_x = next_horz_touch_x;
-			horz_wall_hit_y = next_horz_touch_y;
-			horz_wall_content = data->map.map[map_grid_index_y][map_grid_index_x]; // no need for '-0' as it's already char
-			found_horz_wall_hit = TRUE;
-			break;
-		} else {
-			next_horz_touch_x += xstep;
-			next_horz_touch_y += ystep;
-		}
-	}
-
-
-	////////////////////////////////////////
-	/// VERTICAL GRID INTERSECTION CODE
-	////////////////////////////////////////
-
-	int found_vert_wall_hit = FALSE;
-	float vert_wall_hit_x = 0;
-	float vert_wall_hit_y = 0;
-	int vert_wall_content = 0;
-
-	xintercept = floor(data->player.x / TILE_SIZE) * TILE_SIZE;
-	xintercept += is_ray_facing_right ? TILE_SIZE : 0;
-
-	yintercept = data->player.y + (xintercept - data->player.x) * tan(ray_angle);
-
-	xstep = TILE_SIZE;
-	xstep *= is_ray_facing_left ? -1 : 1;
-
-	ystep = TILE_SIZE * tan(ray_angle);
-	ystep *= (is_ray_facing_up && ystep > 0) ? -1 : 1;
-	ystep *= (is_ray_facing_down && ystep < 0) ? -1 : 1;
-
-	float next_vert_touch_x = xintercept;
-	float next_vert_touch_y = yintercept;
-
-	while (next_vert_touch_x >= 0 && next_vert_touch_x <= data->w.width && next_vert_touch_y >= 0 && next_vert_touch_y <= data->w.height) {
-    float x_to_check = next_vert_touch_x + (is_ray_facing_left ? -1 : 0);
-    float y_to_check = next_vert_touch_y;
-
-    int map_grid_index_x = (int)floor(x_to_check / TILE_SIZE);
-    int map_grid_index_y = (int)floor(y_to_check / TILE_SIZE);
-
-    if (map_grid_index_x < 0 || map_grid_index_x >= data->map.cols ||
-        map_grid_index_y < 0 || map_grid_index_y >= data->map.rows) {
-        break;
-    }
-
-    if (data->map.map[map_grid_index_y][map_grid_index_x] == '1') {
-        vert_wall_hit_x = next_vert_touch_x;
-        vert_wall_hit_y = next_vert_touch_y;
-        vert_wall_content = data->map.map[map_grid_index_y][map_grid_index_x];
-        found_vert_wall_hit = TRUE;
-        break;
-    } else {
-        next_vert_touch_x += xstep;
-        next_vert_touch_y += ystep;
-    }
+	r->ray_angle = normalize_angle(ray_angle);
+	r->is_ray_facing_down = r->ray_angle > 0 && r->ray_angle < PI;
+	r->is_ray_facing_up = !r->is_ray_facing_down;
+	r->is_ray_facing_right = r->ray_angle < 0.5 * PI || r->ray_angle > 1.5 * PI;
+	r->is_ray_facing_left = !r->is_ray_facing_right;
 }
 
-	float horz_hit_distance = found_horz_wall_hit
-		? distance_between_points(data->player.x, data->player.y, horz_wall_hit_x, horz_wall_hit_y)
-		: FLT_MAX;
+void	cast_ray(t_main_data *data, t_ray *ray, float ray_angle)
+{
+	t_raycast	r;
+	float		horz_hit_distance;
+	float		vert_hit_distance;
 
-	float vert_hit_distance = found_vert_wall_hit
-		? distance_between_points(data->player.x, data->player.y, vert_wall_hit_x, vert_wall_hit_y)
-		: FLT_MAX;
-
-	if (vert_hit_distance < horz_hit_distance)
-	{
-		rays[strip_id].distance = vert_hit_distance;
-		rays[strip_id].wall_hit_x = vert_wall_hit_x;
-		rays[strip_id].wall_hit_y = vert_wall_hit_y;
-		rays[strip_id].wall_hit_content = vert_wall_content;	
-		rays[strip_id].was_hit_vertical = TRUE;
-		rays[strip_id].hit_side = (is_ray_facing_right) ? EAST : WEST;
-
-	}
-	else
-	{
-		rays[strip_id].distance = horz_hit_distance;
-		rays[strip_id].wall_hit_x = horz_wall_hit_x;
-		rays[strip_id].wall_hit_y = horz_wall_hit_y;
-		rays[strip_id].wall_hit_content = horz_wall_content;	
-		rays[strip_id].was_hit_vertical = FALSE;
-		rays[strip_id].hit_side = (is_ray_facing_down) ? SOUTH : NORTH;
-
-	}
-	rays[strip_id].ray_angle = ray_angle;
-	rays[strip_id].is_ray_facing_down = is_ray_facing_down;
-	rays[strip_id].is_ray_facing_up = is_ray_facing_up;
-	rays[strip_id].is_ray_facing_left = is_ray_facing_left;
-	rays[strip_id].is_ray_facing_right = is_ray_facing_right;
+	init_raycast(&r, ray_angle);
+	cast_horizontal_ray(data, &r);
+	cast_vertical_ray(data, &r);
+	calculate_distance_hor(data, r, &horz_hit_distance);
+	calculate_distance_ver(data, r, &vert_hit_distance);
+	update_ray_with_closest_hit(&r, ray, vert_hit_distance, horz_hit_distance);
 }
 
-void cast_all_rays(t_main_data *data, t_ray *rays)
+void	cast_all_rays(t_main_data *data, t_ray *rays)
 {
-	float ray_angle = data->player.rotation_angle - (FOV_ANGLE / 2);
+	float	ray_angle;
+	int		strip_id;
 
-	int strip_id = 0;
-	while (strip_id < NUM_RAYS)
+	ray_angle = data->player.rotation_angle - (data->fov_angle / 2);
+	strip_id = 0;
+	while (strip_id < data->num_rays)
 	{
-		cast_ray(data, rays, ray_angle, strip_id);
+		cast_ray(data, &(rays[strip_id]), ray_angle);
 		strip_id++;
-		ray_angle += FOV_ANGLE / NUM_RAYS;
+		ray_angle += data->fov_angle / data->num_rays;
 	}
 }
-
-
-	

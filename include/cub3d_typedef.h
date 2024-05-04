@@ -4,14 +4,10 @@
 /* parser Macros */
 
 # define REM_EMPTY_LINES_MAP_FILE false
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define MIN(a, b) ((a) > (b) ? (a) : (b))
-# define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
+# define MAP_SIZE_LIMIT_FLOOD_FILL 250001
 # define MAX_REC_DEPTH 35000
-// cannot be '?' or '-'
-# define FLOOD_CHAR '_'
 # define ERR_MSG "Error\n"
-# define PRINT_DEBUG true
+# define PRINT_DEBUG false
 # define MAP_DIAG_CHECK false
 
 # define FALSE 0
@@ -27,43 +23,24 @@
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 800
 
-# define FOV_ANGLE (60 * (PI / 180))
-
-# define NUM_RAYS (WINDOW_WIDTH)
-//# define MINIMAP_SCALE_FACTOR 0.2
-
-# define MINIMAP_SCALE_FACTOR 0.2
-
+//# define FOV_ANGLE (60 * (PI / 180))
+//# define NUM_RAYS (WINDOW_WIDTH)
 # define ROTATION_MOVEMENT 0.1
-# define STRAIGHT_MOVEMENT 10
-
-// extern int		map[MAP_NUM_ROWS][MAP_NUM_COLS];
-
 # define REM_EMPTY_LINES_MAP_FILE false
 
 typedef struct s_parse_state	t_parse_state;
+typedef struct s_main_data		t_main_data;
+typedef struct s_tex			t_tex;
 
 typedef struct s_map
 {
 	int							cols;
 	int							rows;
 	int							size;
-	// char						*texture_north;
-	// char						*texture_south;
-	// char						*texture_east;
-	// char						*texture_west;
 	int							color_ceiling[3];
 	int							color_floor[3];
 	char						**map;
 }								t_map;
-
-typedef enum
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-}								wall_side_t;
 
 typedef struct s_player
 {
@@ -93,17 +70,74 @@ typedef struct s_ray
 	int							is_ray_facing_left;
 	int							is_ray_facing_right;
 	int							wall_hit_content;
-	wall_side_t					hit_side;
+	t_tex						*hit_side;
 }								t_ray;
 
-typedef struct s_window
+typedef struct s_raycast
 {
-	void						*mlx;
-	void						*mlx_win;
+	int							is_ray_facing_down;
+	int							is_ray_facing_up;
+	int							is_ray_facing_right;
+	int							is_ray_facing_left;
+	float						xintercept;
+	float						yintercept;
+	float						xstep;
+	float						ystep;
+	int							found_horz_wall_hit;
+	int							found_vert_wall_hit;
+	float						horz_wall_hit_x;
+	float						horz_wall_hit_y;
+	float						vert_wall_hit_x;
+	float						vert_wall_hit_y;
+	float						next_horz_touch_x;
+	float						next_horz_touch_y;
+	float						next_vert_touch_x;
+	float						next_vert_touch_y;
+	int							horz_wall_content;
+	int							vert_wall_content;
+	float						ray_angle;
+	t_main_data					*main_data;
+}								t_raycast;
+
+typedef struct s_line
+{
 	int							width;
 	int							height;
-	float						scale_factor;
-}								t_window;
+	int							start_x;
+	int							start_y;
+	int							end_x;
+	int							end_y;
+	int							color;
+}								t_line;
+
+typedef struct s_tile
+{
+	int							x;
+	int							y;
+	int							color;
+}								t_tile;
+
+typedef struct s_draw_line
+{
+	int							x;
+	int							y;
+	int							step_x;
+	int							step_y;
+	int							error;
+	int							error2;
+	int							delta_x;
+	int							delta_y;
+}								t_draw_line;
+
+typedef struct s_draw_player
+{
+	int							y;
+	int							x;
+	int							scaled_x;
+	int							scaled_y;
+	int							pixel_index;
+	int							scaled_size;
+}								t_draw_player;
 
 typedef struct s_tex
 {
@@ -114,7 +148,42 @@ typedef struct s_tex
 	int							line_size;
 	int							bits_per_pixel;
 	u_int32_t					*mem;
+	void						*img_ptr;
 }								t_tex;
+
+typedef struct s_render_wall
+{
+	t_tex						*tex;
+	int							texture_offset_x;
+	int							distance_from_top;
+	int							texture_offset_y;
+	u_int32_t					texel_color;
+
+}								t_render_wall;
+
+typedef struct s_window
+{
+	void						*mlx;
+	void						*mlx_win;
+	int							width;
+	int							height;
+	float						scale_factor;
+}								t_window;
+
+typedef struct s_wall
+{
+	float						perp_distance;
+	float						distance_proj_plane;
+	float						projected_wall_height;
+	int							wall_strip_height;
+	int							wall_top_pixel;
+	int							wall_bottom_pixel;
+	int							y;
+	u_int32_t					texel_color;
+	int							texture_offset_x;
+	int							texture_offset_y;
+	int							distance_from_top;
+}								t_wall;
 
 typedef struct s_tex_all
 {
@@ -125,6 +194,15 @@ typedef struct s_tex_all
 	t_tex						*all[4];
 }								t_tex_all;
 
+typedef struct s_minimap
+{
+	int							offset_x;
+	int							offset_y;
+	int							width;
+	int							height;
+	u_int32_t					color;
+}								t_minimap;
+
 typedef struct s_main_data
 {
 	int							argc;
@@ -133,14 +211,14 @@ typedef struct s_main_data
 	t_player					player;
 	t_map						map;
 	u_int32_t					*color_buffer;
-	//u_int32_t					*wall_texture[4];
-	t_tex_all 					textures;
-
+	t_tex_all					textures;
 	t_parse_state				*parse_state;
-	// player start_pos_oition
-	// player cur_position
-	// player orientation
-	//
+	float						scale_factor;
+	int							movement;
+	int							minimap_width;
+	int							minimap_height;
+	float						fov_angle;
+	int							num_rays;
 }								t_main_data;
 
 /* map parsing */
