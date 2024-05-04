@@ -89,7 +89,7 @@ SRC = 	main.c \
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
-.PHONY: all clean fclean re fcleanall reall leaks eval libs cleanlibs
+.PHONY: all clean fclean re fcleanall reall leaks eval libs cleanlibs norm
 
 all: $(NAME)
 
@@ -116,8 +116,9 @@ eval:
 	@./cub3D ./eval.cub
 
 norm:
-	norminette ./src
-	norminette ./include
+	@norminette ./src || true
+	@norminette ./include || true
+	@norminette ./libft || true
 
 libs: $(PATHLIBFT) $(PATHMLX)
 
