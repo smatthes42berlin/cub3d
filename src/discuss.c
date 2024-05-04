@@ -17,3 +17,5 @@
 
 
 // add rule for norminette to makefile
+
+// clean mlx before shipping

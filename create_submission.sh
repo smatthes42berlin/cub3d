@@ -2,6 +2,8 @@
 
 clear
 
+make fcleanall
+
 rm -rf submission
 mkdir submission
 mkdir submission/libft

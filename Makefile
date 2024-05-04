@@ -1,7 +1,6 @@
 SHELL:=/bin/bash
 CFLAGS = -g -O3 -Wall -Wextra -Werror $(INCLUDEFLAGS)
 LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
-# LDFLAGS = -lmlx -Lmlx -lXext -lX11 -lm
 
 # CFLAGS = -Wall -Wextra -Werror -fsanitize=leak  $(INCLUDEFLAGS) 
 # CFLAGS = -Wall -Wextra -Werror fsanitize=addressmak  $(INCLUDEFLAGS) 
@@ -90,7 +89,7 @@ SRC = 	main.c \
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
-.PHONY: all clean fclean re fcleanall reall leaks eval libs clean_libs
+.PHONY: all clean fclean re fcleanall reall leaks eval libs cleanlibs
 
 all: $(NAME)
 
@@ -116,6 +115,10 @@ eval:
 	@make
 	@./cub3D ./eval.cub
 
+norm:
+	norminette ./src
+	norminette ./include
+
 libs: $(PATHLIBFT) $(PATHMLX)
 
 $(PATHLIBFT): 
@@ -124,13 +127,12 @@ $(PATHLIBFT):
 $(PATHMLX): 
 	make -C $(FOLDERMLX) -f Makefile.gen
 
-clean_libs:
+cleanlibs:
 	make -C $(FOLDERLIBFT) clean
-	make -C $(FOLDERMLX) clean
+	make -C $(FOLDERMLX) -f Makefile.gen clean
 
-fcleanall: clean clean_libs
+fcleanall: fclean cleanlibs
 	make -C libft fclean
-	$(RM) $(NAME)
 
 reall: fcleanall all
 
