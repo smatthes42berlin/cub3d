@@ -10,8 +10,11 @@ LINK= cc
 CC = cc
 
 NAMELIBFT = libft.a
+NAMEMLX = mlx.a
 FOLDERLIBFT = ./libft/
+FOLDERMLX = ./mlx/
 PATHLIBFT = $(FOLDERLIBFT)$(NAMELIBFT)
+PATHMLX = $(FOLDERMLX)$(NAMEMLX)
 
 INCLUDEPATH = ./include/ ./libft/include/ ./libft/ ./mlx/
 INCLUDEFLAGS = $(patsubst %,-I% ,$(INCLUDEPATH))
@@ -87,12 +90,12 @@ SRC = 	main.c \
 OBJFNAME = $(SRC:.c=.o)
 OBJ = $(patsubst %,$(PATHOBJ)%,$(OBJFNAME))
 
-.PHONY: all clean fclean re fcleanall reall leaks eval
+.PHONY: all clean fclean re fcleanall reall leaks eval libs
 
 all: $(NAME)
 
-$(NAME): $(PATHLIBFT) $(OBJ)
-	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) $(PATHLIBFT) $(LDFLAGS)
+$(NAME): $(PATHLIBFT) $(PATHMLX) $(OBJ)
+	$(LINK) $(CFLAGS) -o $(NAME) $(OBJ) -L$(FOLDERLIBFT) -lft -L$(FOLDERMLX) -lmlx $(LDFLAGS)
 
 $(PATHOBJ)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -100,17 +103,18 @@ $(PATHOBJ)%.o: %.c
 $(PATHLIBFT): 
 	make -C $(FOLDERLIBFT)
 
+$(PATHMLX): 
+	make -C $(FOLDERMLX)
+
 clean:
 	make -C $(FOLDERLIBFT) clean
+	make -C $(FOLDERMLX) clean
 	$(RM) $(OBJ)
 
 fcleanall: clean
 	make -C libft fclean
+	make -C mlx clean
 	$(RM) $(NAME)
-
-norm:
-	@norminette ./src
-	@norminette ./include
 
 fclean: clean
 	$(RM) $(NAME)
@@ -118,6 +122,10 @@ fclean: clean
 leaks:
 	@make
 	@valgrind --leak-check=full --show-leak-kinds=all ./cub3D ./eval.cub
+
+libs:
+	make -C $(FOLDERLIBFT)
+	make -C $(FOLDERMLX)
 
 eval:
 	@make
