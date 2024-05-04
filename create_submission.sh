@@ -114,6 +114,8 @@ for file_name in "${texture_names[@]}"; do
 done
 
 cp ./test_maps/eval.cub ./submission/eval.cub
+cp ./test_maps/eval.cub ./submission/eval1.cub
+cp ./test_maps/eval.cub ./submission/eval2.cub
 
 rm ./submission/libft/src/main.c
 rm ./submission/src/discuss.c
