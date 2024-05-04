@@ -4,7 +4,7 @@
 /* parser Macros */
 
 # define REM_EMPTY_LINES_MAP_FILE false
-# define MAP_SIZE_LIMIT_FLOOD_FILL 1000000000
+# define MAP_SIZE_LIMIT_FLOOD_FILL 250001
 # define MAX_REC_DEPTH 35000
 # define ERR_MSG "Error\n"
 # define PRINT_DEBUG false

@@ -60,7 +60,7 @@ find "$source_dir" -type f -exec bash -c '
 
 texture_names=(
     "basalt_top.xpm"
-    "blue_stone.xpm"
+    "bluestone.xpm"
     "bookshelf_01.xpm"
     "bookshelf_02.xpm"
     "bookshelf_03.xpm"

@@ -14,3 +14,6 @@
 // - add 42 header
 // - one question regarding suctracting -1 when going to next grid point
 // - textures werden scheinbar falsch herum gerendert?
+
+
+// add rule for norminette to makefile

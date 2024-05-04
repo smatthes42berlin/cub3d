@@ -108,6 +108,10 @@ fcleanall: clean
 	make -C libft fclean
 	$(RM) $(NAME)
 
+norm:
+	@norminette ./src
+	@norminette ./include
+
 fclean: clean
 	$(RM) $(NAME)
 

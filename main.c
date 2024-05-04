@@ -9,7 +9,6 @@ int	main(int argc, char *argv[])
 	init_main_data(&main_data, argc, argv);
 	parse_main(&main_data);
 	graphics_main(&main_data);
-
 	return (0);
 }
 
